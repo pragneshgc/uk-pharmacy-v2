@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Library;
 
 use GuzzleHttp;
@@ -86,7 +87,7 @@ class Questionnaire
         // $params .= '&text='.urldecode($table).'&lang=en&format=html';
 
         $options = [
-            'base_uri' => 'https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20191210T154044Z.3edf6236ddb0fa85.74473d9b84a0f8be3093c27d06c88acd72795a1b' . $params,
+            'base_uri' => 'https://translate.yandex.net/api/v1.5/tr.json/translate?key=' . config('esa.translate_key') . $params,
             'headers' => [
                 'Content-Type' => 'application/x-www-form-urlencoded',
             ],
