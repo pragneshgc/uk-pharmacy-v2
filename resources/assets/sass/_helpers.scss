@@ -1,0 +1,99 @@
+.flex{
+    display: flex;
+}
+
+.flex-space-between{
+  justify-content: space-between;
+}
+
+.flex-center-vertically{
+  align-items: center;
+}
+
+.flex-direction-row{
+    flex-direction: row;
+}
+
+.flex-align-center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+
+.text-center{
+  text-align: center;
+}
+.text-warning{
+  color: #ff8944;
+}
+.text-error{
+  color: #fe4949;
+}
+.hover-info{
+  cursor: help;
+}
+.fullwidth{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.fullscreen{
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: white;
+  width: 100%;
+  height: 100vh;
+  z-index: 999;
+  overflow: auto;
+  max-height: 100%;
+  margin: 0;
+  padding: 20px;
+}
+
+/*HIGHLIGHTS*/
+.danger{
+    color: #fe4949;
+}
+
+.infoBox.error{
+    border-color: #fe4949;
+}
+
+.border-none{
+  border: none;
+}
+
+.capitalize{
+  text-transform: capitalize;
+}
+
+$spaceamounts: (5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 75, 100); // Adjust this to include the pixel amounts you need.
+$sides: (top, bottom, left, right); // Leave this variable alone
+
+@each $space in $spaceamounts {
+  @each $side in $sides {
+    .m#{str-slice($side, 0, 1)}-#{$space} {
+      margin-#{$side}: #{$space}px !important;
+    }
+  
+    .p#{str-slice($side, 0, 1)}-#{$space} {
+      padding-#{$side}: #{$space}px !important;
+    }
+  }
+  .m-#{$space} {
+    margin: #{$space}px !important;
+  }
+
+  .p-#{$space} {
+    padding: #{$space}px !important;
+  }
+
+}

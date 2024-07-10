@@ -1,0 +1,24 @@
+@page {
+    size: 6.90cm 3.39cm;
+    margin: 0;
+  }
+@media print {
+    body, html, p {
+        margin: 0pt !important;
+        padding: 0pt !important;
+    }
+    @page {
+       margin: 0pt !important;
+       padding: 0pt !important;
+    }
+    html, body {
+        width: 6.90cm;
+        height: 3.39cm;
+        text-align: center;
+    }
+    svg{
+        max-width: 6cm;
+        max-height: 3cm;
+        image-rendering: optimizeQuality;
+    }
+}

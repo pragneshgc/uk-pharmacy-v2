@@ -1,0 +1,39 @@
+html, body, #app{
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: "Fira Sans", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #212529;
+    text-align: left;
+    background-color: #f5f8fa;
+}
+#app{
+    overflow-x: hidden;
+}
+/*LAYOUT*/
+body.fullwidth-body{
+    .navbar, .page-footer, main{
+    padding-left: 0;
+    }
+}
+main{
+    transition: padding .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.page-footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
+.footer-copyright{
+    span{
+    font-size: 0.8rem;
+    font-weight: 400;
+    }
+}

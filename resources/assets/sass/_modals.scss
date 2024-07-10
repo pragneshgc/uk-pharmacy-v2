@@ -1,0 +1,207 @@
+/*MODAL*/
+.modal{
+    position: fixed;
+    height: 90vh;
+    width: 70vw;
+    // margin: 5vh 5vw;
+    top: 5vh;
+    left: 15vw;
+    background: white;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
+    border: solid 1px #cfcfcf;
+    z-index: 6;
+    overflow: auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    //might need to be fixed
+    // margin-top: 70px;
+    // margin-left: 200px;
+    // width: calc(100% - 210px);
+    .pxp-form{
+        flex-grow: 1;
+    }
+    .orderDetails{
+        border: none;
+        box-shadow: none;
+    }
+    .modal-header{
+        width: 100%;
+        display: inline-block;
+        height: auto;
+        border-bottom: solid 5px #239a9d;
+        box-shadow: none;
+    }
+    .modal-footer{
+        width: 100%;
+        display: inline-block;
+        height: auto;     
+        text-align: center;   
+        border-top: solid 5px #239a9d;
+        padding: 10px;
+    }
+    .close{
+        cursor: pointer;
+        font-weight: 700;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+    .backdrop-toggle{
+        cursor: pointer;
+        font-weight: 700;
+        position: absolute;
+        right: 30px;
+        top: 10px;
+        color: #239a9d;
+    }
+}
+
+.draggable-div-header{
+    cursor: move;
+}
+
+.backdrop{
+    height: 100%;
+    width: 100%;
+    background: #00000052;
+    display: block;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;    
+}
+
+.esa-modal{
+    position: fixed;
+    height: 90vh;
+    width: 70vw;
+    // margin: 5vh 5vw;
+    top: 5vh;
+    left: 15vw;
+    background: transparent;
+    // box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
+    // border: solid 1px #cfcfcf;
+    z-index: 6;
+    overflow: auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .modal{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;   
+        .modal-header{
+            padding: 10px;
+        }
+        .modal-body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            form{
+                width: 100%;
+                height: 100%;
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        .modal-footer{
+
+        }
+    } 
+
+    &.modal-sm{
+        height: 50vh;
+        width: 40vw;
+        margin: 25vh 30vw;
+        .modal{
+            height: 50vh;
+            width: 40vw;
+            margin: 25vh 30vw;       
+        }
+    }
+
+    .modal.height-fit{
+        height: initial!important;
+    }
+}
+
+.duplicate-modal{
+    .modal-body{
+        justify-content: flex-start!important;
+        align-items: flex-start!important;
+    }
+}
+
+#product-modal{
+    .modal-body{
+        .row{
+            height: 100%;
+            .pxp-form{
+                height: auto;
+            }
+        }
+    }
+}
+
+.form-row{
+    h3{
+        text-align: left;
+        margin: 15px;
+        padding-bottom: 5px;
+        border-bottom: 3px solid gainsboro;
+        margin-top: 0;
+    }
+
+    small{
+        display: block;
+        white-space: nowrap;
+        text-align: left;
+        color: #ff8944;
+        font-weight: 700;
+    }
+}
+
+.form-group{
+    flex-direction: column;
+    label{
+        text-align: left;
+    }
+    .invalid-feedback{
+        color: #f53c38;
+        text-align: left;
+    }
+    input{
+        width: calc(90% - 100px);
+    }
+    select{
+        width: calc(90% - 100px);
+    }
+    textarea{
+        width: calc(90% - 100px);
+    }
+    button{
+        width: 250px;
+    }
+
+    small{
+        display: block;
+        white-space: nowrap;
+        text-align: left;
+        color: #ff8944;
+        font-weight: 700;
+        font-size: 12px;
+    }
+
+}
+
+.address-form{
+    .form-group{
+        flex-direction: initial;
+    }
+}

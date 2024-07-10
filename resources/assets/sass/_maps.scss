@@ -1,0 +1,15 @@
+.datamap{
+    overflow: hidden;
+    svg{
+        transform: scale(2)translateY(80px);
+        .datamaps-subunit{
+            cursor: pointer;
+        }
+    }
+    .map-controls{
+        z-index: 1;
+        position: absolute;
+        right: 10px;
+        bottom: 5px;
+    }
+}

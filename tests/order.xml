@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ESAPrescription>
+    <MessageID>FE0B78B9-8711-4322-BAD7-CDE05B531317</MessageID>
+    <Version>V1.0</Version>
+    <Date>20230725000000</Date>
+    <SenderID>8</SenderID>
+    <AccountID>2</AccountID>
+    <!-- added, set to 2 -->
+    <PatientDetail>
+        <Patient>
+            <PatientId>
+                <ReferenceNumber>369784</ReferenceNumber>
+                <UserId>IF YOU HAVE A REFERENCE USER ID ADD IT HERE</UserId>
+                <!-- added -->
+
+            </PatientId>
+            <PatientName>
+                <FirstName>Marius</FirstName>
+                <Surname>Spartan</Surname>
+                <MiddleName></MiddleName>
+                <Title>Mr</Title>
+            </PatientName>
+            <DOB>16/04/1974</DOB>
+            <Sex>1</Sex>
+            <BMI>0</BMI>
+            <!-- added, optional, set to 0 if not used -->
+            <HomeAddress>
+                <CountryCode>GBR</CountryCode>
+                <PostCode>BL2 2HH</PostCode>
+                <AddressLine1>1b Darzei</AddressLine1>
+                <AddressLine2></AddressLine2>
+                <AddressLine3>London</AddressLine3>
+                <AddressLine4>Loncon </AddressLine4>
+            </HomeAddress>
+            <SaturdayDelivery>N</SaturdayDelivery>
+            <!-- added, set to N -->
+            <DeliveryAddress>
+                <CountryCode>GBR</CountryCode>
+                <PostCode>BL2 2HH</PostCode>
+                <AddressLine1>1b Darzei</AddressLine1>
+                <AddressLine2></AddressLine2>
+                <AddressLine3>London</AddressLine3>
+                <AddressLine4>Loncon </AddressLine4>
+            </DeliveryAddress>
+            <UPSAccessPointDelivery>N</UPSAccessPointDelivery>
+            <Notes></Notes>
+            <Telephone>0213149934</Telephone>
+            <Mobile>0758022444</Mobile>
+            <Email>cm.nitu@gmail.com</Email>
+        </Patient>
+        <FamilyDoctor>
+            <!-- Added, can be left empty -->
+            <Organisation />
+            <Title />
+            <FirstName />
+            <MiddleName />
+            <Surname />
+            <AddressLine1 />
+            <AddressLine2 />
+            <AddressLine3 />
+            <AddressLine4 />
+            <PostCode />
+            <CountryCode />
+        </FamilyDoctor>
+        <OrderId>369784</OrderId>
+    </PatientDetail>
+    <Prescription>
+        <Guid>E5A57992-0F6D-4FB8-8E4B-989B2D98FBC2</Guid>
+        <PrescriptionNotes></PrescriptionNotes>
+        <CommercialInvoiceValue>EUR 0</CommercialInvoiceValue>
+        <!-- added with format: CURRENCY VALUE -->
+        <Repeats>0</Repeats>
+        <Prescriber>
+            <Doctor>
+                <GMCNO>123456</GMCNO>
+                <DoctorName>Dr. Marius Bufty</DoctorName>
+            </Doctor>
+        </Prescriber>
+    </Prescription>
+</ESAPrescription>

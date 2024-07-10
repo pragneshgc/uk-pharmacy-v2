@@ -1,0 +1,10 @@
+<ESATracking Priority="Normal" Version="1.0" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <DeliveryCompany></DeliveryCompany>
+    <TrackingLink></TrackingLink>
+    <TrackingCode></TrackingCode>
+    <RefID></RefID>
+    <TrackingRef></TrackingRef>
+    <Username></Username>
+    <Password></Password>
+</ESATracking>

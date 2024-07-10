@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ESAPrescription>
+    <Date>230228015607</Date>
+    <SenderID>8</SenderID>
+    <PatientDetail>
+        <Patient>
+            <PatientId>
+                <ReferenceNumber>369784</ReferenceNumber>
+                <UserId>19511</UserId>
+            </PatientId>
+            <PatientName>
+                <FirstName>First</FirstName>
+                <Surname>LastName</Surname>
+                <Title>Mr</Title>
+            </PatientName>
+            <DOB>16/04/1974</DOB>
+            <Sex>1</Sex>
+            <BMI>20.01</BMI>
+            <HomeAddress>
+                <CountryCode>GBR</CountryCode>
+                <PostCode>BL2 2HH</PostCode>
+                <AddressLine1>1b Darzei</AddressLine1>
+                <AddressLine2>1b Darzei</AddressLine2>
+                <AddressLine3>London</AddressLine3>
+                <AddressLine4>Loncon </AddressLine4>
+            </HomeAddress>
+            <DeliveryAddress>
+                <CountryCode>GBR</CountryCode>
+                <PostCode>BL2 2HH</PostCode>
+                <AddressLine1>1b Darzei</AddressLine1>
+                <AddressLine2>1b Darzei</AddressLine2>
+                <AddressLine3>London</AddressLine3>
+                <AddressLine4>Loncon </AddressLine4>
+            </DeliveryAddress>
+			<SaturdayDelivery>N</SaturdayDelivery>
+            <UPSAccessPointDelivery>N</UPSAccessPointDelivery>
+            <Telephone>0213149934</Telephone>
+            <Mobile>987987987</Mobile>
+            <Email>youemail@yopmail.com</Email>
+        </Patient>
+    </PatientDetail>
+    <Prescription>
+        <CommercialInvoiceValue>EUR 0</CommercialInvoiceValue>
+        <Repeats>0</Repeats>
+        <Prescriber>
+            <Doctor>
+                <GMCNO>4624794</GMCNO>
+                <DoctorName>Dr. Joe Doe</DoctorName>
+            </Doctor>
+        </Prescriber>
+        <Product>
+            <ProductCode>8882821</ProductCode>
+            <Description>sildenafil UK 25mg</Description>
+            <ProductQuantity>
+                <Quantity>1</Quantity>
+                <Units>Tablets</Units>
+                <Dosage>1</Dosage>
+            </ProductQuantity>
+            <Instructions>Take ONE tablet 1 hour prior to sexual activity. Do not take more than one tablet per day. Do not use any other type of medication for erectile dysfunction within 72 hours of taking Viagra.</Instructions>
+        </Product>
+        <Questionnaire>
+            <Question>Do you have any pre-condition?</Question>
+            <Answer>Not Declared</Answer>
+            <Question>Do you have an allergy?</Question>
+            <Answer>Not Declared</Answer>
+            <Question>Did you undergone any surgery?</Question>
+            <Answer>Not Declared</Answer>
+            <Question>Do you take any medication?</Question>
+            <Answer>Not Declared</Answer>
+            <Question>Do you smoke?</Question>
+            <Answer>Not Declared</Answer>
+            <Question>Do you consume alcohol?</Question>
+            <Answer>Not Declared</Answer>
+            <Question>How often do you get erection problems during sex?</Question>
+            <Answer>Most or all of the time</Answer>
+            <Question>Have you seen a doctor about your erection problems?</Question>
+            <Answer>Yes</Answer>
+            <Question>Which treatment(s) have you used before?</Question>
+            <Answer>Viagra or Sildenafil</Answer>
+            <Question>Which type of treatment are you looking for?</Question>
+            <Answer>Tablets or cream</Answer>
+            <Question>What's your blood pressure?</Question>
+            <Answer>Normal (Between 90/60 - 140/90) </Answer>
+            <Question>Was your blood pressure checked in the last year?</Question>
+            <Answer>Yes</Answer>
+            <Question>Do you have chest pain or tightness?</Question>
+            <Answer>No</Answer>
+            <Question>Do you take angina medicines, nitrates, poppers or recreational drugs?</Question>
+            <Answer>No</Answer>
+            <Question>Do you have, or have you ever had any of the following?</Question>
+            <Answer>None of the above</Answer>
+            <Question>Is there anything else you want to add?</Question>
+            <Answer>No</Answer>
+            <Question>Would you like us to tell your GP about any treatment we give you?</Question>
+            <Answer>No</Answer>
+        </Questionnaire>
+    </Prescription>
+</ESAPrescription>

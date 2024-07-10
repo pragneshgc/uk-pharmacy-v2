@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ShipmentConfirmRequest>
+    <Request>
+        <TransactionReference>
+            <CustomerContext>525228-1479748</CustomerContext>
+            <XpciVersion>1.0001</XpciVersion>
+        </TransactionReference>
+        <RequestAction>ShipConfirm</RequestAction>
+        <RequestOption>nonvalidate</RequestOption>
+    </Request>
+    <Shipment>
+        <Shipper>
+            <Name>HR Healthcare</Name>
+            <AttentionName>HR Healthcare</AttentionName>
+            <PhoneNumber>01204 559 999</PhoneNumber>
+            <ShipperNumber>E70E75</ShipperNumber>
+            <Address>
+                <AddressLine1>Unit 18, Waters Meeting</AddressLine1>
+                <City>Britannia Way</City>
+                <StateProvinceCode>Bolton</StateProvinceCode>
+                <CountryCode>GB</CountryCode>
+                <PostalCode>BL2 2HH</PostalCode>
+            </Address>
+        </Shipper>
+        <ShipTo>
+            <CompanyName>Mr Johannes Urban</CompanyName>
+            <AttentionName>Mr Johannes Urban</AttentionName>
+            <PhoneNumber>01792434800</PhoneNumber>
+            <Address>
+                <AddressLine1>8</AddressLine1>
+                <AddressLine2>Lipezker Str.</AddressLine2>
+                <City>Cottbus</City>
+                <StateProvinceCode></StateProvinceCode>
+                <CountryCode>DE</CountryCode>
+                <PostalCode>03048</PostalCode>
+            </Address>
+        </ShipTo>
+        <Service>
+            <Code>65</Code>
+            <Description>UPS Saver</Description>
+        </Service>
+        <ReferenceNumber>
+            <Value> 
+					525228-1479748
+            </Value>
+        </ReferenceNumber>
+        <Description>Medical Supplies</Description>
+        <PaymentInformation>
+            <Prepaid>
+                <BillShipper>
+                    <AccountNumber>E70E75</AccountNumber>
+                </BillShipper>
+            </Prepaid>
+        </PaymentInformation>
+        <Package>
+            <PackagingType>
+                <Code>02</Code>
+            </PackagingType>
+            <PackageWeight>
+                <Weight>0.5</Weight>
+				￼
+            </PackageWeight>
+        </Package>
+    </Shipment>
+    <LabelSpecification>
+        <LabelPrintMethod>
+            <Code>ZPL</Code>
+        </LabelPrintMethod>
+        <LabelStockSize>
+            <Height>4</Height>
+            <Width>6</Width>
+        </LabelStockSize>
+    </LabelSpecification>
+</ShipmentConfirmRequest>

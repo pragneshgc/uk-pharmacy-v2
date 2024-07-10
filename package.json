@@ -1,0 +1,41 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "test": "vitest",
+        "coverage": "vitest run --coverage"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue2": "^2.2.0",
+        "axios": "^1.4.0",
+        "bootstrap": "^4.0.0",
+        "jquery": "^3.6.4",
+        "laravel-vite-plugin": "^0.7.4",
+        "lodash": "^4.17.21",
+        "popper.js": "^1.16.1",
+        "printd": "^1.6.0",
+        "sass": "^1.62.1",
+        "vite": "^4.3.4",
+        "vue": "^2.5.17"
+    },
+    "dependencies": {
+        "@emacle/vue-treeselect": "^0.4.6",
+        "@riophae/vue-treeselect": "^0.4.0",
+        "chart.js": "^2.9.3",
+        "dompurify": "^3.1.5",
+        "fs": "^0.0.1-security",
+        "html2canvas": "^1.4.1",
+        "jspdf": "^2.5.1",
+        "marked": "^5.0.0",
+        "remove": "^0.1.5",
+        "vue-router": "^3.0.1",
+        "vue-select": "^2.5.0",
+        "vue-sweetalert2": "^1.5.3",
+        "vue-toasted": "^1.1.27",
+        "vue2-editor": "^2.10.2",
+        "vuedraggable": "^2.24.3",
+        "vuejs-datepicker": "^1.6.2",
+        "vuex": "^3.1.1"
+    }
+}

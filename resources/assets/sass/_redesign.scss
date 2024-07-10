@@ -1,0 +1,25 @@
+.redesign-style{
+    .tBoxSize02, select, .form-control, .vdp-datepicker input, .vue-treeselect__control, .vue-treeselect .vue-treeselect__control{
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15)!important;
+        border: 1px solid transparent!important;
+        &:hover{
+            border: 1px solid transparent!important;
+        }
+    }
+
+    .btn{
+        border: solid 0 #dcdcdc!important;
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15)!important;
+    }
+    .prescriptionStats{
+        border: none;
+    }
+    .card{
+        border: none;
+    }
+    .filters-row{
+        .dropdown:hover{
+            background: none;
+        }
+    }
+}
