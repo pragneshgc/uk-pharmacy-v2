@@ -118,11 +118,11 @@ export default {
     methods: {
         checkAllVisible() {
             if (this.currentChecked && !this.match) {
-                this.$root.$emit('table.uncheck.all');
+                this.emitter.emit('table.uncheck.all');
             } else if (this.currentChecked && this.match) {
-                this.$root.$emit('table.uncheck.all');
+                this.emitter.emit('table.uncheck.all');
             } else {
-                this.$root.$emit('table.check.all');
+                this.emitter.emit('table.check.all');
             }
         },
         removeFromBlacklist() {
@@ -130,7 +130,7 @@ export default {
                 .then((response) => {
                     this.postSuccess('Removed blacklist entry');
                     this.$store.commit('replaceChecked', []);
-                    this.$root.$emit('table.refresh');
+                    this.emitter.emit('table.refresh');
                 })
                 .catch((error) => {
                     this.postError(error.response.data.message);

@@ -26,50 +26,50 @@
                 <button @click="back()" class="btn btnSize01 tertiaryBtn bigButton big-square-button">
                     <span>
                         Back
-                    </span> 
+                    </span>
                 </button>
-            <div v-if="loading" class="loader" style="">Loading...</div>
-            <span class="close" @click="close()">X</span>
+                <div v-if="loading" class="loader" style="">Loading...</div>
+                <span class="close" @click="close()">X</span>
         </div>
     </div>
 </template>
 
 <script>
-    import Error from '../../../mixins/errors';
+import Error from '../../../mixins/errors';
 
-    export default {
-        data: function () {
-            return {
-                visible: true,
-                loading: false,
-            }
-        },
-        computed:{
-            
-        },
-        mounted() {
-            this.$root.$on('doctor.close.all', this.close);
-            this.$root.$on('doctor.edit', (id) => {
-                this.visible = true;
-            });
-        },
-        destroyed() {
-            this.$root.$off('doctor.close.all');
-            this.$root.$off('doctor.edit');
-        },
-        methods:{
-            close(){
-                this.visible = false;
-            },
-            save(){
+export default {
+    data: function () {
+        return {
+            visible: true,
+            loading: false,
+        }
+    },
+    computed: {
 
-            },
-            submit(){
+    },
+    mounted() {
+        this.emitter.on('doctor.close.all', this.close);
+        this.emitter.on('doctor.edit', (id) => {
+            this.visible = true;
+        });
+    },
+    destroyed() {
+        this.emitter.off('doctor.close.all');
+        this.emitter.off('doctor.edit');
+    },
+    methods: {
+        close() {
+            this.visible = false;
+        },
+        save() {
 
-            },
-            back(){
+        },
+        submit() {
 
-            }
+        },
+        back() {
+
         }
     }
+}
 </script>

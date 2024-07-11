@@ -22,43 +22,43 @@
 </template>
 
 <script>
-    export default {
-        props: ['modalName', 'modalClass'],
-        data: function () {
-            return {
-                show: {
-                    modal: false,
-                },
-                loading: true
-            }
-        },
-        computed:{
-            
-        },
-        mounted() {
-            this.$root.$on('modal.open', (name) => {
-                if(name == this.modalName){
-                    this.show.modal = true;
-                }
-            });
-
-            this.$root.$on('modal.close', (name) => {
-                if(name == this.modalName){
-                    this.show.modal = false;
-                }
-            });
-
-            this.$root.$on('modal.close.all', () => {
-                    this.show.modal = false;
-            });
-        },
-        methods:{
-            close(){
-                this.show.modal = false;
+export default {
+    props: ['modalName', 'modalClass'],
+    data: function () {
+        return {
+            show: {
+                modal: false,
             },
-            save(){
+            loading: true
+        }
+    },
+    computed: {
+
+    },
+    mounted() {
+        this.emitter.on('modal.open', (name) => {
+            if (name == this.modalName) {
+                this.show.modal = true;
+            }
+        });
+
+        this.emitter.on('modal.close', (name) => {
+            if (name == this.modalName) {
                 this.show.modal = false;
             }
+        });
+
+        this.emitter.on('modal.close.all', () => {
+            this.show.modal = false;
+        });
+    },
+    methods: {
+        close() {
+            this.show.modal = false;
+        },
+        save() {
+            this.show.modal = false;
         }
     }
+}
 </script>

@@ -10,6 +10,8 @@
 import Header from './Header.vue'
 import Sidebar from './Sidebar.vue'
 import Content from './Content.vue'
+import { mapState } from 'pinia';
+import { useDefaultStore } from '../../stores/default.store';
 
 export default {
     data: function () {
@@ -21,9 +23,7 @@ export default {
         Header, Sidebar, Content
     },
     computed: {
-        style() {
-            return this.$store.state.style;
-        }
+        ...mapState(useDefaultStore, ['style']),
     },
     mounted() {
         if (version.previousVersion != version.currentVersion) {

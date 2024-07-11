@@ -58,7 +58,8 @@
                             v-for="(key, value) in details.order" :key="value">
                             <label :for="key">{{ alias[value].title }}</label>
                             <label :class="getCounterColor(value, details.order)" class="input-count"
-                                v-if="alias[value].value" :for="key">{{ details.order[value] ? details.order[value].length :
+                                v-if="alias[value].value" :for="key">{{ details.order[value] ?
+                                    details.order[value].length :
                                     0 }}/{{ alias[value].value }}</label>
                             <input :disabled="disabledFields.includes(value)"
                                 v-if="!['JVM', 'UPSAccessPointAddress', 'CountryCode', 'DCountryCode', 'DeliveryID', 'Notes'].includes(value)"
@@ -66,11 +67,13 @@
                             <select v-else-if="['DCountryCode', 'CountryCode'].includes(value)"
                                 v-model="details.order[value]"
                                 :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
-                                <option v-for="country in countries" :value="country.CountryID">{{ country.Name }}</option>
+                                <option v-for="country in countries" :value="country.CountryID">{{ country.Name }}
+                                </option>
                             </select>
                             <select v-else-if="['DeliveryID'].includes(value)" v-model="details.order[value]"
                                 :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
-                                <option v-for="company in companies" :value="company.SettingID">{{ company.Name }}</option>
+                                <option v-for="company in companies" :value="company.SettingID">{{ company.Name }}
+                                </option>
                             </select>
                             <select v-else-if="['UPSAccessPointAddress'].includes(value)" v-model="details.order[value]"
                                 :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
@@ -90,8 +93,8 @@
                                 :class="[!canSetSaturdayDelivery ? 'disabled-slider' : '']"
                                 :title="!canSetSaturdayDelivery ? 'Can not switch Saturday Delivery on when the day is not Thursday after 17:00 or Friday before 17:00' : 'Switch to Saturday Delivery'">
                                 <input id="saturday-delivery"
-                                    :class="[details.order.SaturdayDelivery == 1 ? 'slider-checked' : '']" type="checkbox"
-                                    @click="saturdayDeliveryCheck()" :disabled="!canSetSaturdayDelivery"
+                                    :class="[details.order.SaturdayDelivery == 1 ? 'slider-checked' : '']"
+                                    type="checkbox" @click="saturdayDeliveryCheck()" :disabled="!canSetSaturdayDelivery"
                                     :value="details.order.SaturdayDelivery == 1 ? true : false">
                                 <span class="slider"></span>
                             </label>
@@ -118,11 +121,13 @@
                             <select v-else-if="['DCountryCode', 'CountryCode'].includes(value)"
                                 v-model="details.order[value]"
                                 :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
-                                <option v-for="country in countries" :value="country.CountryID">{{ country.Name }}</option>
+                                <option v-for="country in countries" :value="country.CountryID">{{ country.Name }}
+                                </option>
                             </select>
                             <select v-else-if="['DeliveryID'].includes(value)" v-model="details.order[value]"
                                 :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
-                                <option v-for="company in companies" :value="company.SettingID">{{ company.Name }}</option>
+                                <option v-for="company in companies" :value="company.SettingID">{{ company.Name }}
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -132,19 +137,22 @@
                         <div class="form-group" v-for="(key, value) in details.ups" :key="value">
                             <label :for="key">{{ alias[value].title }}</label>
                             <input :disabled="disabledFields.includes(value)"
-                                v-if="!['CountryCode', 'DCountryCode', 'APNotificationLanguage'].includes(value)" class=""
-                                :name="key" :placeholder="''" v-model="details.ups[value]">
+                                v-if="!['CountryCode', 'DCountryCode', 'APNotificationLanguage'].includes(value)"
+                                class="" :name="key" :placeholder="''" v-model="details.ups[value]">
                             <label :class="getCounterColor(value, details.ups)" class="input-count"
                                 v-if="alias[value].value" :for="key">
                                 {{ details.ups[value] ? details.ups[value].length : 0 }}/{{ alias[value].value }}
                             </label>
-                            <select v-else-if="['DCountryCode', 'CountryCode'].includes(value)" v-model="details.ups[value]"
+                            <select v-else-if="['DCountryCode', 'CountryCode'].includes(value)"
+                                v-model="details.ups[value]"
                                 :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
-                                <option v-for="country in countries" :value="country.CountryID">{{ country.Name }}</option>
+                                <option v-for="country in countries" :value="country.CountryID">{{ country.Name }}
+                                </option>
                             </select>
                             <select v-else-if="['APNotificationLanguage'].includes(value)" v-model="details.ups[value]"
                                 :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
-                                <option v-for="country in countries" :value="country.CountryID">{{ country.Name }}</option>
+                                <option v-for="country in countries" :value="country.CountryID">{{ country.Name }}
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -340,10 +348,10 @@ export default {
         this.getCountries();
         this.getCompanies();
         this.getOrderDetails();
-        this.$root.$on('modal.close.all', this.close);
+        this.emitter.on('modal.close.all', this.close);
     },
     destroyed() {
-        this.$root.$off('modal.close.all');
+        this.emitter.off('modal.close.all');
     },
     methods: {
         getOrderDetails() {
@@ -538,7 +546,7 @@ export default {
                 .then((response) => {
                     this.postSuccess('Saved');
                     if (validate) {
-                        this.$root.$emit('prescription.validate');
+                        this.emitter.emit('prescription.validate');
                     }
                 })
                 .catch((error) => {
@@ -547,7 +555,7 @@ export default {
                 .finally(() => {
                     this.close();
                     this.saveConfirmation = false;
-                    this.$root.$emit('orderupdate');
+                    this.emitter.emit('orderupdate');
                 })
         },
         back() {

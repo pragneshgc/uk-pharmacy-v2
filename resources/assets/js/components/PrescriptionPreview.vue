@@ -3,7 +3,8 @@
         <div class="infoHeader" :class="headerClass">
             <div class="floatLeft">
                 <ul>
-                    <li @dblclick="copyToClipboard(prescription.PrescriptionID)" style="min-width: 120px;"><span>ESA Order
+                    <li @dblclick="copyToClipboard(prescription.PrescriptionID)" style="min-width: 120px;"><span>ESA
+                            Order
                             ID:</span>{{ prescription.PrescriptionID || 'Loading' }}</li>
                     <li @dblclick="copyToClipboard(prescription.ReferenceNumber)" style="min-width: 120px;"><span>Client
                             Reference Number:</span>{{ prescription.ReferenceNumber || 'Loading' }}</li>
@@ -59,7 +60,8 @@
                             {{ duplicate.ReferenceNumber }} with
                             status {{ orderStatuses[duplicate.Status] }}.<br />
                             Please investigate by <a target="_blank"
-                                :href="`#/prescription/${duplicate.PrescriptionID}`">clicking here</a> before processing.
+                                :href="`#/prescription/${duplicate.PrescriptionID}`">clicking here</a> before
+                            processing.
                         </p>
                     </div>
                 </section>
@@ -87,12 +89,14 @@
                             <ul>
                                 <li>
                                     <span>Name: </span>
-                                    <span style="text-transform: uppercase;" class="high-visibility">{{ prescription.Name
+                                    <span style="text-transform: uppercase;" class="high-visibility">{{
+                                        prescription.Name
                                     }}</span>
                                 </li>
                                 <li>
                                     <span>Surname: </span>
-                                    <span style="text-transform: uppercase;" class="high-visibility">{{ prescription.Surname
+                                    <span style="text-transform: uppercase;" class="high-visibility">{{
+                                        prescription.Surname
                                     }}</span>
                                 </li>
                                 <li class="gender"
@@ -118,7 +122,7 @@
                                     <span>Prescriber Address: </span>
                                     <span class="high-visibility"> {{ prescription.DoctorAddress1 }}, {{
                                         prescription.DoctorAddress2 }}, {{ prescription.DoctorAddress3 }}, {{
-        prescription.DoctorAddress4 }} {{ prescription.DoctorPostCode }} </span>
+                                            prescription.DoctorAddress4 }} {{ prescription.DoctorPostCode }} </span>
                                 </li>
                                 <li>
                                     <span>Client: </span>
@@ -132,7 +136,8 @@
                                     <li><span>Recieved Date: </span>{{ timestampToDate(prescription.CreatedDate) }}</li>
                                     <li v-if="prescription.Status == 8"><span>Shipped/Supplied Date:
                                         </span>{{ timestampToDate(prescription.UpdatedDate) }}</li>
-                                    <li v-if="isCommercial"><span>Commercial Invoice Value: </span>{{ prescription.Repeats
+                                    <li v-if="isCommercial"><span>Commercial Invoice Value: </span>{{
+                                        prescription.Repeats
                                     }}
                                         <a v-if="userInfo.role >= 50" href="javascript:;"
                                             class="smallTextBtn tertiaryBtn">Edit</a>
@@ -148,8 +153,10 @@
                             </div>
                             <div class="location">
                                 <ul>
-                                    <li><span>Home adress: </span>{{ prescription.Address1 + ' ' + prescription.Address2 + '
-                                    '+prescription.Address3+' '+prescription.Address4 +' '+prescription.Postcode}}</li>
+                                    <li><span>Home adress: </span>{{ prescription.Address1 + ' ' + prescription.Address2
+                                        + '
+                                    '+prescription.Address3+' '+prescription.Address4 +' '+prescription.Postcode}}
+                                    </li>
                                     <li><span>Delivery address: </span>{{ prescription.DAddress1 + ' ' +
                                         prescription.DAddress2 + '
                                     '+prescription.DAddress3+' '+prescription.DAddress4+' '+prescription.DPostcode}}
@@ -262,17 +269,17 @@ export default {
         this.timer = setInterval(this.getStatistics, 120000);
         //we need to listen for this one in case an
         //order gets updated outside the component
-        this.$root.$on('orderupdate', (e) => {
+        this.emitter.on('orderupdate', (e) => {
             this.getOrderData();
         });
-        this.$root.$on('statistic.update', (e) => {
+        this.emitter.on('statistic.update', (e) => {
             this.getStatistics();
         });
     },
     beforeDestroy() {
         clearInterval(this.timer);
-        this.$root.$off('orderupdate');
-        this.$root.$off('statistic.update');
+        this.emitter.off('orderupdate');
+        this.emitter.off('statistic.update');
     },
     computed: {
         isCommercial() {
@@ -317,7 +324,7 @@ export default {
         },
         fullyLoaded() {
             if (this.fullyLoaded) {
-                this.$root.$emit('prescriptionloaded', { prescription: this.prescription });
+                this.emitter.emit('prescriptionloaded', { prescription: this.prescription });
             }
         },
         prescription() {
@@ -343,7 +350,7 @@ export default {
             axios.get('/order/' + this.currentOrderID)
                 .then((response) => {
                     this.prescription = response.data.data;
-                    //this.$root.$emit('prescriptionloaded');
+                    //this.emitter.emit('prescriptionloaded');
                     this.loading = false;
                 })
                 .catch((error) => {
@@ -423,14 +430,14 @@ export default {
         },
         //used for updating status through the dropdown
         updateStatus() {
-            this.$root.$emit('prescriptionloading');//we need to let the footer know that the prescription is loading
+            this.emitter.emit('prescriptionloading');//we need to let the footer know that the prescription is loading
             axios.post('/order-edit/' + this.prescription.PrescriptionID + '/status', { status: this.prescriptionStatus })
                 .then((response) => {
                     if (this.prescriptionStatus != 1) {
-                        this.$root.$emit('tray.remove', this.prescription.PrescriptionID);
+                        this.emitter.emit('tray.remove', this.prescription.PrescriptionID);
                     }
 
-                    this.$root.$emit('statistic.update');
+                    this.emitter.emit('statistic.update');
                     this.postSuccess(response.data.message);
                 })
                 .catch((error) => {
@@ -475,7 +482,7 @@ export default {
             this.translate = !this.translate
         },
         openNote() {
-            this.$root.$emit('modal.open', 'note');
+            this.emitter.emit('modal.open', 'note');
         },
         // checkIfApproved(){
         //     axios.get(`/order/${this.currentOrderID}/approved`)

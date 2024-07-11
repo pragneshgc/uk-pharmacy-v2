@@ -1,0 +1,2 @@
+import{_ as n,c as s,b as e,e as t,j as a,w as c,h as r,o as d}from"./app-Day-6uLD.js";const i={mounted(){console.log("Component mounted.")}},l={class:"content"},_={class:"title"};function p(u,m,h,f,x,g){const o=r("router-link");return d(),s("div",null,[e("div",l,[e("section",null,[e("h2",_,[t(" This page doesn't seem to contain anything. Get back to "),a(o,{to:"/",exact:""},{default:c(()=>[t("Home page")]),_:1}),t(" and try again. ")])])])])}const N=n(i,[["render",p]]);export{N as default};
+//# sourceMappingURL=NotFound-BH9G8DM7.js.map

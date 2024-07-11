@@ -209,9 +209,7 @@
 <script>
 import AdditionalEdit from './AdditionalEdit.vue';
 import Error from '../../../mixins/errors'
-import Treeselect from '@emacle/vue-treeselect'
-import '@emacle/vue-treeselect/dist/vue-treeselect.css'
-import { ASYNC_SEARCH } from '@emacle/vue-treeselect'
+import Treeselect from '../../wrapper/Treeselect.vue';
 import logging from '../../../mixins/logging';
 import DOMPurify from 'dompurify';
 
@@ -267,12 +265,12 @@ export default {
         this.getLabels();
         this.getCountries();
 
-        this.$root.$on('product.refresh', () => {
+        this.emitter.on('product.refresh', () => {
             this.getLabels();
         });
     },
     destroyed() {
-        this.$root.$off('product.refresh');
+        this.emitter.off('product.refresh');
     },
     computed: {
         visibleColumns() {
@@ -330,7 +328,7 @@ export default {
     },
     methods: {
         loadOptions: _.debounce(function ({ action, searchQuery, callback }) {
-            if (action === ASYNC_SEARCH) {
+            if (action === 'ASYNC_SEARCH') {
                 this.getProductList(searchQuery, (results) => {
                     let products = [];
 
@@ -567,7 +565,7 @@ export default {
             this.labels.splice(this.labels.findIndex(item => item.AIID === label.AIID), 1);
         },
         openEditModal(type) {
-            this.$root.$emit('label.add');
+            this.emitter.emit('label.add');
         },
         check(id, status) {
             if (status == 1) {

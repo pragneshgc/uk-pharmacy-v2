@@ -241,20 +241,20 @@ export default {
         }
     },
     mounted() {
-        this.$root.$on('table.check.all', (e) => {
+        this.emitter.on('table.check.all', (e) => {
             this.checkAll();
         });
-        this.$root.$on('table.refresh', (e) => {
+        this.emitter.on('table.refresh', (e) => {
             this.getData();
         });
-        this.$root.$on('table.uncheck.all', (e) => {
+        this.emitter.on('table.uncheck.all', (e) => {
             this.uncheckAll();
         });
     },
     destroyed() {
-        this.$root.$off('table.check.all');
-        this.$root.$off('table.uncheck.all');
-        this.$root.$off('table.refresh');
+        this.emitter.off('table.check.all');
+        this.emitter.off('table.uncheck.all');
+        this.emitter.off('table.refresh');
     },
     methods: {
         getData: function () {

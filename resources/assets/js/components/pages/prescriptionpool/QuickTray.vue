@@ -18,8 +18,8 @@
                                         {{ duplicate.PrescriptionID }}
                                     </a>
                                     that has the same customer reference id {{ duplicate.ReferenceID }}
-                                    with status {{ orderStatuses[duplicate.Status] }}{{ duplicate.SubStatus ? ' -
-                                                                        '+orderSubStatuses[duplicate.SubStatus] : '' }}.
+                                    with status {{ orderStatuses[duplicate.Status] }}{{ duplicate.SubStatus ? ` -
+                                    ${orderSubStatuses[duplicate.SubStatus]}` : '' }}.
                                     Please investigate by clicking
                                     <a target="_blank" :href="`#/prescription/${duplicate.PrescriptionID}`"
                                         style="color: #A9E2F3;">
@@ -31,9 +31,11 @@
                                     style="background: #f53c38; font-size: 20px; padding: 5px; width: 100%; margin-top: 5px;"
                                     class="infoBox warning thin-error">
                                     <span>
-                                        The product name recieved by {{ selected.CompanyName }} ({{ product.Description }}
+                                        The product name recieved by {{ selected.CompanyName }} ({{ product.Description
+                                        }}
                                         {{ product.Unit }})
-                                        does not match the product name or it's alternatives in ESA ({{ product.Name }} {{
+                                        does not match the product name or it's alternatives in ESA ({{ product.Name }}
+                                        {{
                                             product.product_units }})
                                     </span>
                                 </li>
@@ -85,8 +87,9 @@
                                     :class="[item.Sex == 1 ? 'blue' : item.Sex == 2 ? 'purple' : item.Sex == 3 ? 'orange' : 'grey']">
                                     <span v-html="item['Patient Name']" />
                                     <small>
-                                        ({{ item.Age }} / {{ item.Sex == 1 ? 'Male' : item.Sex == 2 ? 'Female' : item.Sex ==
-                                            3 ? 'Transgender' : 'Other' }})
+                                        ({{ item.Age }} / {{ item.Sex == 1 ? 'Male' : item.Sex == 2 ? 'Female' :
+                                            item.Sex ==
+                                                3 ? 'Transgender' : 'Other' }})
                                     </small>
                                 </span>
                                 <div class="mt-5" v-if="selected.PrescriptionID == item.PrescriptionID">
@@ -105,8 +108,8 @@
                                                 {{ duplicate.PrescriptionID }}
                                             </a>
                                             and
-                                            status {{ orderStatuses[duplicate.Status] }}{{ duplicate.SubStatus ? ' -
-                                                                                        '+orderSubStatuses[duplicate.SubStatus] : '' }}.
+                                            status {{ orderStatuses[duplicate.Status] }}{{ duplicate.SubStatus ? ` -
+                                            ${orderSubStatuses[duplicate.SubStatus]}` : '' }}.
                                         </b>
                                     </li>
 
@@ -156,11 +159,13 @@
                                         </div>
                                         <div class="quick-tray__note"
                                             :class="[notes.other.length + ((selected.Notes != '' && selected.Notes != null) ? 1 : 0) > 0 ? 'quick-tray__note-warning' : '']">
-                                            {{ notes.other.length + ((selected.Notes != '' && selected.Notes != null) ? 1 :
+                                            {{ notes.other.length + ((selected.Notes != '' && selected.Notes != null) ?
+                                                1 :
                                                 0) }} Order Note(s)
                                         </div>
                                     </div>
-                                    <button @click="openNotes()" style="padding: 4px;" class="btn btnSize03 secondaryBtn">
+                                    <button @click="openNotes()" style="padding: 4px;"
+                                        class="btn btnSize03 secondaryBtn">
                                         View
                                     </button>
                                 </div>
@@ -176,7 +181,8 @@
                                         <li v-for="(product, k) in value.Products" class="medicine" :key="k">
                                             <a target="_blank" :href="`#/prescription/${value.PrescriptionID}`"
                                                 style="margin-left: 3px;">
-                                                {{ product.Name }}, {{ product.Quantity * product.Dosage }} {{ product.Units
+                                                {{ product.Name }}, {{ product.Quantity * product.Dosage }} {{
+                                                    product.Units
                                                 }}
                                                 ({{ value.Client }})
                                             </a>
@@ -193,7 +199,8 @@
                                         </li>
                                     </ul>
                                     <div v-if="historyLoading">Loading...</div>
-                                    <div v-if="!historyLoading && history.length == 0">No previous orders available..</div>
+                                    <div v-if="!historyLoading && history.length == 0">No previous orders available..
+                                    </div>
                                     <div v-if="!historyLoading && history.length > 3"
                                         @click="expandHistory = !expandHistory">
 
@@ -203,7 +210,8 @@
                                             Expand ({{ history.length - filteredHistory.length }} more entries)
                                         </button>
 
-                                        <button v-else style="padding: 4px;width: 100%;" class="btn btnSize03 secondaryBtn">
+                                        <button v-else style="padding: 4px;width: 100%;"
+                                            class="btn btnSize03 secondaryBtn">
                                             <i class="fa fa-caret-up" style="padding-right: 5px;"></i>Collapse
                                         </button>
                                     </div>
@@ -211,9 +219,9 @@
                                 <span v-else></span>
                             </td>
                             <td style="vertical-align: middle;text-align: center;">
-                                <button :disabled="locked || printing" v-if="selected.PrescriptionID == item.PrescriptionID"
-                                    @click="tryPrint()" title="Print prescription and pharmacy labels"
-                                    class="btn btnSize01 secondaryBtn">
+                                <button :disabled="locked || printing"
+                                    v-if="selected.PrescriptionID == item.PrescriptionID" @click="tryPrint()"
+                                    title="Print prescription and pharmacy labels" class="btn btnSize01 secondaryBtn">
                                     <i v-if="printable" style="font-size: 25px;" class="fa fa-print"></i>
                                     <i v-else style="font-size: 25px;" class="fa fa-exclamation-circle"></i>
                                 </button>
@@ -295,20 +303,20 @@ export default {
     },
     mounted() {
         this.getOrders();
-        this.$root.$on('prescriptionpool.getnotes', this.getNotes);
-        this.$root.$on('orderupdate', this.getNotes);
-        this.$root.$on('alertupdate', this.getNotes);
-        this.$root.$on('prescriptionpool.reprint', this.reprint);
+        this.emitter.on('prescriptionpool.getnotes', this.getNotes);
+        this.emitter.on('orderupdate', this.getNotes);
+        this.emitter.on('alertupdate', this.getNotes);
+        this.emitter.on('prescriptionpool.reprint', this.reprint);
 
         this.lockTimer = setInterval(() => {
             this.checkLock();
         }, 5000);
     },
     destroyed() {
-        this.$root.$off('prescriptionpool.getnotes', this.getNotes);
-        this.$root.$off('orderupdate', this.getNotes);
-        this.$root.$off('alertupdate', this.getNotes);
-        this.$root.$off('prescriptionpool.reprint', this.reprint);
+        this.emitter.off('prescriptionpool.getnotes', this.getNotes);
+        this.emitter.off('orderupdate', this.getNotes);
+        this.emitter.off('alertupdate', this.getNotes);
+        this.emitter.off('prescriptionpool.reprint', this.reprint);
 
         clearInterval(this.lockTimer);
     },
@@ -364,7 +372,7 @@ export default {
                     this.takeOverOrder(this.selected.PrescriptionID);
                 }
 
-                this.$root.$emit('prescriptionloaded', { prescription: prescription });
+                this.emitter.emit('prescriptionloaded', { prescription: prescription });
                 // this.loading = false;
             });
 
@@ -491,7 +499,7 @@ export default {
                         this.selected.time = Date.now();
                         this.selected.action = 'Printed';
                         this.$store.commit('addLog', this.selected);
-                        this.$root.$emit('tray.changeprescriptionstatus', { id: this.selected.PrescriptionID, status: 7 });
+                        this.emitter.emit('tray.changeprescriptionstatus', { id: this.selected.PrescriptionID, status: 7 });
                         this.printing = false;
                     });
                 });
@@ -523,7 +531,7 @@ export default {
 
                         if (type == 'pdf') {
                             this.printUrl(`${url}?token=${this.user.info.token}&print=true`, () => {
-                                this.$root.$emit('orderupdate');
+                                this.emitter.emit('orderupdate');
 
                                 if (callback) {
                                     callback();
@@ -536,7 +544,7 @@ export default {
                             this.printUrl(url, () => {
                                 axios.get(`/prescription/${id}/log-print?token=${this.user.info.token}`)
                                     .then((response) => {
-                                        this.$root.$emit('orderupdate');
+                                        this.emitter.emit('orderupdate');
 
                                         if (callback) {
                                             callback();
@@ -563,7 +571,7 @@ export default {
                         }
 
                         this.printUrl(`${url}?token=${this.user.info.token}&print=true`, () => {
-                            this.$root.$emit('orderupdate');
+                            this.emitter.emit('orderupdate');
 
                             if (callback) {
                                 callback();
@@ -578,11 +586,11 @@ export default {
         },
         //revert an activity
         openNotes() {
-            this.$root.$emit('modal.open', 'quicktraynotes');
+            this.emitter.emit('modal.open', 'quicktraynotes');
         },
         confirmNotes() {
             this.notesConfirmed = true;
-            this.$root.$emit('modal.close', 'quicktraynotes');
+            this.emitter.emit('modal.close', 'quicktraynotes');
         },
         showNotesAlert() {
             this.$swal({

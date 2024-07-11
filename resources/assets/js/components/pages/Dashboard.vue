@@ -151,7 +151,8 @@
                                                 pendingPharmacyOrders.length }}</span></b>
                                     <div>
                                         <button class="btn btn-primary table-icon"
-                                            title="Download CSV with a list of reference numbers" @click=" getPendingCSV()">
+                                            title="Download CSV with a list of reference numbers"
+                                            @click=" getPendingCSV()">
                                             <i aria-hidden="true" class="fa fa-file"></i>
                                         </button>
                                         <button class="btn btn-primary table-icon"
@@ -167,7 +168,7 @@
                                     <div class="pool-column"><b>Client</b></div>
                                     <div class="pool-column"><b>Status</b></div>
                                 </li>
-                                <li class="pool-list-layout" v-for="   order    in    pendingPharmacyOrders   "
+                                <li class="pool-list-layout" v-for="   order in pendingPharmacyOrders   "
                                     :key="order.SyncOrderID">
                                     <div class="pool-column">{{ order.Value }}</div>
                                     <div class="pool-column"><span>{{ order.CompanyName }}</span></div>
@@ -194,7 +195,7 @@
                                     <div class="pool-column"><b>Postponed By</b></div>
                                     <div class="pool-column">Tools</div>
                                 </li>
-                                <li class="pool-list-layout" v-for="   order    in    onHoldOrders   "
+                                <li class="pool-list-layout" v-for="   order in onHoldOrders   "
                                     :key="order.PrescriptionID">
                                     <div class="pool-column">
                                         <b>{{ order.PrescriptionID }}</b>
@@ -221,7 +222,8 @@
                                             :class="[pendingOrderAlerts.length > 0 ? 'red' : '']">{{
                                                 pendingOrderAlerts.length }}</span></b>
                                     <div>
-                                        <button title="Create an alert for a prescription that is not yet imported on ESA"
+                                        <button
+                                            title="Create an alert for a prescription that is not yet imported on ESA"
                                             @click=" $root.$emit('modal.open', 'note', 'preimport');"
                                             class="btn btn-primary table-icon">
                                             Create Alert
@@ -235,7 +237,7 @@
                                     <div class="pool-column"><b>Created At</b></div>
                                     <div v-if="userInfo.role >= 40" class="pool-column">Tools</div>
                                 </li>
-                                <li class="pool-list-layout" v-for="   alert    in    pendingOrderAlerts   "
+                                <li class="pool-list-layout" v-for="   alert in pendingOrderAlerts   "
                                     :key="alert.NoteID">
                                     <div class="pool-column">
                                         <div v-if="alert.Subscription">
@@ -376,14 +378,14 @@ export default {
         //     this.getCount();
         // }, 60000);
 
-        this.$root.$on('changefilter', (e) => {
+        this.emitter.on('changefilter', (e) => {
             this.orderFilter = e.filter;
         });
-        this.$root.$on('orderupdate', this.getOrderAlerts);
+        this.emitter.on('orderupdate', this.getOrderAlerts);
     },
     destroyed() {
-        this.$root.$off('changefilter');
-        this.$root.$off('orderupdate');
+        this.emitter.off('changefilter');
+        this.emitter.off('orderupdate');
         clearInterval(this.countTimer);
     },
     methods: {
@@ -405,7 +407,7 @@ export default {
                 this.checkOrders(() => {
                     this.getCount();
                     this.getOnHoldOrders();
-                    this.$root.$emit('alertupdate');
+                    this.emitter.emit('alertupdate');
                 });
             } else {
                 axios.get('/api/check-orders/results')
@@ -419,7 +421,7 @@ export default {
                     })
                     .finally(() => {
                         this.loadingPendingPharmacy = false;
-                        this.$root.$emit('alertupdate');
+                        this.emitter.emit('alertupdate');
                     })
             }
         },
@@ -461,13 +463,13 @@ export default {
                         })
                         .finally(() => {
                             this.getOrderAlerts();
-                            this.$root.$emit('alertupdate');
+                            this.emitter.emit('alertupdate');
                         })
                 }
             })
         },
         editNote(note = false) {
-            this.$root.$emit('modal.open', 'note', note);
+            this.emitter.emit('modal.open', 'note', note);
         },
         getPendingCSV() {
             let pending = [];
@@ -496,7 +498,7 @@ export default {
                 axios.post(`/tray/new/insert/20`)
                     .then((response) => {
                         this.postSuccess(response.data.message);
-                        this.$root.$emit('tray.refresh');
+                        this.emitter.emit('tray.refresh');
                     })
                     .catch((error) => {
                         this.postError(error.response.data.message);
@@ -518,8 +520,8 @@ export default {
                 .then((response) => {
                     this.postSuccess(response.data.message);
                     this.$store.commit('replaceChecked', []);
-                    this.$root.$emit('tray.refresh');
-                    this.$root.$emit('table.refresh');
+                    this.emitter.emit('tray.refresh');
+                    this.emitter.emit('table.refresh');
                 })
                 .catch((error) => {
                     this.postError(error.response.data.message);
@@ -528,10 +530,10 @@ export default {
         safe(id) {
             axios.post(`/order-edit/${id}/status`, { status: 1 })
                 .then((response) => {
-                    this.$root.$emit('table.refresh');
+                    this.emitter.emit('table.refresh');
                 })
                 .catch((error) => {
-                    this.$root.$emit('table.refresh');
+                    this.emitter.emit('table.refresh');
                     this.postError(error.response.data.message);
                 })
                 .finally(() => {
@@ -558,11 +560,11 @@ export default {
         },
         checkAllVisible() {
             if (this.currentChecked && !this.match) {
-                this.$root.$emit('table.uncheck.all');
+                this.emitter.emit('table.uncheck.all');
             } else if (this.currentChecked && this.match) {
-                this.$root.$emit('table.uncheck.all');
+                this.emitter.emit('table.uncheck.all');
             } else {
-                this.$root.$emit('table.check.all');
+                this.emitter.emit('table.check.all');
             }
         },
         clearChecked() {

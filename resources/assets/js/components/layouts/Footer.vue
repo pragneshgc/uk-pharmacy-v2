@@ -36,51 +36,52 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr :class="{ 'active': ($route.params.id == item.PrescriptionID && tray.length != 0) }"
-                            v-for="item in tray" :key="item.PrescriptionID">
-                            <td class="clickable" @click="selectFromTray(item.PrescriptionID)">
-                                {{ item.PrescriptionID }}
-                            </td>
-                            <td class="clickable" @click="selectFromTray(item.PrescriptionID)">
-                                {{ item.CompanyName }}
-                                <span v-if="item.JVM">
-                                    <br>
-                                    <b>Pouch</b>
-                                </span>
-                            </td>
-                            <td class="clickable" @click="selectFromTray(item.PrescriptionID)">
-                                <div style="display: inline-flex; align-items: center;">
-                                    <div
-                                        style="margin-right: 5px;text-align: center;min-width: 85px; height:25px; display: inline-block;">
-                                        <img height="25"
-                                            :src="imgMap[item.UPSAccessPointAddress != 0 ? 70 : item.DeliveryID]" />
+                        <template v-for="item in tray" :key="item.PrescriptionID">
+                            <tr :class="{ 'active': ($route.params.id == item.PrescriptionID && tray.length != 0) }">
+                                <td class="clickable" @click="selectFromTray(item.PrescriptionID)">
+                                    {{ item.PrescriptionID }}
+                                </td>
+                                <td class="clickable" @click="selectFromTray(item.PrescriptionID)">
+                                    {{ item.CompanyName }}
+                                    <span v-if="item.JVM">
+                                        <br>
+                                        <b>Pouch</b>
+                                    </span>
+                                </td>
+                                <td class="clickable" @click="selectFromTray(item.PrescriptionID)">
+                                    <div style="display: inline-flex; align-items: center;">
+                                        <div
+                                            style="margin-right: 5px;text-align: center;min-width: 85px; height:25px; display: inline-block;">
+                                            <img height="25"
+                                                :src="imgMap[item.UPSAccessPointAddress != 0 ? 70 : item.DeliveryID]" />
+                                        </div>
+                                        <!-- {{ couriers[item.DeliveryID] }} -->
                                     </div>
                                     <!-- {{ couriers[item.DeliveryID] }} -->
-                                </div>
-                                <!-- {{ couriers[item.DeliveryID] }} -->
-                            </td>
-                            <td class="clickable" @click="selectFromTray(item.PrescriptionID)">
-                                {{ item.ReferenceNumber }}
-                            </td>
-                            <td class="clickable" @click="selectFromTray(item.PrescriptionID)">
-                                {{ item.Status }}
-                            </td>
-                            <td class="clickable" @click="selectFromTray(item.PrescriptionID)">
-                                {{ item['Date/Time'] }}
-                            </td>
-                            <td class="clickable" @click="selectFromTray(item.PrescriptionID)">
-                                <ul>
-                                    <!-- <li v-for="(value, index) in item.Products" :key="index">{{ value }}</li> -->
-                                    <li v-for="(value, index) in item.Products" :key="index" v-html="value" />
-                                </ul>
-                            </td>
-                            <td v-if="user.selected != 'new'">
-                                <a class="btn btn-primary waves-effect table-icon" title="Remove from tray"
-                                    @click="deleteTray(item.TrayID)">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </a>
-                            </td>
-                        </tr>
+                                </td>
+                                <td class="clickable" @click="selectFromTray(item.PrescriptionID)">
+                                    {{ item.ReferenceNumber }}
+                                </td>
+                                <td class="clickable" @click="selectFromTray(item.PrescriptionID)">
+                                    {{ item.Status }}
+                                </td>
+                                <td class="clickable" @click="selectFromTray(item.PrescriptionID)">
+                                    {{ item['Date/Time'] }}
+                                </td>
+                                <td class="clickable" @click="selectFromTray(item.PrescriptionID)">
+                                    <ul>
+                                        <!-- <li v-for="(value, index) in item.Products" :key="index">{{ value }}</li> -->
+                                        <li v-for="(value, index) in item.Products" :key="index" v-html="value" />
+                                    </ul>
+                                </td>
+                                <td v-if="user.selected != 'new'">
+                                    <a class="btn btn-primary waves-effect table-icon" title="Remove from tray"
+                                        @click="deleteTray(item.TrayID)">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </template>
                     </tbody>
                 </table>
             </div>
@@ -257,28 +258,6 @@
                         New</button>
                 </div>
 
-                <!-- <div v-else-if="prescription.Status == 8 && !loadingPrescription">
-                    <button :disabled="/*![8].includes(prescription.Status) || loadingPrescription*/true"
-                    @click="$router.push({name: 'returns', params: {id: prescription.PrescriptionID}})"
-                    title="Approve prescription"
-                    class="btn btnSize01 primaryBtn">Resend</button>
-                </div> -->
-
-                <!-- <div v-else-if="prescription.Status == 8 && !loadingPrescription">
-                    <button
-                    :disabled="loadingPrescription"
-                    @click="redelivery()"
-                    title="Approve prescription"
-                    class="btn btnSize01 primaryBtn">Redelivery</button>
-                </div> -->
-
-                <!-- <div v-else-if="prescription.Status == 9 && !loadingPrescription">
-                    <button :disabled="/*![9].includes(prescription.Status) || loadingPrescription || loading*/true"
-                    @click="changePrescriptionStatus(1)"
-                    title="Approve prescription"
-                    class="btn btnSize01 primaryBtn">Safe</button>
-                </div> -->
-
                 <div v-else-if="[29, 30, 35].includes(user.info.role) || user.info.role >= 50">
                     <button title="Open the prescriber contact form" :disabled="loadingPrescription || !approveable"
                         v-if="prescription.Status == 1" @click="openContact()" class="btn btnSize01 secondaryBtn">
@@ -342,14 +321,26 @@ import Download from '../../mixins/download';
 import Print from '../../mixins/print';
 import PDF from '../../mixins/pdf'
 import deliveryImgMap from '../../mixins/constants/deliveryImgMap';
+import { useDefaultStore } from '../../stores/default.store';
+import { defineAsyncComponent } from 'vue';
+import { storeToRefs } from 'pinia';
 
 export default {
+    setup() {
+        const { tray } = storeToRefs(useDefaultStore());
+        const { refreshTray } = useDefaultStore();
+
+        return {
+            tray,
+            refreshTray
+        }
+    },
     components: {
-        'EditOrderAddress': () => import('../pages/EditOrderAddress.vue'),
-        'PrescriberModal': () => import('../PrescriberModal.vue'),
-        'NoteModal': () => import('../NoteModal.vue'),
-        'Modal': () => import('../Modal.vue'),
-        'RedeliveryModal': () => import('../RedeliveryModal.vue'),
+        'EditOrderAddress': defineAsyncComponent(() => import('../pages/EditOrderAddress.vue')),
+        'PrescriberModal': defineAsyncComponent(() => import('../PrescriberModal.vue')),
+        'NoteModal': defineAsyncComponent(() => import('../NoteModal.vue')),
+        'Modal': defineAsyncComponent(() => import('../Modal.vue')),
+        'RedeliveryModal': defineAsyncComponent(() => import('../RedeliveryModal.vue')),
     },
     mixins: [OrderStatuses, Error, Download, Print, deliveryImgMap, PDF],
     data() {
@@ -391,28 +382,28 @@ export default {
         }
     },
     mounted() {
-        this.$root.$on('tray.toggle', () => {
+        this.emitter.on('tray.toggle', () => {
             this.toggleTray();
         });
 
-        this.$root.$on('tray.refresh', (e) => {
+        this.emitter.on('tray.refresh', (e) => {
             this.getTray();
         });
 
-        this.$root.$on('tray.changeprescriptionstatus', (e) => {
+        this.emitter.on('tray.changeprescriptionstatus', (e) => {
             this.prescription = { PrescriptionID: e.id }
             this.changePrescriptionStatus(e.status);
         });
 
-        this.$root.$on('tray.remove', (id) => {
+        this.emitter.on('tray.remove', (id) => {
             this.deleteTrayByPrescription(id);
         });
 
-        this.$root.$on('tray.remove.skip', (id) => {
+        this.emitter.on('tray.remove.skip', (id) => {
             this.deleteTrayByPrescription(id, true);
         });
 
-        this.$root.$on('prescriptionloaded', (e) => {
+        this.emitter.on('prescriptionloaded', (e) => {
             this.loadingPrescription = false;
 
             if (typeof e.prescription.PrescriptionID == 'undefined') {
@@ -435,7 +426,7 @@ export default {
             }
         });
 
-        this.$root.$on('prescriptionloading', (e) => {
+        this.emitter.on('prescriptionloading', (e) => {
             this.loadingPrescription = true;
             this.approveable = false;
             this.printed = {
@@ -450,13 +441,13 @@ export default {
             };
         });
 
-        this.$root.$on('prescription.edit', (e) => {
+        this.emitter.on('prescription.edit', (e) => {
             this.editDetails();
         });
 
-        this.$root.$on('showduplicates', (e) => {
+        this.emitter.on('showduplicates', (e) => {
             this.duplicateReference = e.duplicateReference;
-            this.$root.$emit('modal.open', 'duplicate');
+            this.emitter.emit('modal.open', 'duplicate');
         })
 
         document.onkeydown = (e) => {
@@ -468,13 +459,13 @@ export default {
                 case 37:
                     if (document.activeElement.nodeName == 'BODY') {
                         this.changePrescription('back');
-                        this.$root.$emit('modal.close.all');
+                        this.emitter.emit('modal.close.all');
                     }
                     break;
                 case 39:
                     if (document.activeElement.nodeName == 'BODY') {
                         this.changePrescription('forward');
-                        this.$root.$emit('modal.close.all');
+                        this.emitter.emit('modal.close.all');
                     }
                     break;
             }
@@ -488,9 +479,6 @@ export default {
         this.checkApprovable(this.$route.params.id);
     },
     computed: {
-        tray() {
-            return this.$store.state.tray;
-        },
         currentOrderInTray() {
             return this.tray.some(prescription => prescription.PrescriptionID == this.$route.params.id)
         },
@@ -536,15 +524,15 @@ export default {
     },
     destroyed() {
         document.onkeydown = null;
-        this.$root.$off('prescription.edit');
-        this.$root.$off('prescriptionloaded');
-        this.$root.$off('prescriptionloading');
-        this.$root.$off('showduplicates');
-        this.$root.$off('tray.open');
-        this.$root.$off('tray.refresh');
-        this.$root.$off('tray.remove');
-        this.$root.$off('tray.remove.skip');
-        this.$root.$off('tray.changeprescriptionstatus');
+        this.emitter.off('prescription.edit');
+        this.emitter.off('prescriptionloaded');
+        this.emitter.off('prescriptionloading');
+        this.emitter.off('showduplicates');
+        this.emitter.off('tray.open');
+        this.emitter.off('tray.refresh');
+        this.emitter.off('tray.remove');
+        this.emitter.off('tray.remove.skip');
+        this.emitter.off('tray.changeprescriptionstatus');
     },
     watch: {
         "user.selected"() {
@@ -641,7 +629,7 @@ export default {
                 } else {
                     this.prescription = false;
                     localStorage.setItem('dashboard.orderFilter', (this.user.info.role == 20 || this.user.info.role == 19) ? 'approved' : 'new');//reset dashboard tray to new to show new orders
-                    this.$root.$emit('orderupdate');
+                    this.emitter.emit('orderupdate');
                     if (this.user.info.role == 20 || this.user.info.role == 19) {
                         this.$router.push({ name: 'prescription pool' });
                     } else {
@@ -704,17 +692,18 @@ export default {
 
             axios.get(`/tray${parameter}`)
                 .then((response) => {
-                    this.$store.commit('refreshTray', response.data.data);
+                    this.refreshTray(response.data.data);
                 })
                 .catch((error) => {
-                    this.postError(error.response.data.message);
+                    console.log(error);
+                    //this.postError(error.response.data.message);
                 })
         },
         addToTray(id) {
             axios.post('/tray', { PrescriptionID: [this.$route.params.id] })
                 .then((response) => {
                     this.postSuccess(response.data.message);
-                    this.$root.$emit('tray.refresh');
+                    this.emitter.emit('tray.refresh');
                 })
                 .catch((error) => {
                     this.postError(error.response.data.message);
@@ -736,8 +725,8 @@ export default {
                 .then((response) => {
                     this.$store.commit('clearTray');
                     this.postSuccess(response.data.message);
-                    this.$root.$emit('table.refresh'); // this should only be called if there is a table present
-                    this.$root.$emit('tray.clear'); // this event is used by the prescription pool
+                    this.emitter.emit('table.refresh'); // this should only be called if there is a table present
+                    this.emitter.emit('tray.clear'); // this event is used by the prescription pool
                     this.getPharmacists();
                     this.user.selected = this.user.info.id;
                 })
@@ -764,8 +753,8 @@ export default {
                     .then((response) => {
                         this.$store.commit('removeTray', response.data.data);
                         this.postSuccess(response.data.message);
-                        this.$root.$emit('table.refresh'); // this should only be called if there is a table present
-                        this.$root.$emit('tray.clear'); // this event is used by the prescription pool
+                        this.emitter.emit('table.refresh'); // this should only be called if there is a table present
+                        this.emitter.emit('tray.clear'); // this event is used by the prescription pool
                     })
                     .catch((error) => {
                         this.postError(error.response.data.message);
@@ -789,19 +778,19 @@ export default {
         },
         //change the status of prescription
         changePrescriptionStatus(status) {
-            // this.$root.$emit('prescriptionloading');
+            // this.emitter.emit('prescriptionloading');
             this.loading = true;
             axios.post('/order-edit/' + this.prescription.PrescriptionID + '/status', { status: status })
                 .then((response) => {
 
                     if (response.status == 200) {
-                        this.$root.$emit('statistic.update');
+                        this.emitter.emit('statistic.update');
                         this.deleteTrayByPrescription(this.prescription.PrescriptionID);
                         this.postSuccess(response.data.message);
                     }
                 })
                 .catch((error) => {
-                    this.$root.$emit('orderupdate');
+                    this.emitter.emit('orderupdate');
                     this.postError(error.response.data.message);
                 })
                 .finally(() => {
@@ -810,14 +799,14 @@ export default {
         },
         //open contact modal
         openContact() {
-            this.$root.$emit('modal.open', 'prescriber');
+            this.emitter.emit('modal.open', 'prescriber');
         },
         //save later - change the priority of tray item
         saveLater() {
             axios.patch(`/tray/${this.getTrayId(this.prescription.PrescriptionID)}/lower-priority`)
                 .then((response) => {
                     this.postSuccess('Order saved for later!');
-                    this.$root.$emit('tray.refresh');
+                    this.emitter.emit('tray.refresh');
                 })
                 .catch((error) => {
                     this.postError(error.response.data.message);
@@ -878,7 +867,7 @@ export default {
             this.isDownloading = false;
         },
         closeDuplicateModal() {
-            this.$root.$emit('modal.close', 'duplicate');
+            this.emitter.emit('modal.close', 'duplicate');
         },
         prescriptionPrint() {
             axios.get(`/order/${this.prescription.PrescriptionID}/view`)
@@ -970,7 +959,7 @@ export default {
 
                         if (type == 'pdf') {
                             this.printUrl(`${url}?token=${this.user.info.token}&print=true`, () => {
-                                this.$root.$emit('orderupdate');
+                                this.emitter.emit('orderupdate');
                             }, 'pdf', printer);
                         } else {
                             //test and delete this as necessary
@@ -980,7 +969,7 @@ export default {
                             this.printUrl(url, () => {
                                 axios.get(`/prescription/${this.prescription.PrescriptionID}/log-print?token=${this.user.info.token}`)
                                     .then((response) => {
-                                        this.$root.$emit('orderupdate');
+                                        this.emitter.emit('orderupdate');
                                     })
                                     .catch((error) => {
                                         this.postError(error.response.data.message);
@@ -1005,7 +994,7 @@ export default {
                         }
 
                         this.printUrl(`${url}?token=${this.user.info.token}&print=true`, () => {
-                            this.$root.$emit('orderupdate');
+                            this.emitter.emit('orderupdate');
                         }, 'pdf', printer, true);
                     })
                     .catch((error) => {
@@ -1047,7 +1036,7 @@ export default {
         },
         redelivery() {
             this.redeliveryToggle = true;
-            // this.$root.$emit('modal.open', 'redelivery');
+            // this.emitter.emit('modal.open', 'redelivery');
         }
     },
 }

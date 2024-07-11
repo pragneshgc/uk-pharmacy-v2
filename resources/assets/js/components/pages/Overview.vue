@@ -3,10 +3,11 @@
         <div class="card-group">
             <section class="card">
                 <div class="card-header flex flex-space-between">
-                    <span>User Activity Aggregate</span> 
+                    <span>User Activity Aggregate</span>
                     <div>
                         <span class="clickable mr-10" @click="visibleFilters.aggregate = !visibleFilters.aggregate">
-                            Filters <i :class="[visibleFilters.aggregate ? 'fa-caret-up' : 'fa-caret-down']" class="fa"></i>
+                            Filters <i :class="[visibleFilters.aggregate ? 'fa-caret-up' : 'fa-caret-down']"
+                                class="fa"></i>
                         </span>
                         <span class="clickable" @click="$root.$emit('chart.aggregate.fullscreen')">
                             Fullscreen <i class="fa fa-window-maximize" aria-hidden="true"></i>
@@ -14,15 +15,15 @@
                     </div>
                 </div>
 
-                <ActivityDashboardMain :visible-filters="visibleFilters.aggregate" style="padding: 15px;"/>
+                <ActivityDashboardMain :visible-filters="visibleFilters.aggregate" style="padding: 15px;" />
 
                 <div class="card-header flex flex-space-between">
-                    <span>Order Statistics</span> 
+                    <span>Order Statistics</span>
                 </div>
                 <div class="card-body">
                     <ul class="overview-statistics">
                         <a @click="setTab(k)" class="overview-statistics__list-item" href="#/" :class="colorMapping[k]"
-                        v-for="(v, k) in statistics.statistics" :key="k" >
+                            v-for="(v, k) in statistics.statistics" :key="k">
                             <div class="overview-statistics__list-item-title">
                                 {{ mapping[k] }}
                             </div>
@@ -36,7 +37,7 @@
                             </div>
                             <div class="overview-statistics__list-item-value">
                                 {{ pendingPharmacyOrdersCount }}
-                            </div>                        
+                            </div>
                         </a>
                     </ul>
                 </div>
@@ -54,50 +55,49 @@
                         <option value="25">Show 25</option>
                         <option value="50">Show 50</option>
                         <option value="200">Show 200</option>
-                        <option v-if="filters.activity.date && filters.activity.user != 'false'" value="9999">Show All</option>
+                        <option v-if="filters.activity.date && filters.activity.user != 'false'" value="9999">Show All
+                        </option>
                     </select>
 
                     <select v-model="filters.activity.user" class="browser-default custom-select mb-10 mr-5">
                         <option value="false">Show All</option>
-                        <option v-for="user in users" :key="user.ID" :value="user.ID">{{ user.Name }} {{ user.Surname }}</option>
+                        <option v-for="user in users" :key="user.ID" :value="user.ID">{{ user.Name }} {{ user.Surname }}
+                        </option>
                     </select>
 
-                    <datepicker 
-                        placeholder="Today (select to change)"
-                        name="Date" 
-                        :clear-button="true"
-                        clear-button-icon="fa fa-times"
-                        v-model="filters.activity.date"
-                        maxlength="30"
-                    ></datepicker>
+                    <datepicker placeholder="Today (select to change)" name="Date" :clear-button="true"
+                        clear-button-icon="fa fa-times" v-model="filters.activity.date" maxlength="30"></datepicker>
                 </div>
                 <div class="card-body">
                     <transition-group tag="ul" class="user-app-activity-list" name="fade">
-                    <!-- <ul class="user-app-activity-list"> -->
-                        <li v-for="a in activity" :key="a.ActivityID" class="default" 
-                        :class="[a.Type == 8 || a.Type == 22 || a.Type == 50 ? 'border-success': 
-                        a.Type == 750 || a.Type == 751 || a.Action == 'Order changed to SAFETYCHECK' ? 'border-warning' : 
-                        a.Action == 'Order changed to CANCELLED' || a.Action == 'Order changed to REJECTED' ? 'border-danger' : '']">
+                        <!-- <ul class="user-app-activity-list"> -->
+                        <li v-for="a in activity" :key="a.ActivityID" class="default"
+                            :class="[a.Type == 8 || a.Type == 22 || a.Type == 50 ? 'border-success' :
+                                a.Type == 750 || a.Type == 751 || a.Action == 'Order changed to SAFETYCHECK' ? 'border-warning' :
+                                    a.Action == 'Order changed to CANCELLED' || a.Action == 'Order changed to REJECTED' ? 'border-danger' : '']">
                             <div class="user-app-activity-overview">
                                 <div class="user-app-activity-name">
-                                    <div>{{`${a.Name}`}}</div>
-                                    <small><router-link target="_blank" :to="{name: `prescription`, params: {id: a.OrderID}}">Prescription {{a.OrderID}}</router-link></small>
-                                </div> 
+                                    <div>{{ `${a.Name}` }}</div>
+                                    <small><router-link target="_blank"
+                                            :to="{ name: `prescription`, params: { id: a.OrderID } }">Prescription
+                                            {{ a.OrderID }}</router-link></small>
+                                </div>
                                 <div style="flex-grow: 1;text-align: right;">
                                     <div>{{ a.Action }}</div>
-                                    <div>{{ `${a.Date}` }}</div> 
+                                    <div>{{ `${a.Date}` }}</div>
                                 </div>
                             </div>
                         </li>
-                    <!-- </ul> -->
-                    </transition-group> 
+                        <!-- </ul> -->
+                    </transition-group>
                 </div>
             </section>
             <section class="card">
                 <div class="card-header flex flex-space-between">
                     <span>Users</span>
                     <span class="clickable" @click="visibleFilters.appActivity = !visibleFilters.appActivity">
-                        Filters <i :class="[visibleFilters.appActivity ? 'fa-caret-up' : 'fa-caret-down']" class="fa"></i>
+                        Filters <i :class="[visibleFilters.appActivity ? 'fa-caret-up' : 'fa-caret-down']"
+                            class="fa"></i>
                     </span>
                 </div>
                 <div class="card-header-filters" v-if="visibleFilters.appActivity">
@@ -120,25 +120,30 @@
                 <div class="card-body">
                     <!-- <transition-group tag="ul" class="user-app-activity-list" name="fade"> -->
                     <ul class="user-app-activity-list">
-                        <li :class="[activity.Page != 'exit' ? 'user-online' : 'user-offline', (activity.current_time - activity.unix_time > 1800) ? 'user-away' : '']" 
-                        @click="toggleAppActivity(activity.UserID)"
-                        v-for="activity in appActivity" 
-                        :key="activity.ViewLogCurrentID">
+                        <li :class="[activity.Page != 'exit' ? 'user-online' : 'user-offline', (activity.current_time - activity.unix_time > 1800) ? 'user-away' : '']"
+                            @click="toggleAppActivity(activity.UserID)" v-for="activity in appActivity"
+                            :key="activity.ViewLogCurrentID">
                             <div class="user-app-activity-overview">
                                 <div class="user-app-activity-name">
-                                    <div>{{ `${activity.name} ${activity.surname}` }} <i :class="[!toggled.appActivity.includes(activity.UserID) ? 'fa-caret-down' : 'fa-caret-up']" class="fa ml-5"/></div>
-                                    <small>{{ activity.current_time - activity.unix_time > 1800 && activity.Page != 'exit' ? 'Away' : activity.Page != 'exit' ? 'Online' : 'Offline' }}</small>
-                                </div> 
+                                    <div>{{ `${activity.name} ${activity.surname}` }} <i
+                                            :class="[!toggled.appActivity.includes(activity.UserID) ? 'fa-caret-down' : 'fa-caret-up']"
+                                            class="fa ml-5" /></div>
+                                    <small>{{ activity.current_time - activity.unix_time > 1800 && activity.Page !=
+                                        'exit' ? 'Away' : activity.Page != 'exit' ? 'Online' : 'Offline' }}</small>
+                                </div>
                                 <div>
-                                    <router-link v-if="activity.fullPath" class="capitalize" :to="activity.fullPath"><b>{{ `${activity.routeName}` }}</b> <b v-if="typeof activity.id != 'undefined'">{{activity.id}}</b></router-link>
+                                    <router-link v-if="activity.fullPath" class="capitalize"
+                                        :to="activity.fullPath"><b>{{ `${activity.routeName}` }}</b> <b
+                                            v-if="typeof activity.id != 'undefined'">{{ activity.id }}</b></router-link>
                                     <span class="capitalize" v-else><b>{{ `${activity.routeName}` }}</b></span>
-                                    <div>{{ `${activity.UpdatedAt}` }}</div> 
+                                    <div>{{ `${activity.UpdatedAt}` }}</div>
                                 </div>
                             </div>
                             <div v-if="toggled.appActivity.includes(activity.UserID)" class="user-app-activity-details">
                                 <hr class="mt-10 mb-10">
-                                <div>Last login location: <b>{{ `${activity.IP}` }}</b></div> 
-                                <div>Last login time: <b>{{ `${activity.last_login_at == null ? 'never' : activity.last_login_at}` }}</b></div> 
+                                <div>Last login location: <b>{{ `${activity.IP}` }}</b></div>
+                                <div>Last login time: <b>{{ `${activity.last_login_at == null ? 'never' :
+                                    activity.last_login_at}` }}</b></div>
                             </div>
                         </li>
                     </ul>
@@ -152,10 +157,10 @@
 <script>
 
 import ActivityDashboardMain from '../ActivityDashboardMain.vue'
-import Datepicker from 'vuejs-datepicker'
+import Datepicker from '../wrapper/Datepicker.vue';
 
 export default {
-    components:{ActivityDashboardMain, Datepicker},
+    components: { ActivityDashboardMain, Datepicker },
     data() {
         return {
             loaded: false,
@@ -165,7 +170,7 @@ export default {
                 total: 0,
             },
             users: [],
-            filters:{
+            filters: {
                 activity: {
                     show: 25,
                     user: false,
@@ -176,14 +181,14 @@ export default {
                     status: 'all',
                 },
                 statistics: {
-                    
+
                 },
             },
             visibleFilters: {
                 activity: false,
                 appActivity: false,
                 aggregate: false,
-            },            
+            },
             pendingPharmacyOrdersCount: 0,
             appActivity: [],
             intervals: {
@@ -223,12 +228,12 @@ export default {
                 queried: 'border-warning',
                 rejected: 'border-danger',
                 cancelled: 'border-danger',
-                return: 'border-danger',                
+                return: 'border-danger',
             }
         }
-    },    
+    },
     computed: {
-        params(){
+        params() {
             let params = {
                 appActivity: '',
                 activity: '',
@@ -242,17 +247,17 @@ export default {
         }
     },
     watch: {
-        'params.appActivity': function(){
+        'params.appActivity': function () {
             this.getAppActivity();
         },
-        'params.activity': function(){
-            if(this.filters.activity.show == 9999 && (this.filters.activity.date == '' || this.filters.activity.date == null || this.filters.activity.user == 'false')){
+        'params.activity': function () {
+            if (this.filters.activity.show == 9999 && (this.filters.activity.date == '' || this.filters.activity.date == null || this.filters.activity.user == 'false')) {
                 this.filters.activity.show = '25';
             }
 
             this.getActivity();
         },
-        'params.statistics': function(){
+        'params.statistics': function () {
             this.getStatistics();
             this.getCount();
         }
@@ -267,7 +272,7 @@ export default {
         this.intervals.activity = setInterval(() => {
             this.getAppActivity();
 
-            if((this.filters.activity.user == 'false' || !this.filters.activity.user) && this.filters.activity.date == ''){
+            if ((this.filters.activity.user == 'false' || !this.filters.activity.user) && this.filters.activity.date == '') {
                 this.getActivity();
             }
         }, 5000);
@@ -282,78 +287,78 @@ export default {
         clearInterval(this.intervals.statistics);
     },
     methods: {
-        getUsers(){
+        getUsers() {
             axios.get(`/users/all`)
-            .then((response) => {
-                this.users = response.data.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-        },
-        getCount(){
-            axios.get(`/api/check-orders/results`)
-            .then((response) => {
-                this.pendingPharmacyOrdersCount = response.data.data.pendingPharmacyOrdersCount;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        },
-        getStatistics(){
-            axios.get(`/statistics-cached`)
-            .then((response) => {
-                this.statistics = response.data.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-        },
-        getAppActivity(){
-            axios.get(`/logs/app-activity${this.params.appActivity}`)
-            .then((response) => {
-                this.appActivity = response.data.data;
-                this.appActivity.forEach((activity) => {
-                    if(activity.Page != 'exit'){
-                        let routeDetails = this.getPageDetails(activity.Page);
-                        activity.routeName = routeDetails.name;
-                        activity.id = routeDetails.params.id;
-                        activity.fullPath = routeDetails.fullPath;
-                    } else {
-                        activity.routeName = 'Logout';
-                        activity.id = false;
-                        activity.fullPath = false;                        
-                    }
+                .then((response) => {
+                    this.users = response.data.data;
                 })
-            })
-            .catch((error) => {
-                console.log(error);
-            })
+                .catch((error) => {
+                    console.log(error);
+                })
         },
-        setTab(tab){
+        getCount() {
+            axios.get(`/api/check-orders/results`)
+                .then((response) => {
+                    this.pendingPharmacyOrdersCount = response.data.data.pendingPharmacyOrdersCount;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        getStatistics() {
+            axios.get(`/statistics-cached`)
+                .then((response) => {
+                    this.statistics = response.data.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        },
+        getAppActivity() {
+            axios.get(`/logs/app-activity${this.params.appActivity}`)
+                .then((response) => {
+                    this.appActivity = response.data.data;
+                    this.appActivity.forEach((activity) => {
+                        if (activity.Page != 'exit') {
+                            let routeDetails = this.getPageDetails(activity.Page);
+                            activity.routeName = routeDetails.name;
+                            activity.id = routeDetails.params.id;
+                            activity.fullPath = routeDetails.fullPath;
+                        } else {
+                            activity.routeName = 'Logout';
+                            activity.id = false;
+                            activity.fullPath = false;
+                        }
+                    })
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        },
+        setTab(tab) {
             localStorage.setItem('dashboard.orderFilter', tab);
         },
-        getActivity(){
+        getActivity() {
             axios.get(`/overview/activity${this.params.activity}`)
-            .then((response) => {
-                this.activity = response.data.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            })            
+                .then((response) => {
+                    this.activity = response.data.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
         },
-        toggleAppActivity(id){
-            if(!this.toggled.appActivity.includes(id)){
+        toggleAppActivity(id) {
+            if (!this.toggled.appActivity.includes(id)) {
                 this.toggled.appActivity.push(id);
             } else {
                 this.toggled.appActivity.splice(this.toggled.appActivity.indexOf(id), 1);
             }
         },
-        getPageDetails(page){
-            let {route} = this.$router.resolve({
+        getPageDetails(page) {
+            let { route } = this.$router.resolve({
                 path: page,
             });
-            
+
             return route;
         }
     },

@@ -71,14 +71,14 @@ export default {
     },
     mounted() {
         this.getAlertNotifications();
-        this.$root.$on('orderupdate', this.getAlertNotifications);
+        this.emitter.on('orderupdate', this.getAlertNotifications);
 
-        this.$root.$on('alertupdate', (e) => {
+        this.emitter.on('alertupdate', (e) => {
             this.getAlertNotifications();
         });
     },
     destroyed() {
-        this.$root.$off('alertupdate', (e) => {
+        this.emitter.off('alertupdate', (e) => {
             this.getAlertNotifications();
         });
     },
@@ -102,10 +102,10 @@ export default {
             if (this.orderID == '' && this.refNo != '') {
                 this.refNo = DOMPurify.sanitize(this.refNo);
                 this.getOrderID(this.refNo, () => {
-                    //this.$root.$emit('orderupdate');
+                    //this.emitter.emit('orderupdate');
                     if (Array.isArray(this.orderID)) {
                         // this.$router.push({name: 'duplicate', params: {id: this.refNo}});
-                        this.$root.$emit('showduplicates', { duplicateReference: this.refNo });
+                        this.emitter.emit('showduplicates', { duplicateReference: this.refNo });
                         this.postError(`Duplicate orders for reference number ${this.refNo} found. Displaying orders.`);
                         this.orderID = '';
                         this.refNo = '';
@@ -116,7 +116,7 @@ export default {
                     }
                 });
             } else {
-                this.$root.$emit('prescriptionloading');
+                this.emitter.emit('prescriptionloading');
                 this.$router.push({ name: 'prescription', params: { id: this.orderID } });
                 this.orderID = '';
                 this.refNo = '';
@@ -161,7 +161,7 @@ export default {
         },
         viewAlerts() {
             if (this.currentRouteName == 'in tray' || this.currentRouteName == 'dashboard') {
-                this.$root.$emit('changefilter', { filter: 'ordercount' });
+                this.emitter.emit('changefilter', { filter: 'ordercount' });
             } else {
                 localStorage.setItem('dashboard.orderFilter', 'ordercount');
                 this.$router.push({ name: 'in tray' });

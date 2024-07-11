@@ -61,8 +61,8 @@
                             :default-options="false" :multiple="filter.multiple ? true : false" :append-to-body="false"
                             v-model="selectedFilters[filter.value]">
                             <div slot="value-label" slot-scope="{ node }">{{ node.raw.customLabel ? node.raw.customLabel
-        :
-        node.raw.label }}</div>
+                                :
+                                node.raw.label }}</div>
                             <label slot="option-label"
                                 slot-scope="{ node, shouldShowCount, count, labelClassName, countClassName }"
                                 :class="labelClassName">
@@ -219,9 +219,8 @@
 
 <script>
 import TableComponent from './TableComponent.vue';
-import Datepicker from 'vuejs-datepicker'
-import Treeselect from '@emacle/vue-treeselect'
-import '@emacle/vue-treeselect/dist/vue-treeselect.css'
+import Datepicker from './wrapper/Datepicker.vue';
+import Treeselect from './wrapper/Treeselect.vue';
 
 export default {
     extends: TableComponent,
@@ -382,7 +381,7 @@ export default {
                 let route = this.$router.resolve({ name: this.redirectName, params: { id: id } });
                 window.open(route.href, '_blank');
             } else {
-                this.$root.$emit(this.redirectEvent, id);
+                this.emitter.emit(this.redirectEvent, id);
             }
         },
     },

@@ -1,8 +1,8 @@
 <template>
     <section>
         <div class="orderSearch">
-            <data-table v-if="orderFilter != 'ordercount'" data-url="/orders" column-class="col-lg-12" table-title="InTray"
-                redirect-name="prescription" redirect-id="PrescriptionID" :filters="orderFilter"
+            <data-table v-if="orderFilter != 'ordercount'" data-url="/orders" column-class="col-lg-12"
+                table-title="InTray" redirect-name="prescription" redirect-id="PrescriptionID" :filters="orderFilter"
                 :redirect-callback="redirectCallback"
                 :checkbox-visible="(orderFilter == 'new' && [29, 30, 35].includes(userInfo.role))/* || (orderFilter == 'approved' && userInfo.role == 20)*/"
                 :hidden-columns="['checked', 'disabled', 'UPSAccessPointAddress']" :not-orderable="['Products']"
@@ -68,7 +68,8 @@
                         </div>
                         <div class="check-options" v-if="checked.length > 0">
                             <button @click="addToTray()" class="btn btnSize02 secondaryBtn">
-                                <span v-if="userInfo.role == 20 || userInfo.role == 19">Take over</span><span v-else>Add To
+                                <span v-if="userInfo.role == 20 || userInfo.role == 19">Take over</span><span v-else>Add
+                                    To
                                     Tray</span> ({{ checked.length }} orders)
                             </button>
                         </div>
@@ -96,7 +97,8 @@
                                 </button>
                                 <button class="btn btn-primary table-icon"
                                     title="Refresh the pending pharmacy orders list manually" @click=" getCount(true)">
-                                    <i class="fa fa-refresh" :class="[loadingPendingPharmacy ? 'spin-animation' : '']"></i>
+                                    <i class="fa fa-refresh"
+                                        :class="[loadingPendingPharmacy ? 'spin-animation' : '']"></i>
                                 </button>
                             </div>
                         </li>
@@ -105,7 +107,7 @@
                             <div class="pool-column"><b>Client</b></div>
                             <div class="pool-column"><b>Status</b></div>
                         </li>
-                        <li class="pool-list-layout" v-for="   order    in    pendingPharmacyOrders   "
+                        <li class="pool-list-layout" v-for="   order in pendingPharmacyOrders   "
                             :key="order.SyncOrderID">
                             <div class="pool-column">{{ order.Value }}</div>
                             <div class="pool-column"><span>{{ order.CompanyName }}</span></div>
@@ -132,7 +134,7 @@
                             <div class="pool-column"><b>Postponed By</b></div>
                             <div class="pool-column">Tools</div>
                         </li>
-                        <li class="pool-list-layout" v-for="   order    in    onHoldOrders   " :key="order.PrescriptionID">
+                        <li class="pool-list-layout" v-for="   order in onHoldOrders   " :key="order.PrescriptionID">
                             <div class="pool-column">
                                 <b>{{ order.PrescriptionID }}</b>
                             </div>
@@ -228,12 +230,12 @@ export default {
 
         this.getOnHoldOrders();
 
-        this.$root.$on('changefilter', (e) => {
+        this.emitter.on('changefilter', (e) => {
             this.orderFilter = e.filter;
         });
     },
     destroyed() {
-        this.$root.$off('changefilter');
+        this.emitter.off('changefilter');
     },
     computed: {
         checked() {
@@ -274,7 +276,7 @@ export default {
                 axios.post(`/tray/new/insert/20`)
                     .then((response) => {
                         this.postSuccess(response.data.message);
-                        this.$root.$emit('tray.refresh');
+                        this.emitter.emit('tray.refresh');
                     })
                     .catch((error) => {
                         this.postError(error.response.data.message);
@@ -288,7 +290,7 @@ export default {
                 this.checkOrders(() => {
                     this.getCount();
                     this.getOnHoldOrders();
-                    this.$root.$emit('alertupdate');
+                    this.emitter.emit('alertupdate');
                 });
             } else {
                 axios.get('/api/check-orders/results')
@@ -302,7 +304,7 @@ export default {
                     })
                     .finally(() => {
                         this.loadingPendingPharmacy = false;
-                        this.$root.$emit('alertupdate');
+                        this.emitter.emit('alertupdate');
                     })
             }
         },
@@ -333,8 +335,8 @@ export default {
                 .then((response) => {
                     this.postSuccess(response.data.message);
                     this.$store.commit('replaceChecked', []);
-                    this.$root.$emit('tray.refresh');
-                    this.$root.$emit('table.refresh');
+                    this.emitter.emit('tray.refresh');
+                    this.emitter.emit('table.refresh');
                 })
                 .catch((error) => {
                     this.postError(error.response.data.message);
@@ -360,13 +362,13 @@ export default {
                         })
                         .finally(() => {
                             //this.getOrderAlerts();
-                            this.$root.$emit('alertupdate');
+                            this.emitter.emit('alertupdate');
                         })
                 }
             })
         },
         editNote(note = false) {
-            this.$root.$emit('modal.open', 'note', note);
+            this.emitter.emit('modal.open', 'note', note);
         },
         getPendingCSV() {
             let pending = [];
@@ -380,10 +382,10 @@ export default {
         safe(id) {
             axios.post(`/order-edit/${id}/status`, { status: 1 })
                 .then((response) => {
-                    this.$root.$emit('table.refresh');
+                    this.emitter.emit('table.refresh');
                 })
                 .catch((error) => {
-                    this.$root.$emit('table.refresh');
+                    this.emitter.emit('table.refresh');
                     this.postError(error.response.data.message);
                 })
                 .finally(() => {
@@ -410,11 +412,11 @@ export default {
         },
         checkAllVisible() {
             if (this.currentChecked && !this.match) {
-                this.$root.$emit('table.uncheck.all');
+                this.emitter.emit('table.uncheck.all');
             } else if (this.currentChecked && this.match) {
-                this.$root.$emit('table.uncheck.all');
+                this.emitter.emit('table.uncheck.all');
             } else {
-                this.$root.$emit('table.check.all');
+                this.emitter.emit('table.check.all');
             }
         },
         clearChecked() {

@@ -1,0 +1,2 @@
+import{_ as e,c as s,o as c,b as o}from"./app-Day-6uLD.js";const t={mounted(){console.log("Component mounted.")}},a=o("div",{class:"row wow fadeIn"},[o("div",{class:"col-md-12"},[o("div",{class:"card"},[o("div",{class:"card-body"}," You are not allowed to access this page! ")])])],-1),d=[a];function n(l,r,_,i,p,m){return c(),s("div",null,d)}const f=e(t,[["render",n]]);export{f as default};
+//# sourceMappingURL=NotAllowed-DSV4RnpS.js.map

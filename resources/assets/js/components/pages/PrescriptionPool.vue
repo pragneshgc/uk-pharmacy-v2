@@ -164,8 +164,9 @@
                                 TAKE OVER
                             </button>
 
-                            <button :title="'Release orders assigned to ' + dispenser.name" :disabled="dispenser.count == 0"
-                                @click="release(dispenser.esa_user_id, false)" class="btn btnSize02 tertiaryBtn">
+                            <button :title="'Release orders assigned to ' + dispenser.name"
+                                :disabled="dispenser.count == 0" @click="release(dispenser.esa_user_id, false)"
+                                class="btn btnSize02 tertiaryBtn">
                                 RELEASE
                             </button>
                         </div>
@@ -300,8 +301,8 @@ export default {
     },
     mounted() {
         this.refresh();
-
-        this.$root.$on('tray.clear', () => {
+        this.emitter.on
+        this.emitter.on('tray.clear', () => {
             this.refresh();
         })
     },
@@ -347,7 +348,7 @@ export default {
             axios.post('/prescription-pool/allocate', { userID: userID, deliveryID: deliveryID, orderID: orderID })
                 .then((response) => {
                     this.refresh();
-                    this.$root.$emit('tray.refresh');
+                    this.emitter.emit('tray.refresh');
                 })
                 .catch((error) => {
                     this.postError(error.response.data.message);
@@ -367,14 +368,14 @@ export default {
             axios.post('/prescription-pool/release', { userID: userID, dispenserPoolID: dispenserPoolID, all: all })
                 .then((response) => {
                     this.refresh();
-                    this.$root.$emit('tray.refresh');
+                    this.emitter.emit('tray.refresh');
                 })
                 .catch((error) => {
                     this.postError(error.response.data.message);
                 })
         },
         viewAssigned() {
-            this.$root.$emit('tray.toggle')
+            this.emitter.emit('tray.toggle')
         },
         checkMessage(message, callback) {
             this.$swal({
@@ -391,7 +392,7 @@ export default {
             })
         },
         reprint(id) {
-            this.$root.$emit('prescriptionpool.reprint', id);
+            this.emitter.emit('prescriptionpool.reprint', id);
         },
     }
 }

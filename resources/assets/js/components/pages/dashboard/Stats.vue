@@ -81,10 +81,10 @@ export default {
     mounted() {
         this.getStatistics();
         this.getOrderAlerts();
-        this.$root.$on('orderupdate', this.getOrderAlerts);
+        this.emitter.on('orderupdate', this.getOrderAlerts);
     },
     destroyed() {
-        this.$root.$off('orderupdate');
+        this.emitter.off('orderupdate');
     },
     methods: {
         getStatistics() {
@@ -105,7 +105,7 @@ export default {
                 localStorage.setItem('dashboard.orderFilter', (this.userInfo.role == 20 || this.userInfo.role == 19) ? 'approved' : 'new');
             }
             this.orderFilter = filter;
-            this.$root.$emit('changefilter', { filter });
+            this.emitter.emit('changefilter', { filter });
         },
         getOrderAlerts() {
             axios.get('/note/pending-alerts')

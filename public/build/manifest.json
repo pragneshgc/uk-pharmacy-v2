@@ -1,49 +1,73 @@
 {
-  "_logging-e11bbfe7.js": {
-    "file": "assets/logging-e11bbfe7.js"
+  "_Datepicker-!~{00G}~.js": {
+    "file": "assets/Datepicker-B76Gv48S.css",
+    "src": "_Datepicker-!~{00G}~.js"
   },
-  "_vue2-editor.esm-3249ef74.js": {
-    "file": "assets/vue2-editor.esm-3249ef74.js",
+  "_Datepicker-B5Jhtrx6.js": {
+    "file": "assets/Datepicker-B5Jhtrx6.js",
+    "name": "Datepicker",
+    "imports": [
+      "resources/assets/js/app.js"
+    ],
+    "css": [
+      "assets/Datepicker-B76Gv48S.css"
+    ]
+  },
+  "_csv-D9clh__g.js": {
+    "file": "assets/csv-D9clh__g.js",
+    "name": "csv"
+  },
+  "_logging-D8Y4Ru6_.js": {
+    "file": "assets/logging-D8Y4Ru6_.js",
+    "name": "logging"
+  },
+  "_vue2-editor.esm-90NpmgUV.js": {
+    "file": "assets/vue2-editor.esm-90NpmgUV.js",
+    "name": "vue2-editor.esm",
     "imports": [
       "resources/assets/js/app.js"
     ]
   },
-  "_vuejs-datepicker.esm-72f1c627.js": {
-    "file": "assets/vuejs-datepicker.esm-72f1c627.js"
-  },
   "node_modules/canvg/lib/index.es.js": {
-    "file": "assets/index.es-6fdf1b6d.js",
+    "file": "assets/index.es-CozD7L_v.js",
+    "name": "index.es",
+    "src": "node_modules/canvg/lib/index.es.js",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "node_modules/canvg/lib/index.es.js"
+    ]
   },
   "node_modules/jspdf/node_modules/dompurify/dist/purify.es.js": {
-    "file": "assets/purify.es-d2cc20bc.js",
-    "isDynamicEntry": true,
-    "src": "node_modules/jspdf/node_modules/dompurify/dist/purify.es.js"
+    "file": "assets/purify.es-DGIRlouP.js",
+    "name": "purify.es",
+    "src": "node_modules/jspdf/node_modules/dompurify/dist/purify.es.js",
+    "isDynamicEntry": true
   },
   "public/images/iconPaper.png": {
-    "file": "assets/iconPaper-74eba9a2.png",
+    "file": "assets/iconPaper-mzJ3qGNQ.png",
     "src": "public/images/iconPaper.png"
   },
   "public/images/logo/ups_access_point.jpg": {
-    "file": "assets/ups_access_point-ad6b7abe.jpg",
+    "file": "assets/ups_access_point-CQwXzLyN.jpg",
     "src": "public/images/logo/ups_access_point.jpg"
   },
   "public/images/logo/ups_cod.jpg": {
-    "file": "assets/ups_cod-eb4767bc.jpg",
+    "file": "assets/ups_cod-Cs4WG20W.jpg",
     "src": "public/images/logo/ups_cod.jpg"
   },
-  "resources/assets/js/app.css": {
-    "file": "assets/app-7eda0943.css",
-    "src": "resources/assets/js/app.css"
+  "resources/assets/images/footerBgr.png": {
+    "file": "assets/footerBgr-BuSvDiN5.png",
+    "src": "resources/assets/images/footerBgr.png"
+  },
+  "resources/assets/images/logo.png": {
+    "file": "assets/logo-RZFh7qaA.png",
+    "src": "resources/assets/images/logo.png"
   },
   "resources/assets/js/app.js": {
-    "css": [
-      "assets/app-7eda0943.css"
-    ],
+    "file": "assets/app-Day-6uLD.js",
+    "name": "app",
+    "src": "resources/assets/js/app.js",
+    "isEntry": true,
     "dynamicImports": [
       "resources/assets/js/components/TableComponentSearch.vue",
       "resources/assets/js/components/pages/Dashboard.vue",
@@ -80,350 +104,390 @@
       "resources/assets/js/components/PrescriberModal.vue",
       "resources/assets/js/components/NoteModal.vue",
       "resources/assets/js/components/Modal.vue",
-      "resources/assets/js/components/RedeliveryModal.vue",
-      "resources/assets/js/components/PaginationComponent.vue"
+      "resources/assets/js/components/RedeliveryModal.vue"
     ],
-    "file": "assets/app-a3e6dddd.js",
-    "isEntry": true,
-    "src": "resources/assets/js/app.js"
+    "css": [
+      "assets/app-DWMI0VDG.css"
+    ]
   },
   "resources/assets/js/components/Modal.vue": {
-    "file": "assets/Modal-76bda924.js",
+    "file": "assets/Modal-C4m4T6Vr.js",
+    "name": "Modal",
+    "src": "resources/assets/js/components/Modal.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/Modal.vue"
+    ]
   },
   "resources/assets/js/components/NoteModal.vue": {
-    "file": "assets/NoteModal-d6e1370a.js",
+    "file": "assets/NoteModal-BLjtw0vb.js",
+    "name": "NoteModal",
+    "src": "resources/assets/js/components/NoteModal.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/components/Modal.vue",
       "resources/assets/js/app.js",
-      "_vue2-editor.esm-3249ef74.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/NoteModal.vue"
+      "_vue2-editor.esm-90NpmgUV.js"
+    ]
   },
   "resources/assets/js/components/PaginationComponent.vue": {
-    "file": "assets/PaginationComponent-1eec5f97.js",
+    "file": "assets/PaginationComponent-VHHkEw7x.js",
+    "name": "PaginationComponent",
+    "src": "resources/assets/js/components/PaginationComponent.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/PaginationComponent.vue"
+    ]
   },
   "resources/assets/js/components/PrescriberModal.vue": {
-    "file": "assets/PrescriberModal-db89f615.js",
+    "file": "assets/PrescriberModal-Ba3oI7pV.js",
+    "name": "PrescriberModal",
+    "src": "resources/assets/js/components/PrescriberModal.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/components/Modal.vue",
-      "_vue2-editor.esm-3249ef74.js",
+      "_vue2-editor.esm-90NpmgUV.js",
       "resources/assets/js/app.js",
-      "_vuejs-datepicker.esm-72f1c627.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/PrescriberModal.vue"
+      "_Datepicker-B5Jhtrx6.js"
+    ]
   },
   "resources/assets/js/components/RedeliveryModal.vue": {
-    "file": "assets/RedeliveryModal-fa21ac93.js",
+    "file": "assets/RedeliveryModal-Bv2IS1wG.js",
+    "name": "RedeliveryModal",
+    "src": "resources/assets/js/components/RedeliveryModal.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js",
       "resources/assets/js/components/Modal.vue"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/RedeliveryModal.vue"
+    ]
   },
   "resources/assets/js/components/TableComponentSearch.vue": {
-    "file": "assets/TableComponentSearch-05ef0c08.js",
+    "file": "assets/TableComponentSearch-BX1i9UPY.js",
+    "name": "TableComponentSearch",
+    "src": "resources/assets/js/components/TableComponentSearch.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js",
-      "_vuejs-datepicker.esm-72f1c627.js"
+      "_csv-D9clh__g.js",
+      "_Datepicker-B5Jhtrx6.js"
     ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/TableComponentSearch.vue"
+    "dynamicImports": [
+      "resources/assets/js/components/PaginationComponent.vue"
+    ]
   },
   "resources/assets/js/components/pages/Dashboard.vue": {
-    "dynamicImports": [
-      "resources/assets/js/components/Modal.vue"
-    ],
-    "file": "assets/Dashboard-c3ad5a64.js",
-    "imports": [
-      "resources/assets/js/app.js"
-    ],
+    "file": "assets/Dashboard-0jHEzBCH.js",
+    "name": "Dashboard",
+    "src": "resources/assets/js/components/pages/Dashboard.vue",
     "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/Dashboard.vue"
-  },
-  "resources/assets/js/components/pages/Duplicate.vue": {
-    "file": "assets/Duplicate-ac7d61a5.js",
-    "imports": [
-      "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/Duplicate.vue"
-  },
-  "resources/assets/js/components/pages/EditOrderAddress.vue": {
-    "file": "assets/EditOrderAddress-e960b434.js",
-    "imports": [
-      "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/EditOrderAddress.vue"
-  },
-  "resources/assets/js/components/pages/IpAudit.vue": {
-    "dynamicImports": [
-      "resources/assets/js/components/TableComponentSearch.vue"
-    ],
-    "file": "assets/IpAudit-42a95c54.js",
-    "imports": [
-      "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/IpAudit.vue"
-  },
-  "resources/assets/js/components/pages/Overview.vue": {
-    "file": "assets/Overview-4cd0220a.js",
     "imports": [
       "resources/assets/js/app.js",
-      "_vuejs-datepicker.esm-72f1c627.js"
+      "_csv-D9clh__g.js"
     ],
+    "dynamicImports": [
+      "resources/assets/js/components/Modal.vue"
+    ]
+  },
+  "resources/assets/js/components/pages/Duplicate.vue": {
+    "file": "assets/Duplicate-B3w1bdcZ.js",
+    "name": "Duplicate",
+    "src": "resources/assets/js/components/pages/Duplicate.vue",
     "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/Overview.vue"
+    "imports": [
+      "resources/assets/js/app.js"
+    ]
+  },
+  "resources/assets/js/components/pages/EditOrderAddress.vue": {
+    "file": "assets/EditOrderAddress-BhiZAOvf.js",
+    "name": "EditOrderAddress",
+    "src": "resources/assets/js/components/pages/EditOrderAddress.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/assets/js/app.js"
+    ]
+  },
+  "resources/assets/js/components/pages/IpAudit.vue": {
+    "file": "assets/IpAudit-C7BYElTB.js",
+    "name": "IpAudit",
+    "src": "resources/assets/js/components/pages/IpAudit.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/assets/js/app.js"
+    ],
+    "dynamicImports": [
+      "resources/assets/js/components/TableComponentSearch.vue"
+    ]
+  },
+  "resources/assets/js/components/pages/Overview.vue": {
+    "file": "assets/Overview-YT1gklRF.js",
+    "name": "Overview",
+    "src": "resources/assets/js/components/pages/Overview.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_Datepicker-B5Jhtrx6.js",
+      "resources/assets/js/app.js"
+    ]
   },
   "resources/assets/js/components/pages/PrescriptionPool.vue": {
+    "file": "assets/PrescriptionPool-BnQbGrTX.js",
+    "name": "PrescriptionPool",
+    "src": "resources/assets/js/components/pages/PrescriptionPool.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/assets/js/app.js"
+    ],
     "dynamicImports": [
       "resources/assets/js/components/pages/prescriptionpool/NotesPopup.vue",
       "resources/assets/js/components/Modal.vue"
-    ],
-    "file": "assets/PrescriptionPool-ffc5c101.js",
-    "imports": [
-      "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/PrescriptionPool.vue"
+    ]
   },
   "resources/assets/js/components/pages/Register.vue": {
-    "dynamicImports": [
-      "resources/assets/js/components/TableComponentSearch.vue"
-    ],
-    "file": "assets/Register-f1b83811.js",
+    "file": "assets/Register-Cxk3F4ik.js",
+    "name": "Register",
+    "src": "resources/assets/js/components/pages/Register.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
     ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/Register.vue"
+    "dynamicImports": [
+      "resources/assets/js/components/TableComponentSearch.vue"
+    ]
   },
   "resources/assets/js/components/pages/additional/Additional.vue": {
-    "file": "assets/Additional-229b3db4.js",
+    "file": "assets/Additional-G0do3CFn.js",
+    "name": "Additional",
+    "src": "resources/assets/js/components/pages/additional/Additional.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js",
-      "_logging-e11bbfe7.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/additional/Additional.vue"
+      "_logging-D8Y4Ru6_.js"
+    ]
   },
   "resources/assets/js/components/pages/admin/Logs.vue": {
-    "file": "assets/Logs-c0bd48c4.js",
+    "file": "assets/Logs-V4oNnXSi.js",
+    "name": "Logs",
+    "src": "resources/assets/js/components/pages/admin/Logs.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/admin/Logs.vue"
+    ]
   },
   "resources/assets/js/components/pages/blacklist/Blacklist.vue": {
-    "dynamicImports": [
-      "resources/assets/js/components/TableComponentSearch.vue"
-    ],
-    "file": "assets/Blacklist-8dfd0b17.js",
+    "file": "assets/Blacklist-C-oBDx5J.js",
+    "name": "Blacklist",
+    "src": "resources/assets/js/components/pages/blacklist/Blacklist.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
     ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/blacklist/Blacklist.vue"
+    "dynamicImports": [
+      "resources/assets/js/components/TableComponentSearch.vue"
+    ]
   },
   "resources/assets/js/components/pages/blacklist/New.vue": {
-    "file": "assets/New-e2678411.js",
+    "file": "assets/New-DFw8rgMT.js",
+    "name": "New",
+    "src": "resources/assets/js/components/pages/blacklist/New.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/blacklist/New.vue"
+    ]
   },
   "resources/assets/js/components/pages/client/Client.vue": {
-    "file": "assets/Client-90c3e80a.js",
+    "file": "assets/Client-CgGEs_i2.js",
+    "name": "Client",
+    "src": "resources/assets/js/components/pages/client/Client.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/client/Client.vue"
+    ]
   },
   "resources/assets/js/components/pages/client/Clients.vue": {
-    "dynamicImports": [
-      "resources/assets/js/components/TableComponentSearch.vue"
-    ],
-    "file": "assets/Clients-ad4b09ce.js",
+    "file": "assets/Clients-CyQQgXBo.js",
+    "name": "Clients",
+    "src": "resources/assets/js/components/pages/client/Clients.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
     ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/client/Clients.vue"
+    "dynamicImports": [
+      "resources/assets/js/components/TableComponentSearch.vue"
+    ]
   },
   "resources/assets/js/components/pages/client/New.vue": {
-    "file": "assets/New-ddf0c960.js",
+    "file": "assets/New-DSDkCNDD.js",
+    "name": "New",
+    "src": "resources/assets/js/components/pages/client/New.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/client/New.vue"
+    ]
   },
   "resources/assets/js/components/pages/dispensing/Dispensing.vue": {
-    "dynamicImports": [
-      "resources/assets/js/components/TableComponentSearch.vue"
-    ],
-    "file": "assets/Dispensing-a34933d4.js",
+    "file": "assets/Dispensing-63Pp-T_P.js",
+    "name": "Dispensing",
+    "src": "resources/assets/js/components/pages/dispensing/Dispensing.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
     ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/dispensing/Dispensing.vue"
+    "dynamicImports": [
+      "resources/assets/js/components/TableComponentSearch.vue"
+    ]
   },
   "resources/assets/js/components/pages/doctor/New.vue": {
-    "file": "assets/New-e1851c98.js",
+    "file": "assets/New-CTY0w19M.js",
+    "name": "New",
+    "src": "resources/assets/js/components/pages/doctor/New.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/doctor/New.vue"
+    ]
   },
   "resources/assets/js/components/pages/doctor/Prescriber.vue": {
-    "file": "assets/Prescriber-f53316e3.js",
+    "file": "assets/Prescriber-CzZJ4yP2.js",
+    "name": "Prescriber",
+    "src": "resources/assets/js/components/pages/doctor/Prescriber.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/doctor/Prescriber.vue"
+    ]
   },
   "resources/assets/js/components/pages/doctor/Prescribers.vue": {
-    "dynamicImports": [
-      "resources/assets/js/components/TableComponentSearch.vue"
-    ],
-    "file": "assets/Prescribers-03ddad94.js",
+    "file": "assets/Prescribers-NWLAcH_g.js",
+    "name": "Prescribers",
+    "src": "resources/assets/js/components/pages/doctor/Prescribers.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
     ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/doctor/Prescribers.vue"
+    "dynamicImports": [
+      "resources/assets/js/components/TableComponentSearch.vue"
+    ]
   },
   "resources/assets/js/components/pages/general/Info.vue": {
-    "file": "assets/Info-e90e3ee1.js",
+    "file": "assets/Info-DFXaT4NE.js",
+    "name": "Info",
+    "src": "resources/assets/js/components/pages/general/Info.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/general/Info.vue"
+    ]
   },
   "resources/assets/js/components/pages/generic/NotAllowed.vue": {
-    "file": "assets/NotAllowed-422afc29.js",
+    "file": "assets/NotAllowed-DSV4RnpS.js",
+    "name": "NotAllowed",
+    "src": "resources/assets/js/components/pages/generic/NotAllowed.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/generic/NotAllowed.vue"
+    ]
   },
   "resources/assets/js/components/pages/generic/NotFound.vue": {
-    "file": "assets/NotFound-e25da6e0.js",
+    "file": "assets/NotFound-BH9G8DM7.js",
+    "name": "NotFound",
+    "src": "resources/assets/js/components/pages/generic/NotFound.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/generic/NotFound.vue"
+    ]
   },
   "resources/assets/js/components/pages/invoices/InvoicePreview.vue": {
-    "dynamicImports": [
-      "resources/assets/js/components/Modal.vue"
-    ],
-    "file": "assets/InvoicePreview-e5692163.js",
+    "file": "assets/InvoicePreview-DCnhEIMM.js",
+    "name": "InvoicePreview",
+    "src": "resources/assets/js/components/pages/invoices/InvoicePreview.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
     ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/invoices/InvoicePreview.vue"
+    "dynamicImports": [
+      "resources/assets/js/components/Modal.vue"
+    ]
   },
   "resources/assets/js/components/pages/invoices/Invoices.vue": {
-    "dynamicImports": [
-      "resources/assets/js/components/TableComponentSearch.vue"
-    ],
-    "file": "assets/Invoices-2d5cd7c6.js",
+    "file": "assets/Invoices-DPjOsRBX.js",
+    "name": "Invoices",
+    "src": "resources/assets/js/components/pages/invoices/Invoices.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
     ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/invoices/Invoices.vue"
+    "dynamicImports": [
+      "resources/assets/js/components/TableComponentSearch.vue"
+    ]
   },
   "resources/assets/js/components/pages/label/Labels.vue": {
-    "file": "assets/Labels-434d026e.js",
+    "file": "assets/Labels-BXFW3fFE.js",
+    "name": "Labels",
+    "src": "resources/assets/js/components/pages/label/Labels.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js",
-      "_logging-e11bbfe7.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/label/Labels.vue"
+      "_logging-D8Y4Ru6_.js"
+    ]
   },
   "resources/assets/js/components/pages/prescriptionpool/NotesPopup.vue": {
-    "file": "assets/NotesPopup-44d7f3dc.js",
+    "file": "assets/NotesPopup-CKW8TDwu.js",
+    "name": "NotesPopup",
+    "src": "resources/assets/js/components/pages/prescriptionpool/NotesPopup.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/prescriptionpool/NotesPopup.vue"
+    ]
   },
   "resources/assets/js/components/pages/product/Products.vue": {
-    "file": "assets/Products-2a2186c9.js",
+    "file": "assets/Products-CTR8S5nY.js",
+    "name": "Products",
+    "src": "resources/assets/js/components/pages/product/Products.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js",
-      "_logging-e11bbfe7.js",
+      "_logging-D8Y4Ru6_.js",
       "resources/assets/js/components/Modal.vue"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/product/Products.vue"
+    ]
   },
   "resources/assets/js/components/pages/setting/Settings.vue": {
-    "file": "assets/Settings-a1cedb1d.js",
+    "file": "assets/Settings-BQ-O1c74.js",
+    "name": "Settings",
+    "src": "resources/assets/js/components/pages/setting/Settings.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/setting/Settings.vue"
+    ]
   },
   "resources/assets/js/components/pages/user/NewUser.vue": {
-    "file": "assets/NewUser-bd231a54.js",
+    "file": "assets/NewUser-BSB6oKBZ.js",
+    "name": "NewUser",
+    "src": "resources/assets/js/components/pages/user/NewUser.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/user/NewUser.vue"
+    ]
   },
   "resources/assets/js/components/pages/user/User.vue": {
-    "file": "assets/User-a7793af5.js",
+    "file": "assets/User-DRHb6Xua.js",
+    "name": "User",
+    "src": "resources/assets/js/components/pages/user/User.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/user/User.vue"
+    ]
   },
   "resources/assets/js/components/pages/user/Users.vue": {
-    "dynamicImports": [
-      "resources/assets/js/components/TableComponentSearch.vue"
-    ],
-    "file": "assets/Users-3147540a.js",
+    "file": "assets/Users-DYfiTqGn.js",
+    "name": "Users",
+    "src": "resources/assets/js/components/pages/user/Users.vue",
+    "isDynamicEntry": true,
     "imports": [
       "resources/assets/js/app.js"
     ],
-    "isDynamicEntry": true,
-    "src": "resources/assets/js/components/pages/user/Users.vue"
+    "dynamicImports": [
+      "resources/assets/js/components/TableComponentSearch.vue"
+    ]
   },
   "resources/assets/sass/app.scss": {
-    "file": "assets/app-e4a68a1e.css",
-    "isEntry": true,
-    "src": "resources/assets/sass/app.scss"
+    "file": "assets/app-C-O-Tfd2.css",
+    "src": "resources/assets/sass/app.scss",
+    "isEntry": true
   }
 }

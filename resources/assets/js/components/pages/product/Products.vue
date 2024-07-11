@@ -51,13 +51,13 @@
                         </ul>
                     </div>
                     <div class="products-buttons" style="margin-right: 10px;">
-                        <button title="Add new product" class="btn btnSize02 secondaryBtn" @click="openEditModal('product')"
-                            v-if="userInfo.role > 4">
+                        <button title="Add new product" class="btn btnSize02 secondaryBtn"
+                            @click="openEditModal('product')" v-if="userInfo.role > 4">
                             <i class="fa fa-plus"></i> New Product
                         </button>
 
-                        <button title="Add new country" class="btn btnSize02 secondaryBtn" @click="openEditModal('country')"
-                            v-if="userInfo.role > 4">
+                        <button title="Add new country" class="btn btnSize02 secondaryBtn"
+                            @click="openEditModal('country')" v-if="userInfo.role > 4">
                             <i class="fa fa-plus"></i> New Country
                         </button>
 
@@ -148,8 +148,8 @@
                                     <div class="clickable" title="Filter by Name" v-else-if="value == 'Name'">
                                         <div v-if="filter.name.status">
                                             <form @submit.prevent="saveFilter('name')">
-                                                <input id="name-filter" class="form-control-inline" v-model="values.name"
-                                                    type="text">
+                                                <input id="name-filter" class="form-control-inline"
+                                                    v-model="values.name" type="text">
                                                 <i @click="saveFilter('name')" class="fa fa-check ml-10"></i>
                                                 <i @click="clearFilter('name')" class="fa fa-close ml-10"></i>
                                             </form>
@@ -180,8 +180,8 @@
                                     <div class="clickable" title="Filter by Code" v-else-if="value == 'Code'">
                                         <div v-if="filter.code.status">
                                             <form @submit.prevent="saveFilter('code')">
-                                                <input id="code-filter" class="form-control-inline" v-model="values.code"
-                                                    type="text">
+                                                <input id="code-filter" class="form-control-inline"
+                                                    v-model="values.code" type="text">
                                                 <i @click="saveFilter('code')" class="fa fa-check ml-10"></i>
                                                 <i @click="clearFilter('code')" class="fa fa-close ml-10"></i>
                                             </form>
@@ -314,7 +314,7 @@ export default {
         this.getProducts();
         this.getCountries();
 
-        this.$root.$on('product.refresh', () => {
+        this.emitter.on('product.refresh', () => {
             if (this.tab == 'drug') {
                 this.getProducts();
             } else {
@@ -341,7 +341,7 @@ export default {
         }
     },
     destroyed() {
-        this.$root.$off('product.refresh');
+        this.emitter.off('product.refresh');
     },
     computed: {
         visibleColumns() {
@@ -445,22 +445,22 @@ export default {
                 });
         },
         addProduct() {
-            this.$root.$emit('product.add');
+            this.emitter.emit('product.add');
         },
         addCountry() {
-            this.$root.$emit('country.add');
+            this.emitter.emit('country.add');
         },
         editProduct(product) {
-            this.$root.$emit('product.details', product);
+            this.emitter.emit('product.details', product);
         },
         editCountry(country) {
-            this.$root.$emit('country.details', country);
+            this.emitter.emit('country.details', country);
         },
         openEditModal(type) {
-            this.$root.$emit(type + '.add');
+            this.emitter.emit(type + '.add');
         },
         openImportModal() {
-            this.$root.$emit('modal.open', 'import');
+            this.emitter.emit('modal.open', 'import');
         },
     },
 }

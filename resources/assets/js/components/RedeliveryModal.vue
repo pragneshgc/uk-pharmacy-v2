@@ -40,14 +40,17 @@
                                         <select v-else-if="['DCountryCode', 'CountryCode'].includes(value)"
                                             v-model="details.order[value]"
                                             :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
-                                            <option v-for="country in countries" :value="country.CountryID">{{ country.Name
-                                            }}
+                                            <option v-for="country in countries" :value="country.CountryID">{{
+                                                country.Name
+                                                }}
                                             </option>
                                         </select>
-                                        <select v-else-if="['DeliveryID'].includes(value)" v-model="details.order[value]"
+                                        <select v-else-if="['DeliveryID'].includes(value)"
+                                            v-model="details.order[value]"
                                             :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
-                                            <option v-for="company in companies" :value="company.SettingID">{{ company.Name
-                                            }}
+                                            <option v-for="company in companies" :value="company.SettingID">{{
+                                                company.Name
+                                                }}
                                             </option>
                                         </select>
                                     </div>
@@ -202,7 +205,7 @@ export default {
                 .then((response) => {
                     this.postSuccess(response.data.message);
                     this.show.modal = false;
-                    this.$root.$emit('orderupdate');
+                    this.emitter.emit('orderupdate');
                     this.close();
                 })
                 .catch((error) => {

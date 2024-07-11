@@ -90,11 +90,11 @@ export default {
     methods: {
         checkAllVisible() {
             if (this.currentChecked && !this.match) {
-                this.$root.$emit('table.uncheck.all');
+                this.emitter.emit('table.uncheck.all');
             } else if (this.currentChecked && this.match) {
-                this.$root.$emit('table.uncheck.all');
+                this.emitter.emit('table.uncheck.all');
             } else {
-                this.$root.$emit('table.check.all');
+                this.emitter.emit('table.check.all');
             }
         },
         addToBlacklist() {

@@ -19,7 +19,6 @@
 <script>
 import orderStatuses from '../../mixins/constants/orderStatuses'
 import filtersData from '../../mixins/filtersData'
-import { ASYNC_SEARCH } from '@emacle/vue-treeselect'
 
 export default {
     mixins: [orderStatuses, filtersData],
@@ -110,7 +109,7 @@ export default {
                     multiple: true,
                     clearable: false,
                     loadOptions: _.debounce(({ action, searchQuery, callback }) => {
-                        if (action === ASYNC_SEARCH) {
+                        if (action === 'ASYNC_SEARCH') {
                             let filter = searchQuery != '' && typeof searchQuery != 'undefined' ? `?filter=${searchQuery}` : '';
 
                             axios.get(`/products${filter}`)

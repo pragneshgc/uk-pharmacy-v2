@@ -22,10 +22,10 @@
                             @click="form.Alert = !form.Alert" for="specific"><b>Alert other users</b></label>
 
                         <!-- <div v-if="error.ReferenceNumber" class="infoBox warning">This Reference Number is already in the system!</div> -->
-                        <label v-if="preimport && !editing && form.Type != 4" for="reference-number">Reference Number <small
-                                class="danger">(required)</small></label>
-                        <label v-if="preimport && !editing && form.Type == 4" for="reference-number">Subscription ID <small
-                                class="danger">(required)</small></label>
+                        <label v-if="preimport && !editing && form.Type != 4" for="reference-number">Reference Number
+                            <small class="danger">(required)</small></label>
+                        <label v-if="preimport && !editing && form.Type == 4" for="reference-number">Subscription ID
+                            <small class="danger">(required)</small></label>
                         <input class="form-control tBoxSize02 mb-10" name="reference-number"
                             v-if="preimport && !editing && form.Type != 4" v-model="form.ReferenceNumber" type="text">
                         <input class="form-control tBoxSize02 mb-10" name="reference-number"
@@ -114,7 +114,7 @@ export default {
         }
     },
     mounted() {
-        this.$root.$on('modal.open', (name, note) => {
+        this.emitter.on('modal.open', (name, note) => {
             if (name == this.modalName) {
                 this.show.modal = true;
             }
@@ -142,13 +142,13 @@ export default {
             }
         });
 
-        this.$root.$on('modal.close', (name) => {
+        this.emitter.on('modal.close', (name) => {
             if (name == this.modalName) {
                 this.close();
             }
         });
 
-        this.$root.$on('modal.close.all', () => {
+        this.emitter.on('modal.close.all', () => {
             this.close();
         });
     },
@@ -263,8 +263,8 @@ export default {
             axios.post('/note', this.form)
                 .then((response) => {
                     this.postSuccess(response.data.message);
-                    this.$root.$emit('orderupdate');
-                    this.$root.$emit('alertupdate');
+                    this.emitter.emit('orderupdate');
+                    this.emitter.emit('alertupdate');
                     this.reset();
                 })
                 .catch((error) => {
@@ -291,8 +291,8 @@ export default {
             axios.patch(`/note/${this.form.NoteID}`, this.form)
                 .then((response) => {
                     this.postSuccess(response.data.message);
-                    this.$root.$emit('orderupdate');
-                    this.$root.$emit('alertupdate');
+                    this.emitter.emit('orderupdate');
+                    this.emitter.emit('alertupdate');
                     this.reset();
                 })
                 .catch((error) => {

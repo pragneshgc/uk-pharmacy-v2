@@ -178,9 +178,9 @@ export default {
                 Type: 3,
             }
 
-            this.$root.$emit('modal.open', 'additem');
+            this.emitter.emit('modal.open', 'additem');
             // this.notesConfirmed = true;
-            // this.$root.$emit('modal.close', 'quicktraynotes');
+            // this.emitter.emit('modal.close', 'quicktraynotes');
         },
         saveItem() {
             axios.post(`/invoice/${this.$route.params.id}/item`, this.item)
@@ -188,7 +188,7 @@ export default {
                     this.item = false;
                     this.getInvoice();
                     this.postSuccess(response.data.message);
-                    this.$root.$emit('modal.close', 'additem');
+                    this.emitter.emit('modal.close', 'additem');
                 })
                 .catch((error) => {
                     this.postError(error.response.data.message);

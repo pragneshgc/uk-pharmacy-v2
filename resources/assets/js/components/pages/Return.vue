@@ -73,18 +73,18 @@
                         </div>
                         <div class="location">
                             <ul>
-                                <li><span>Home adress: </span>{{ prescription.Address1 + ' ' + prescription.Address2 + '
-                                '+prescription.Address3+' '+prescription.Address4}}</li>
-                                <li><span>Delivery address: </span>{{ prescription.DAddress1 + ' ' + prescription.DAddress2
-                                    + '
-                                '+prescription.DAddress3+' '+prescription.DAddress4}}
+                                <li><span>Home adress: </span>{{ `${prescription.Address1} ${prescription.Address2}
+                                    ${prescription.Address3} ${prescription.Address4}` }}</li>
+                                <li><span>Delivery address: </span>{{ `${prescription.DAddress1}
+                                    ${prescription.DAddress2} ${prescription.DAddress3} ${prescription.DAddress4}` }}
                                 </li>
                             </ul>
                         </div>
                         <div class="prescription">
                             <ul>
                                 <li><span>Date: </span>{{ timestampToDate(prescription.CreatedDate) }}</li>
-                                <li v-if="isCommercial"><span>Commercial Invoice Value: </span>{{ prescription.Repeats }}
+                                <li v-if="isCommercial"><span>Commercial Invoice Value: </span>{{ prescription.Repeats
+                                    }}
                                     <a v-if="userInfo.role >= 50" href="javascript:;"
                                         class="smallTextBtn tertiaryBtn">Edit</a>
                                 </li>
@@ -124,7 +124,8 @@
                             <div class="title">
                                 <h4>
                                     <div class="medicineName">
-                                        {{ product.Description }}, {{ product.Quantity * product.Dosage }} {{ product.Units
+                                        {{ product.Description }}, {{ product.Quantity * product.Dosage }} {{
+                                            product.Units
                                         }}
                                         <br />
                                         <small style="color: orange;">Fridge</small>
@@ -137,7 +138,8 @@
                                 </h4>
                             </div>
                             <div class="instructions">
-                                <div style="display: inline-block;" class="btn btnSize01 tertiaryBtn dropdown bin-dropdown">
+                                <div style="display: inline-block;"
+                                    class="btn btnSize01 tertiaryBtn dropdown bin-dropdown">
                                     Bin <i aria-hidden="true" class="fa fa-trash"></i>
                                     <ul class="dropdown-menu">
                                         <li @click="checkAll()" class="dropdown-menu-item">
@@ -161,7 +163,8 @@
                         <!--DETAILS-->
                         <div class="medicineDetails">
                             <ul class="tabs">
-                                <li :class="{ 'active': activeTab == 'information' }" @click="activeTab = 'information'">
+                                <li :class="{ 'active': activeTab == 'information' }"
+                                    @click="activeTab = 'information'">
                                     <a href="javascript:;">Medical Information</a>
                                 </li>
                                 <li :class="{ 'active': activeTab == 'activity' }" @click="activeTab = 'activity'">
@@ -171,9 +174,11 @@
                             <div v-if="activeTab == 'information'">
                                 <h2>Medical information</h2>
                                 <ul class="critical">
-                                    <li>Relates to allergies and medical conditions. This are added by AI and pharmacists.
+                                    <li>Relates to allergies and medical conditions. This are added by AI and
+                                        pharmacists.
                                     </li>
-                                    <li>Relates to allergies and medical conditions. This are added by AI and pharmacists.
+                                    <li>Relates to allergies and medical conditions. This are added by AI and
+                                        pharmacists.
                                     </li>
                                 </ul>
                                 <h2>Other notes</h2>
@@ -203,8 +208,8 @@
                             <h2>Medical history</h2>
                             <ul v-if="!historyLoading" class="new" v-for="(value, key) in history"
                                 :class="statusClass(value.Status)">
-                                <li class="date">{{ value.CreatedDate }} <a target="_blank" :href="'#/prescription/' + key"
-                                        class="smallTextBtn secondaryBtn">View</a></li>
+                                <li class="date">{{ value.CreatedDate }} <a target="_blank"
+                                        :href="'#/prescription/' + key" class="smallTextBtn secondaryBtn">View</a></li>
                                 <li v-for="product in value.Products" class="medicine">
                                     {{ product.Name }}, {{ product.Quantity * product.Dosage }} {{ product.Units }}
                                 </li>
@@ -269,7 +274,7 @@ export default {
         this.timer = setInterval(this.getStatistics, 120000);
         //we need to listen for this one in case an
         //order gets updated outside the component
-        this.$root.$on('orderupdate', (e) => {
+        this.emitter.on('orderupdate', (e) => {
             this.getOrderData();
         });
     },
@@ -301,7 +306,7 @@ export default {
         },
         fullyLoaded() {
             if (this.fullyLoaded) {
-                this.$root.$emit('prescriptionloaded', { prescription: this.prescription });
+                this.emitter.emit('prescriptionloaded', { prescription: this.prescription });
             }
         },
         prescription() {
@@ -324,7 +329,7 @@ export default {
             axios.get('/order/' + this.currentOrderID)
                 .then((response) => {
                     this.prescription = response.data.data;
-                    //this.$root.$emit('prescriptionloaded');
+                    //this.emitter.emit('prescriptionloaded');
                     this.loading = false;
                 })
                 .catch((error) => {
@@ -360,7 +365,7 @@ export default {
             this.editingOrder = !this.editingOrder;
         },
         updateStatus() {
-            this.$root.$emit('prescriptionloading');//we need to let the footer know that the prescription is loading
+            this.emitter.emit('prescriptionloading');//we need to let the footer know that the prescription is loading
             axios.post('/order-edit/' + this.prescription.PrescriptionID + '/status', { status: this.prescriptionStatus })
                 .then((response) => {
                     this.postSuccess(response.data.message);

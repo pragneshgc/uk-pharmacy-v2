@@ -16,8 +16,9 @@
                         <label for="message-select">Email template <small class="danger">(required)</small></label>
                         <select v-model="prescriberForm.select" name="message-select" class="table-dropdown mb-10">
                             <option value="0" disabled>Please select a template</option>
-                            <option v-for="option in prescriberForm.options" :value="option.value" :key="option.value">{{
-                                option.name }}</option>
+                            <option v-for="option in prescriberForm.options" :value="option.value" :key="option.value">
+                                {{
+                                    option.name }}</option>
                         </select>
 
                         <div class="mb-10" v-if="prescriberForm.select == 3">
@@ -58,7 +59,7 @@
 import Modal from './Modal.vue';
 import { VueEditor } from "vue2-editor";
 import Error from '../mixins/errors'
-import Datepicker from 'vuejs-datepicker'
+import Datepicker from './wrapper/Datepicker.vue'
 
 export default {
     props: ['orderID'],
@@ -158,8 +159,8 @@ export default {
             axios.post('/mail/' + this.orderID + '/contact', { form: this.prescriberForm })
                 .then((response) => {
                     this.postSuccess(response.data.message);
-                    // this.$root.$emit('orderupdate'); //this was causing an issue of doing refresh request for the old order
-                    this.$root.$emit('tray.remove', this.orderID); //remove from tray when queried
+                    // this.emitter.emit('orderupdate'); //this was causing an issue of doing refresh request for the old order
+                    this.emitter.emit('tray.remove', this.orderID); //remove from tray when queried
                     this.resetForm();
                     this.show.modal = false;
                 })

@@ -95,8 +95,8 @@
                             <a target="_blank" :href="`#/prescription/${duplicate.PrescriptionID}`">{{
                                 duplicate.PrescriptionID }}</a> that has the same customer reference id
                             {{ duplicate.ReferenceNumber }} with
-                            status {{ orderStatuses[duplicate.Status] }}{{ duplicate.SubStatus ? ' -
-                            '+orderSubStatuses[duplicate.SubStatus] : '' }}.<br />
+                            status {{ orderStatuses[duplicate.Status] }}{{ duplicate.SubStatus ? ` -
+                            ${orderSubStatuses[duplicate.SubStatus]}` : '' }}.<br />
                             Please investigate by <a target="_blank"
                                 :href="`#/prescription/${duplicate.PrescriptionID}`">clicking here</a> before
                             processing.
@@ -933,8 +933,7 @@ import orderStatuses from '../../mixins/constants/orderStatuses'
 import doctorTypes from '../../mixins/constants/doctorTypes'
 import DiffTableAddress from './DiffTableAddress.vue';
 import BMI from '../BMI.vue';
-import Treeselect from '@emacle/vue-treeselect'
-import '@emacle/vue-treeselect/dist/vue-treeselect.css'
+import Treeselect from "../wrapper/Treeselect.vue";
 import _ from 'lodash';
 
 export default {
@@ -997,7 +996,7 @@ export default {
         }
     },
     mounted() {
-        this.$root.$emit('prescriptionloading');//make sure the loading state gets initialized every time a prescription is mounted
+        this.emitter.emit('prescriptionloading');//make sure the loading state gets initialized every time a prescription is mounted
         //check if order is locked
         this.lockTimer = setInterval(() => {
             this.checkLock();
@@ -1009,24 +1008,24 @@ export default {
         //we need to listen for this one in case an
         //order gets updated outside the component
 
-        this.$root.$on('orderupdate', (e) => {
+        this.emitter.on('orderupdate', (e) => {
             this.getOrderData();
         });
 
-        this.$root.$on('statistic.update', (e) => {
+        this.emitter.on('statistic.update', (e) => {
             this.getStatistics();
         });
 
-        this.$root.$on('prescription.validate', (e) => {
+        this.emitter.on('prescription.validate', (e) => {
             this.validateAddress();
         });
     },
     beforeDestroy() {
         clearInterval(this.timer);
         clearInterval(this.lockTimer);
-        this.$root.$off('orderupdate');
-        this.$root.$off('statistic.update');
-        this.$root.$off('prescription.validate');
+        this.emitter.offffffffffffffff('orderupdate');
+        this.emitter.off('statistic.update');
+        this.emitter.off('prescription.validate');
     },
     computed: {
         isDemo() {
@@ -1113,14 +1112,14 @@ export default {
     watch: {
         '$route.params'() {
             if (typeof this.$route.params.id != 'undefined' && this.currentOrderID != this.$route.params.id) {
-                this.$root.$emit('prescriptionloading');
+                this.emitter.emit('prescriptionloading');
                 this.orderID = this.$route.params.id;
                 this.getOrderData();
             }
         },
         fullyLoaded() {
             if (this.fullyLoaded) {
-                this.$root.$emit('prescriptionloaded', { prescription: this.prescription });
+                this.emitter.emit('prescriptionloaded', { prescription: this.prescription });
             }
         },
         prescription() {
@@ -1189,7 +1188,7 @@ export default {
                 .then((response) => {
                     if (response.data.data) {
                         this.locked = response.data.data.Name + ' ' + response.data.data.Surname;
-                        this.$root.$emit('prescriptionloading');
+                        this.emitter.emit('prescriptionloading');
                     } else {
                         this.locked = false;
                     }
@@ -1488,7 +1487,7 @@ export default {
             })
         },
         openNote(note = false) {
-            this.$root.$emit('modal.open', 'note', note);
+            this.emitter.emit('modal.open', 'note', note);
         },
         editDetails(prescription) {
             this.editingOrder = !this.editingOrder;
@@ -1496,7 +1495,7 @@ export default {
         //used for updating status through the dropdown
         updateStatus(text = false) {
             this.loading = true;
-            this.$root.$emit('prescriptionloading');//we need to let the footer know that the prescription is loading
+            this.emitter.emit('prescriptionloading');//we need to let the footer know that the prescription is loading
 
             let postData = { status: this.prescriptionStatus };
 
@@ -1521,12 +1520,12 @@ export default {
 
                     if (this.prescriptionStatus != 1) {
                         if (this.userInfo.role == 20 || this.userInfo.role == 10) {
-                            this.$root.$emit('tray.remove.skip', this.prescription.PrescriptionID);
+                            this.emitter.emit('tray.remove.skip', this.prescription.PrescriptionID);
                         }
                     }
 
-                    // this.$root.$emit('prescriptionloading');//we need to let the footer know that the prescription is loading
-                    this.$root.$emit('statistic.update');
+                    // this.emitter.emit('prescriptionloading');//we need to let the footer know that the prescription is loading
+                    this.emitter.emit('statistic.update');
                     this.postSuccess(response.data.message);
                 })
                 .catch((error) => {
@@ -1815,7 +1814,7 @@ export default {
             }).then((result) => {
                 if (result.value) {
                     this.loading = true;
-                    this.$root.$emit('prescriptionloading');
+                    this.emitter.emit('prescriptionloading');
 
                     axios.post(`/order/${this.currentOrderID}/add-tracking`, { code: result.value })
                         .then((response) => {
@@ -1833,7 +1832,7 @@ export default {
         },
         resendTracking(id) {
             this.loading = true;
-            this.$root.$emit('prescriptionloading');
+            this.emitter.emit('prescriptionloading');
 
             axios.post(`/order/${this.currentOrderID}/resend-tracking`)
                 .then((response) => {

@@ -213,12 +213,11 @@
     </section>
 </template>
 
+
 <script>
 import LabelEdit from './LabelEdit.vue';
 import Error from '../../../mixins/errors'
-import Treeselect from '@emacle/vue-treeselect'
-import '@emacle/vue-treeselect/dist/vue-treeselect.css'
-import { ASYNC_SEARCH } from '@emacle/vue-treeselect'
+import Treeselect from "../../wrapper/Treeselect.vue";
 import logging from '../../../mixins/logging';
 import DOMPurify from 'dompurify';
 
@@ -275,12 +274,12 @@ export default {
         this.getCountries();
         // this.getProductList();
 
-        this.$root.$on('product.refresh', () => {
+        this.emitter.on('product.refresh', () => {
             this.getLabels();
         });
     },
     destroyed() {
-        this.$root.$off('product.refresh');
+        this.emitter.off('product.refresh');
     },
     computed: {
         visibleColumns() {
@@ -577,7 +576,7 @@ export default {
             this.labels.splice(this.labels.findIndex(item => item.WLID === label.WLID), 1);
         },
         openEditModal(type) {
-            this.$root.$emit('label.add');
+            this.emitter.emit('label.add');
         },
         check(id, status) {
             if (status == 1) {

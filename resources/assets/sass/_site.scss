@@ -62,9 +62,6 @@ body{
         height: 60px;
         z-index: 1;
         background: white;
-        .btn{
-            // font-size: 14px!important;
-        }
     }
     .tray-drawer{
         position: absolute;
@@ -75,7 +72,7 @@ body{
         bottom: -240px;
         width: 100%;
         max-height: 300px;
-        background: white; 
+        background: white;
         opacity: 0;
         z-index: 0;
         overflow: hidden;
@@ -124,15 +121,12 @@ body{
     margin-top: 0;
     &.finish{
         color: white;
-        text-decoration: none;  
+        text-decoration: none;
         justify-content: center;
         align-items: center;
         font-weight: 700;
         text-transform: uppercase;
         background: #239a9d;
-    }
-    &.finish:hover{
-        
     }
 }
 
@@ -163,7 +157,7 @@ body{
 /*MENU*/
 // .sidebarWrapper{
 //     background: #3E3E3E;
-    
+
 // }
 
 // .sidebarWrapper ul.sidebar ul.nav li a, .sidebarWrapper a.collapseToggler{
@@ -207,7 +201,7 @@ body{
     }
 }
 
-.sidebarWrapper ul.sidebar ul.nav li.active a{
+.sidebarWrapper ul.sidebar ul.nav li a.active{
     transition: all .2s ease-in-out;
 }
 
@@ -237,42 +231,10 @@ body{
     }
 }
 
-// .sidebarWrapper ul.sidebar ul.nav li.active a{
-//     background-color: #121212;
-// }
-
-/*header*/
-
-// header{
-//     background: #E3DDF7;
-//     .user{
-//         color: #4C38B5;
-//         ul{
-//             li{
-//                 a{
-//                     color: #4C38B5;
-//                 }
-//                 border-left: solid 1px #4C38B5;
-//             }
-//         }
-//     }
-// }
-
 header{
     z-index: 2;
     background: #ffffff;
 }
-
-/*BUTTONS*/
-// .primaryBtn:hover{
-//     background-color: #4C38B5;    
-//     border: 1px solid #A093E5;
-// }
-
-// .primaryBtn{
-//     background: #4C38B5;
-//     border: 1px solid #4C38B5;
-// }
 
 .secondaryBtn.active{
     background: #ff8944;
@@ -282,7 +244,7 @@ header{
 .secondaryBtn:disabled{
     color: #239a9d;
     background: gainsboro;
-    cursor: not-allowed;    
+    cursor: not-allowed;
 }
 
 .swal2-popup{
@@ -301,7 +263,7 @@ header{
     font-weight: 700!important;
     text-transform: uppercase;
     background: #ff8944!important;
-    border: solid 1px #ba6432!important;    
+    border: solid 1px #ba6432!important;
 }
 
 .swal2-cancel{
@@ -327,17 +289,17 @@ header{
 }
 
 // .disabledBtn{
-//     background-color: #A093E5;    
+//     background-color: #A093E5;
 //     border: 1px solid #A093E5;
 // }
 
 // button:disabled{
-//     background-color: #A093E5;    
+//     background-color: #A093E5;
 //     border: 1px solid #A093E5;
 // }
 
 // button:disabled:hover{
-//     background-color: #A093E5;    
+//     background-color: #A093E5;
 //     border: 1px solid #A093E5;
 // }
 
@@ -357,7 +319,7 @@ header{
     cursor: pointer;
     margin: 0px 2px;
     -webkit-transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
-    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);    
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
     i{
         color: #239a9d!important;
     }
@@ -396,7 +358,7 @@ header{
     animation-name: spin;
     animation-duration: 900ms;
     animation-iteration-count: infinite;
-    animation-timing-function: linear; 
+    animation-timing-function: linear;
 }
 
 .spin-back-animation{
@@ -481,7 +443,7 @@ header{
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
     border: solid 1px #cfcfcf;
     background: #fff;
-    padding: 5px 10px;    
+    padding: 5px 10px;
     border-bottom: solid 5px #239a9d;
     ul{
         display: flex;
@@ -489,12 +451,12 @@ header{
         align-items: center;
         flex-grow: 1;
         li{
+            font-size: 20px;
+            font-weight: 700;
             span{
                 font-size: 16px;
                 font-weight: 500;
             }
-            font-size: 20px;
-            font-weight: 700;
         }
     }
 }
@@ -569,7 +531,7 @@ header{
       border-top-right-radius: 5px;
       border-bottom-left-radius: 0;
     }
-    
+
     .file-info {
       display: block;
       margin: 10px 5px;
@@ -624,8 +586,6 @@ section.card{
         padding: 5px;
         border-bottom: 1px solid gainsboro;
     }
-    .card-body{
-    }
     .infoBox{
         float: initial;
         background: #f7941d4f;
@@ -658,7 +618,7 @@ section.card{
     background: #f53c38;
     color: white;
     border: #f53c38;
-    border-radius: 0;    
+    border-radius: 0;
     padding: 3px;
 }
 
@@ -790,7 +750,7 @@ section.card{
         box-sizing: content-box;
         height: auto;
         max-height: 210px;
-    }    
+    }
     .delivery{
         width: 10%;
     }
@@ -812,7 +772,7 @@ section.card{
 
 .gender{
     margin: 0px 0px;
-    // padding: 1px;    
+    // padding: 1px;
     line-height: 21px;
 }
 
@@ -836,7 +796,7 @@ section.card{
     background: #FDE4E1;
     border: 1px solid #f53c38;
     margin: 0px 0px;
-    padding: 1px;    
+    padding: 1px;
     line-height: 21px;
 }
 
@@ -845,7 +805,7 @@ section.card{
     border: 1px solid #ed008c;
     color: white;
     margin: 0px 0px;
-    // padding: 1px;    
+    // padding: 1px;
     line-height: 21px;
 }
 
@@ -865,11 +825,7 @@ section.card{
 }
 
 // Prescription
-.demo{
-    .prescription-content{
-        // margin-top: 10px;
-    }
-}
+
 .no-demo{
     .prescription-content{
         margin-top: 35px;
@@ -884,12 +840,12 @@ section.card{
 
 .card-header-success{
     background: #32a36a!important;
-    color: white!important;    
+    color: white!important;
 }
 
 .sub-order-wrapper-flex{
-    display: flex; 
-    justify-content:space-around; 
+    display: flex;
+    justify-content:space-around;
     align-items: center;
     .sub-order{
         flex-grow: 1;
@@ -910,15 +866,15 @@ section.card{
     .blue{
         background: #A9E2F3;
     }
-    
+
     .purple{
         background: #fbd3d3;
     }
-    
+
     .orange{
         background: #ffc450;
     }
-    
+
     .grey{
         background: gainsboro;
     }
@@ -1023,9 +979,6 @@ section.card{
     .returned{
         border-color: black;
     }
-    ul:hover{
-        
-    }
 }
 
 .font-highlight{
@@ -1047,6 +1000,11 @@ section.card{
 
 /*MEDICAL DETAILS*/
 .medicineDetails{
+    width: 35%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+
     &.alternate{
         width: 100%;
         margin: 0;
@@ -1057,13 +1015,10 @@ section.card{
     }
     // min-height: 270px;
     // max-height: 270px;
-    width: 35%;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
+
     .content{
         height: 100%;
-        padding-top: 10px; 
+        padding-top: 10px;
         padding: 5px;
         box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
         border-left: solid 1px #cfcfcf;
@@ -1072,8 +1027,6 @@ section.card{
     }
     .tabs{
         display: flex;
-        // overflow-x: auto;
-        // overflow-y: hidden;
         li{
             flex-grow: 1;
             display: flex;
@@ -1150,7 +1103,7 @@ section.card{
     width: 100%;
     height: 30px;
     background: #c49bc0;
-    color: white; 
+    color: white;
     font-size: 20px;
     font-weight: 700;
     text-align: center;
@@ -1175,7 +1128,7 @@ section.card{
         left: 0;
         height: 30px;
         background: #f7941d;
-        color: white; 
+        color: white;
         font-size: 20px;
         font-weight: 700;
         text-align: center;
@@ -1194,7 +1147,7 @@ section.card{
     .instructions{
         font-weight: 700;
         width: 63%;
-        font-size: 19px;    
+        font-size: 19px;
     }
     h4{
         text-align: left;
@@ -1239,7 +1192,7 @@ section.card{
     }
     // .medicineTooltip:hover{
     //     background-color: #239a9d;
-    //     color: #fff;        
+    //     color: #fff;
     // }
 }
 /*FLAGS*/
@@ -1249,7 +1202,7 @@ section.card{
     align-items: center;
     a{
         margin: 20px;
-    }    
+    }
 }
 /*TABS*/
 .tabs{
@@ -1271,18 +1224,18 @@ section.card{
         margin: 0 2px !important;
         // border: solid 1px #8e8e8e !important;
         // border-bottom: none !important;
-        background: #fff !important;   
-        font-weight: 700;    
+        background: #fff !important;
+        font-weight: 700;
         text-transform: uppercase;
         transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1);
         border: solid 1px #cfcfcf!important;
-        border-bottom: none!important;        
+        border-bottom: none!important;
         a{
             float: left;
             color: #239a9d !important;
             padding: .5em 1em;
-            text-decoration: none;    
-            transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1);        
+            text-decoration: none;
+            transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1);
         }
     }
     li:hover{
@@ -1292,8 +1245,8 @@ section.card{
     }
     li.active{
         //background: #f3f3f3 !important;
-        margin-bottom: -1px !important;     
-        padding-bottom: 1px;   
+        margin-bottom: -1px !important;
+        padding-bottom: 1px;
         a{
             color: #333 !important;
         }
@@ -1314,7 +1267,7 @@ section.card{
 .activity-log-wrapper{
     padding: 0!important;
     list-style: none!important;
-    overflow: auto;    
+    overflow: auto;
     .activity-log-item{
         transition: all .3s ease-in-out;
         padding: 5px;
@@ -1363,7 +1316,7 @@ section.card{
                 font-weight: 700;
                 font-size: 18px;
                 background: transparent;
-                border: 1px solid white;                
+                border: 1px solid white;
             }
         }
     }
@@ -1501,11 +1454,11 @@ input[type=checkbox] + label {
     cursor: pointer;
     // padding: 0.2em;
   }
-  
+
   input[type=checkbox] {
     display: none;
   }
-  
+
   input[type=checkbox] + label:before {
     content: "\2714";
     border: 0.1em solid #000;
@@ -1526,29 +1479,29 @@ input[type=checkbox] + label {
 .unchecked + label:before {
     content: "-"!important;
   }
-  
+
   input[type=checkbox] + label:active:before {
     transform: scale(0);
   }
-  
+
   input[type=checkbox]:checked + label:before {
     background-color: #239a9d;
     border-color: #239a9d;
     color: #fff;
   }
-  
+
   input[type=checkbox]:disabled + label:before {
     transform: scale(1);
     border-color: #aaa;
   }
-  
+
   input[type=checkbox]:checked:disabled + label:before {
     transform: scale(1);
     background-color: #bdbdbd;
     border-color: #bdbdbd;
   }
 
-  
+
 /*RETURN*/
 
 .return-note{
@@ -1600,7 +1553,7 @@ input[type=checkbox] + label {
     .medicineTitle{
         .instructions{
             border-left: none;
-            flex-grow: 1; 
+            flex-grow: 1;
             text-align: right;
         }
     }
@@ -1650,8 +1603,8 @@ input[type=checkbox] + label {
         background: #239a9d;
         border: solid 1px #196f71;
         color: #fff;
-    }   
-    
+    }
+
     .vdp-datepicker__clear-button{
         position: absolute;
         right: 0;
@@ -1661,12 +1614,12 @@ input[type=checkbox] + label {
 
     .today{
         background: #94eaef;
-    }  
+    }
     .selected{
         background: #ff8944 !important;
         border-color: #ff8944!important;
     }
-    
+
 }
 
 .badge{
@@ -1735,7 +1688,7 @@ header .user {
         padding: 0.75rem 1.25rem;
         margin-bottom: -1px;
         background-color: #fff;
-        border: 1px solid rgba(0, 0, 0, 0.125);        
+        border: 1px solid rgba(0, 0, 0, 0.125);
     }
 }
 
@@ -1808,7 +1761,7 @@ header .user {
     button{
         outline: none;
     }
-} 
+}
 
 .expand-100{
     height: 100%;
@@ -1886,7 +1839,7 @@ button.active{
                 white-space: initial!important;;
                 padding: 5px!important;
                 max-width: 500px!important;
-                overflow: auto;        
+                overflow: auto;
             }
         }
     }
@@ -1907,7 +1860,7 @@ button.active{
         .pool-column{
             width: 20%;
             display: flex;
-            align-items: center;        
+            align-items: center;
         }
         .pool-actions{
             width: 60%;
@@ -1970,18 +1923,12 @@ option{
         flex-grow: 1;
         border: 1px solid gainsboro;
         margin: 20px;
-        position: relative;     
+        position: relative;
         box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
-        &.small{
-
-        }
         &.medium{
             height: 150px;
             background: #3ca5a8;
-            color: white;            
-        }
-        &.large{
-            
+            color: white;
         }
         .title{
             position: absolute;
@@ -2005,14 +1952,14 @@ option{
 
 /*Dashboard*/
 .import-awaiting-check{
-    color:#32a36a; 
-    left: -20px; 
+    color:#32a36a;
+    left: -20px;
     position: absolute;
     border: 2px solid;
     padding: 2px;
     transition: color .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     &:hover{
-        color:#3ca5a8; 
+        color:#3ca5a8;
     }
 }
 
@@ -2022,11 +1969,11 @@ input, textarea, select{
     // border-top: none!important;
     // border-left: none!important;
     // border-right: none!important;
-    // border-bottom: 2px solid gainsboro!important;   
+    // border-bottom: 2px solid gainsboro!important;
     font-family:"Roboto Condensed", sans-serif;
     border: 1px solid gainsboro!important;
     border-bottom-width: 2px!important;
-    transition: border-color .2s cubic-bezier(0.55, 0.055, 0.675, 0.19)!important;      
+    transition: border-color .2s cubic-bezier(0.55, 0.055, 0.675, 0.19)!important;
 }
 
 select{
@@ -2054,7 +2001,7 @@ input:not(:placeholder-shown){
 
     &:disabled{
         // border-bottom:2px solid gainsboro!important;
-        border: 1px solid gainsboro!important; 
+        border: 1px solid gainsboro!important;
         border-bottom-width: 2px!important;
     }
 }
@@ -2091,7 +2038,7 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
 
 .select-dropdown-active {
     border: 1px solid #05a1a554!important;
-    border-bottom-width: 2px!important;    
+    border-bottom-width: 2px!important;
 }
 
 .infoHeader.active select{
@@ -2121,29 +2068,24 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
             transition: background .3s cubic-bezier(0.075, 0.82, 0.165, 1);
             .vue-treeselect__icon{
                 color: #ffffff;
-            }  
+            }
 
             &:hover{
                 // color: #f53c38;
                 background: #f53c38!important;
-                // border: 1px solid #8fdade;
-                .vue-treeselect__icon{
-                    // color: #f53c38;
-                    // background: white!important;
-                }
             }
         }
     }
     &.vue-treeselect--has-value{
         .vue-treeselect__control{
-            border: 1px solid #05a1a554 !important; 
+            border: 1px solid #05a1a554 !important;
             border-bottom-width: 2px!important;
         }
     }
     &.vue-treeselect--focused{
         .vue-treeselect__control{
             border: 1px solid #239a9d !important;
-            border-bottom-width: 2px !important;    
+            border-bottom-width: 2px !important;
         }
     }
     &.vue-treeselect-reports{
@@ -2219,18 +2161,18 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
                 padding-bottom: 0;
                 min-width: 205px;
                 height: auto;
-                max-height: 80vh!important;            
+                max-height: 80vh!important;
                 .vue-treeselect__indent-level-0{
                     .vue-treeselect__list{
                         border-top: 1px solid gainsboro;
                         border-bottom: 1px solid gainsboro;
                     }
                 }
-                
+
                 .vue-treeselect__indent-level-1 .vue-treeselect__option{
                     padding-right: 5px!important;
                 }
-    
+
                 .vue-treeselect__option{
                     padding-right: 0;
                     display: block;
@@ -2262,14 +2204,14 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
         padding-bottom: 0;
         min-width: 205px;
         height: auto;
-        max-height: 80vh!important;            
+        max-height: 80vh!important;
         .vue-treeselect__indent-level-0{
             .vue-treeselect__list{
                 border-top: 1px solid gainsboro;
                 border-bottom: 1px solid gainsboro;
             }
         }
-        
+
         .vue-treeselect__indent-level-1 .vue-treeselect__option{
             padding-right: 5px!important;
         }
@@ -2288,10 +2230,6 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
         }
     }
 }
-
-.vue-treeselect-compact{
-
-}   
 
 // ::placeholder{
 //     font-family:"Roboto Condensed", sans-serif;
@@ -2318,9 +2256,7 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
 
         .user-app-activity-overview{
             display: flex;
-            justify-content: space-between;    
-        }
-        .user-app-activity-details{
+            justify-content: space-between;
         }
         .user-app-activity-name{
             font-size: 16px;
@@ -2356,7 +2292,7 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
         .overview-statistics__list-item-value{
             text-transform: uppercase;
             font-size: 1.1rem;
-            font-weight: 500;            
+            font-weight: 500;
         }
     }
 }
@@ -2419,7 +2355,7 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
 
 /*BMI INDICATOR*/
 .bmi-indicator{
-    display: inline-flex; 
+    display: inline-flex;
     width: 50%;
     .bmi-indicator__section{
         width: 16.6%;
@@ -2459,7 +2395,6 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
         transition: all .3s cubic-bezier(0.165, 0.84, 0.44, 1);
         &.selected{
             border: 2px solid #3ca5a8!important;
-            &.locked{}
             &:hover{
                 background: #3ca4a827;
             }
@@ -2491,8 +2426,8 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
         }
     }
     .quick-tray__history{
-        margin: 0; 
-        width: 100%; 
+        margin: 0;
+        width: 100%;
         padding: 0;
         ul{
             width: 100%;
@@ -2551,4 +2486,18 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
             }
         }
     }
+}
+
+.vuejs3-datepicker__value{
+    border-radius: 0px !important;
+    padding: 0 10px !important;
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+    border: 1px solid gainsboro !important;
+}
+.vuejs3-datepicker__calendar header{
+    width: auto !important;
+    height: auto !important;
+    position: relative !important;
 }
