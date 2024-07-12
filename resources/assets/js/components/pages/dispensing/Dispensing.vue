@@ -13,13 +13,14 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue';
 import orderStatuses from '../../../mixins/constants/orderStatuses'
 import filtersData from '../../../mixins/filtersData'
 
 export default {
     mixins: [orderStatuses, filtersData],
     components: {
-        'TableComponentSearch': () => import('../../TableComponentSearch.vue'),
+        'TableComponentSearch': defineAsyncComponent(() => import('../../TableComponentSearch.vue')),
     },
     data: function () {
         return {

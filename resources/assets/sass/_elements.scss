@@ -42,7 +42,7 @@
 
 /*STEPS*/
 .stepwizard-step p {
-    margin-top: 10px;    
+    margin-top: 10px;
 }
 
 .stepwizard-row {
@@ -50,7 +50,7 @@
 }
 
 .stepwizard {
-    display: table;     
+    display: table;
     width: 100%;
     position: relative;
 }
@@ -69,10 +69,10 @@
     height: 1px;
     background-color: #ccc;
     z-order: 0;
-    
+
 }
 
-.stepwizard-step {    
+.stepwizard-step {
     display: table-cell;
     text-align: center;
     position: relative;
@@ -160,7 +160,7 @@
 ::-webkit-scrollbar {
     width: 10px;
 }
- 
+
 ::-webkit-scrollbar:hover {
     width: 15px;
 }
@@ -168,7 +168,7 @@
 ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
- 
+
 ::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
@@ -259,8 +259,8 @@
     border-radius: 50%;
     height: 300px;
     width: 300px;
-    font-size: 30px;  
-    box-shadow: 0px 10px 0px #A093E5;  
+    font-size: 30px;
+    box-shadow: 0px 10px 0px #A093E5;
     transition: all .3s ease-in-out;
     outline: none;
 }
@@ -314,7 +314,7 @@
 }
 
 .btn{
-    border: solid 1px #dcdcdc;
+    border: solid 1px #dcdcdc !important;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
     transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
@@ -332,8 +332,8 @@
 /*QUESTIONNAIRE*/
 .language-toggle{
     font-weight: 500;
-    font-size: 12px; 
-    cursor: pointer;   
+    font-size: 12px;
+    cursor: pointer;
     user-select: none;
 }
 /**/
@@ -351,14 +351,14 @@
         }
     }
   }
-  
+
   /* Hide default HTML checkbox */
   .switch input {
     opacity: 0;
     width: 0;
     height: 0;
   }
-  
+
   /* The slider */
   .slider {
     position: absolute;
@@ -371,7 +371,7 @@
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
+
   .slider:before {
     position: absolute;
     content: "";
@@ -383,26 +383,26 @@
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
+
   .slider-checked + .slider {
     background-color: #2196F3;
   }
-  
+
   .slider-checked + .slider {
     box-shadow: 0 0 1px #2196F3;
   }
-  
+
   .slider-checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
   }
-  
+
   /* Rounded sliders */
   .slider.round {
     border-radius: 34px;
   }
-  
+
   .slider.round:before {
     border-radius: 50%;
   }

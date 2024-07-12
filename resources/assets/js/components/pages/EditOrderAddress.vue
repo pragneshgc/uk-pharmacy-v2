@@ -42,50 +42,54 @@
                     @submit.prevent="save" class="pxp-form address-form mb-20">
                     <div class="form-column">
                         <h3>Patient Details</h3>
-                        <div v-if="columnPatient.includes(value)" class="form-group form-group-2 pb-10"
-                            v-for="(key, value) in details.order" :key="value">
-                            <label :for="key">{{ alias[value].title }}</label>
-                            <label :class="getCounterColor(value, details.order)" class="input-count"
-                                v-if="alias[value].value" :for="key">
-                                {{ details.order[value] ? details.order[value].length +
-                                    details.order[alias[value].combined].length : 0 }}/{{ alias[value].value }}
-                            </label>
-                            <input :disabled="disabledFields.includes(value)" class="" :name="key" :placeholder="''"
-                                v-model="details.order[value]">
-                        </div>
+                        <template v-for="(key, value) in details.order" :key="value">
+                            <div v-if="columnPatient.includes(value)" class="form-group form-group-2 pb-10">
+                                <label :for="key">{{ alias[value].title }}</label>
+                                <label :class="getCounterColor(value, details.order)" class="input-count"
+                                    v-if="alias[value].value" :for="key">
+                                    {{ details.order[value] ? details.order[value].length +
+                                        details.order[alias[value].combined].length : 0 }}/{{ alias[value].value }}
+                                </label>
+                                <input :disabled="disabledFields.includes(value)" class="" :name="key" :placeholder="''"
+                                    v-model="details.order[value]">
+                            </div>
+                        </template>
                         <h3>Delivery Details</h3>
-                        <div v-if="columnDelivery.includes(value)" class="form-group form-group-2"
-                            v-for="(key, value) in details.order" :key="value">
-                            <label :for="key">{{ alias[value].title }}</label>
-                            <label :class="getCounterColor(value, details.order)" class="input-count"
-                                v-if="alias[value].value" :for="key">{{ details.order[value] ?
-                                    details.order[value].length :
-                                    0 }}/{{ alias[value].value }}</label>
-                            <input :disabled="disabledFields.includes(value)"
-                                v-if="!['JVM', 'UPSAccessPointAddress', 'CountryCode', 'DCountryCode', 'DeliveryID', 'Notes'].includes(value)"
-                                class="" :name="key" :placeholder="''" v-model="details.order[value]">
-                            <select v-else-if="['DCountryCode', 'CountryCode'].includes(value)"
-                                v-model="details.order[value]"
-                                :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
-                                <option v-for="country in countries" :value="country.CountryID">{{ country.Name }}
-                                </option>
-                            </select>
-                            <select v-else-if="['DeliveryID'].includes(value)" v-model="details.order[value]"
-                                :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
-                                <option v-for="company in companies" :value="company.SettingID">{{ company.Name }}
-                                </option>
-                            </select>
-                            <select v-else-if="['UPSAccessPointAddress'].includes(value)" v-model="details.order[value]"
-                                :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
-                            </select>
-                            <select v-else-if="['JVM'].includes(value)" v-model="details.order[value]"
-                                :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
-                            </select>
-                        </div>
+                        <template v-for="(key, value) in details.order" :key="value">
+                            <div v-if="columnDelivery.includes(value)" class="form-group form-group-2">
+                                <label :for="key">{{ alias[value].title }}</label>
+                                <label :class="getCounterColor(value, details.order)" class="input-count"
+                                    v-if="alias[value].value" :for="key">{{
+                                        details.order[value] ?
+                                            details.order[value].length :
+                                            0 }}/{{ alias[value].value }}</label>
+                                <input :disabled="disabledFields.includes(value)"
+                                    v-if="!['JVM', 'UPSAccessPointAddress', 'CountryCode', 'DCountryCode', 'DeliveryID', 'Notes'].includes(value)"
+                                    class="" :name="key" :placeholder="''" v-model="details.order[value]">
+                                <select v-else-if="['DCountryCode', 'CountryCode'].includes(value)"
+                                    v-model="details.order[value]"
+                                    :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
+                                    <option v-for="country in countries" :value="country.CountryID">{{ country.Name }}
+                                    </option>
+                                </select>
+                                <select v-else-if="['DeliveryID'].includes(value)" v-model="details.order[value]"
+                                    :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
+                                    <option v-for="company in companies" :value="company.SettingID">{{ company.Name }}
+                                    </option>
+                                </select>
+                                <select v-else-if="['UPSAccessPointAddress'].includes(value)"
+                                    v-model="details.order[value]"
+                                    :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                                <select v-else-if="['JVM'].includes(value)" v-model="details.order[value]"
+                                    :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+                        </template>
 
                         <div class="form-group form-group-2">
                             <label for="saturday-delivery">Saturday Delivery</label>
@@ -111,25 +115,26 @@
 
                     <div class="form-column">
                         <h3>Home Details</h3>
-                        <div v-if="columnHome.includes(value)" class="form-group form-group-2"
-                            v-for="(key, value) in details.order" :key="value">
-                            <label :for="key">{{ alias[value].title }}</label>
-                            <!-- <label :class="getCounterColor(value, details.order)" class="input-count" v-if="alias[value].value" :for="key">{{ details.order[value] ? details.order[value].length : 0 }}/{{alias[value].value}}</label> -->
-                            <input :disabled="disabledFields.includes(value)"
-                                v-if="!['CountryCode', 'DCountryCode', 'DeliveryID', 'Notes'].includes(value)" class=""
-                                :name="key" :placeholder="''" v-model="details.order[value]">
-                            <select v-else-if="['DCountryCode', 'CountryCode'].includes(value)"
-                                v-model="details.order[value]"
-                                :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
-                                <option v-for="country in countries" :value="country.CountryID">{{ country.Name }}
-                                </option>
-                            </select>
-                            <select v-else-if="['DeliveryID'].includes(value)" v-model="details.order[value]"
-                                :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
-                                <option v-for="company in companies" :value="company.SettingID">{{ company.Name }}
-                                </option>
-                            </select>
-                        </div>
+                        <template v-for="(key, value) in details.order" :key="value">
+                            <div v-if="columnHome.includes(value)" class="form-group form-group-2">
+                                <label :for="key">{{ alias[value].title }}</label>
+                                <!-- <label :class="getCounterColor(value, details.order)" class="input-count" v-if="alias[value].value" :for="key">{{ details.order[value] ? details.order[value].length : 0 }}/{{alias[value].value}}</label> -->
+                                <input :disabled="disabledFields.includes(value)"
+                                    v-if="!['CountryCode', 'DCountryCode', 'DeliveryID', 'Notes'].includes(value)"
+                                    class="" :name="key" :placeholder="''" v-model="details.order[value]">
+                                <select v-else-if="['DCountryCode', 'CountryCode'].includes(value)"
+                                    v-model="details.order[value]"
+                                    :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
+                                    <option v-for="country in countries" :value="country.CountryID">{{ country.Name }}
+                                    </option>
+                                </select>
+                                <select v-else-if="['DeliveryID'].includes(value)" v-model="details.order[value]"
+                                    :class="[details.order[value] && details.order[value] != '' ? 'select-dropdown-active' : '']">
+                                    <option v-for="company in companies" :value="company.SettingID">{{ company.Name }}
+                                    </option>
+                                </select>
+                            </div>
+                        </template>
                     </div>
 
                     <div class="form-column">
@@ -253,6 +258,7 @@ export default {
             confirmationChangesUPS: {},
             confirmationOld: {},
             confirmationOldUPS: {},
+            iconPaper
         }
     },
     watch: {

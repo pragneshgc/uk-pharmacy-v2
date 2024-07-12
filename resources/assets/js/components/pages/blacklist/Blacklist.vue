@@ -5,9 +5,9 @@
                 <h3>Blacklist</h3>
             </div>
             <div class="card-body">
-                <router-link tag="button" to="/blacklist/new" class="btn btnSize01 secondaryBtn mb-10" exact>
+                <button @click="$router.push('/blacklist/new')" class="btn btnSize01 secondaryBtn mb-10">
                     Add new entries
-                </router-link>
+                </button>
 
                 <TableComponentSearch data-url="/blacklist" column-class="col-lg-12" table-title="Blacklist"
                     :hidden-columns="['BlackListID']" :filters="filters" :checkbox-visible="true" deleteUrl="/blacklist"
@@ -41,11 +41,22 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue';
 import Error from '../../../mixins/errors'
+import { storeToRefs } from 'pinia';
+import { useDefaultStore } from '../../../stores/default.store';
 
 export default {
+    setup() {
+        const { checked, visible } = storeToRefs(useDefaultStore());
+        const { replaceChecked } = useDefaultStore();
+        return {
+            checked, visible,
+            replaceChecked
+        }
+    },
     components: {
-        'TableComponentSearch': () => import('../../TableComponentSearch.vue'),
+        'TableComponentSearch': defineAsyncComponent(() => import('../../TableComponentSearch.vue')),
     },
     mixins: [Error],
     data: function () {
@@ -81,18 +92,12 @@ export default {
         }
     },
     destroyed() {
-        this.$store.commit('replaceChecked', []);
+        this.replaceChecked([]);
     },
     mounted() {
 
     },
     computed: {
-        checked() {
-            return this.$store.state.checked;
-        },
-        visible() {
-            return this.$store.state.visible;
-        },
         //check if the current checked boxes match the total check boxes
         match() {
             if (this.checked.length == 0) {
@@ -129,7 +134,7 @@ export default {
             axios.post(`/blacklist/delete`, { ids: this.checked })
                 .then((response) => {
                     this.postSuccess('Removed blacklist entry');
-                    this.$store.commit('replaceChecked', []);
+                    this.replaceChecked([]);
                     this.emitter.emit('table.refresh');
                 })
                 .catch((error) => {
@@ -137,7 +142,7 @@ export default {
                 })
         },
         clearChecked() {
-            this.$store.commit('replaceChecked', []);
+            this.replaceChecked([]);
         },
     }
 }

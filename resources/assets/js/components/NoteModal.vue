@@ -32,7 +32,7 @@
                             v-if="preimport && !editing && form.Type == 4" v-model="form.Subscription" type="text">
 
                         <label for="message-text">Note<small class="danger">(required)</small></label>
-                        <vue-editor v-model="form.Note" />
+                        <Editor id="note" v-model="form.Note" />
 
                         <div class="infoBox warning note-error" v-if="error != ''">
                             <p>{{ this.error }}</p>
@@ -63,14 +63,14 @@
 <script>
 import Modal from './Modal.vue';
 import Error from '../mixins/errors'
-import { VueEditor } from "vue2-editor";
+import Editor from './wrapper/Editor.vue';
 
 export default {
     mixins: [Error],
     props: ['orderID'],
     extends: Modal,
     components: {
-        VueEditor,
+        Editor,
     },
     data: function () {
         return {

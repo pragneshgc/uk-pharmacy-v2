@@ -30,7 +30,7 @@
                     <div class="prescription-pool_print-log" v-if="printLog.length > 0 && showLogs">
                         <ul>
                             <li style="border-bottom: 1px solid gainsboro;">Print Log</li>
-                            <li v-for="log in printLog" :key="log.PrescriptionID">
+                            <li v-for="(log, index) in printLog" :key="index">
                                 <span>
                                     {{ log.action }}
                                     <b>
@@ -179,10 +179,19 @@
 </template>
 
 <script>
+import { storeToRefs } from 'pinia';
 import Error from '../../mixins/errors';
 import QuickTray from '../pages/prescriptionpool/QuickTray.vue';
+import { useDefaultStore } from '../../stores/default.store';
 
 export default {
+    setup() {
+        const { printLog, tray } = storeToRefs(useDefaultStore());
+        return {
+            printLog,
+            tray
+        }
+    },
     components: {
         QuickTray
     },
@@ -212,14 +221,8 @@ export default {
         availableCount() {
             return this.orders.filter((item) => item.UserID === 0).length;
         },
-        tray() {
-            return this.$store.state.tray;
-        },
         trayIds() {
-            return this.$store.state.tray.map(order => order.PrescriptionID);
-        },
-        printLog() {
-            return this.$store.state.printLog;
+            return this.tray.map(order => order.PrescriptionID);
         },
         trayCompany() {
             let companies = [];

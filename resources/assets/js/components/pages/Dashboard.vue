@@ -7,12 +7,14 @@
                     <div class="title flex-align-center">Order Statistics</div>
                     <div class="list">
                         <ul v-if="loaded">
-                            <li class="list-item-background" v-for="(value, key) in statistics.statistics"
-                                v-if="!roleVisibility[userInfo.role].includes(key)" @click="changeOrder(key)"
-                                :class="{ 'active': key == orderFilter }">
-                                <span>{{ mapping[key] }}</span>{{ value }}
-                                <!-- <a class="smallTextBtn secondaryBtn" :class="{ 'active': key == orderFilter }" href="javascript:;">View</a> -->
-                            </li>
+                            <template v-for="(value, key) in statistics.statistics">
+                                <li class="list-item-background" v-if="!roleVisibility[userInfo.role].includes(key)"
+                                    @click="changeOrder(key)" :class="{ 'active': key == orderFilter }">
+                                    <span>{{ mapping[key] }}</span>{{ value }}
+                                    <!-- <a class="smallTextBtn secondaryBtn" :class="{ 'active': key == orderFilter }" href="javascript:;">View</a> -->
+                                </li>
+                            </template>
+
                             <li :class="['ordercount' == orderFilter ? 'active' : '', pendingPharmacyOrdersCount > 0 ? 'blink_me' : '']"
                                 class="list-item-background" @click="orderFilter = 'ordercount';"
                                 v-if="!roleVisibility[userInfo.role].includes('ordercount')">
@@ -275,10 +277,21 @@
 <script>
 import Error from '../../mixins/errors'
 import CSV from '../../mixins/csv'
+import { defineAsyncComponent } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useDefaultStore } from '../../stores/default.store';
 
 export default {
+    setup() {
+        const { checked, visible, tray } = storeToRefs(useDefaultStore());
+        const { replaceChecked } = useDefaultStore();
+
+        return {
+            checked, visible, tray, replaceChecked
+        }
+    },
     components: {
-        'Modal': () => import('../Modal.vue'),
+        'Modal': defineAsyncComponent(() => import('../Modal.vue')),
     },
     mixins: [Error, CSV],
     data: function () {
@@ -334,15 +347,6 @@ export default {
         }
     },
     computed: {
-        checked() {
-            return this.$store.state.checked;
-        },
-        // mainChecked(){
-        //     return this.checked.length == 0 ? false : true;
-        // },
-        visible() {
-            return this.$store.state.visible;
-        },
         //check if the current checked boxes match the total check boxes
         match() {
             if (this.checked.length == 0) {
@@ -365,7 +369,7 @@ export default {
             }
         },
         trayLength() {
-            return this.$store.state.tray.length;
+            return this.tray.length;
         }
     },
     mounted() {
@@ -519,7 +523,7 @@ export default {
             axios.post('/tray', { PrescriptionID: this.checked })
                 .then((response) => {
                     this.postSuccess(response.data.message);
-                    this.$store.commit('replaceChecked', []);
+                    this.replaceChecked([]);
                     this.emitter.emit('tray.refresh');
                     this.emitter.emit('table.refresh');
                 })
@@ -543,7 +547,7 @@ export default {
         checkAll(limit = false) {
             axios.get(`/orders/ids?f=${this.orderFilter}&intray=false&limit=${limit}`)
                 .then((response) => {
-                    this.$store.commit('replaceChecked', response.data.data);
+                    this.replaceChecked(response.data.data);
                 })
                 .catch((error) => {
                     this.postError(error.response.data.message);
@@ -552,7 +556,7 @@ export default {
         checkByProperty(type, property) {
             axios.get(`/orders/ids?f=${this.orderFilter}&intray=false&type=${type}&property=${property}`)
                 .then((response) => {
-                    this.$store.commit('replaceChecked', response.data.data);
+                    this.replaceChecked(response.data.data);
                 })
                 .catch((error) => {
                     this.postError(error.response.data.message);
@@ -569,7 +573,7 @@ export default {
         },
         clearChecked() {
             this.checkboxStatus = false;
-            this.$store.commit('replaceChecked', []);
+            this.replaceChecked([]);
         },
         viewOrder(id) {
             this.$router.push({ name: 'prescription', params: { id: id } });

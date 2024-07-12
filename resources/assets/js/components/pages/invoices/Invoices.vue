@@ -7,8 +7,8 @@
             <div class="card-body">
                 <div class="invoice-search">
                     <TableComponentSearch data-url="/invoices" column-class="col-lg-12" table-title="Invoices"
-                        redirect-name="invoice" redirect-id="InvoiceID" :hidden-columns="['InvoiceID']" :filters="filters"
-                        :column-map="columnMap" :csv-url="true">
+                        redirect-name="invoice" redirect-id="InvoiceID" :hidden-columns="['InvoiceID']"
+                        :filters="filters" :column-map="columnMap" :csv-url="true">
                         <template v-slot:tools="{ item }">
                             <!-- <a class="btn btn-primary table-icon" style="margin: 0;" title="Download Invoice" @click="sendInvoice(item)">
                                 <i class="fa fa-envelope"></i>
@@ -27,12 +27,13 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue';
 import filtersData from '../../../mixins/filtersData'
 
 export default {
     mixins: [filtersData],
     components: {
-        'TableComponentSearch': () => import('../../TableComponentSearch.vue'),
+        'TableComponentSearch': defineAsyncComponent(() => import('../../TableComponentSearch.vue')),
     },
     data() {
         return {

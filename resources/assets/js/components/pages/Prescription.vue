@@ -20,7 +20,7 @@
                         <span style="padding-right: 0;">ORDER STATUS: </span>
                     </li>
                     <li style="border-left: none; display: flex; align-items: center;">
-                        <treeselect class="vue-treeselect-compact" :disabled="!fullyLoaded" :open-on-click="true"
+                        <treeselect class="vue3-treeselect-compact" :disabled="!fullyLoaded" :open-on-click="true"
                             :clearable="false" :open-on-focus="true" :open-on-hover="true" :searchable="false"
                             :disable-branch-nodes="true" placeholder="Loading..." :show-count="true"
                             :default-expand-level="1" :options="restrictedStatus" :scrollPositionOnCenter="true"
@@ -171,13 +171,13 @@
                                     <span>Name: </span>
                                     <span style="text-transform: uppercase;" class="high-visibility">{{
                                         prescription.Name
-                                        }}</span>
+                                    }}</span>
                                 </li>
                                 <li>
                                     <span>Surname: </span>
                                     <span style="text-transform: uppercase;" class="high-visibility">{{
                                         prescription.Surname
-                                        }}</span>
+                                    }}</span>
                                 </li>
                                 <li class="gender"
                                     :class="[prescription.Sex == 'Male' ? 'blue' : prescription.Sex == 'Female' ? 'purple' : prescription.Sex == 'Transgender' ? 'orange' : 'grey']">
@@ -226,7 +226,7 @@
                                         </span>{{ timestampToDate(prescription.UpdatedDate) }}</li>
                                     <li v-if="isCommercial"><span>Commercial Invoice Value: </span>{{
                                         prescription.Repeats
-                                        }}</li>
+                                    }}</li>
                                     <li><span>Shipping: </span>Patient has Authorised 3rd Party Carrier</li>
                                     <li><span>Courier: </span>{{ prescription.Courier }}</li>
                                     <li v-if="prescription.TrackingCode != '' && prescription.TrackingCode != null">
@@ -935,8 +935,14 @@ import DiffTableAddress from './DiffTableAddress.vue';
 import BMI from '../BMI.vue';
 import Treeselect from "../wrapper/Treeselect.vue";
 import _ from 'lodash';
+import { storeToRefs } from 'pinia';
+import { useDefaultStore } from '../../stores/default.store';
 
 export default {
+    setup() {
+        const { tray } = storeToRefs(useDefaultStore());
+        return { tray }
+    },
     mixins: [Error, Clipboard, orderStatuses, doctorTypes],
     components: {
         Treeselect,
@@ -1077,9 +1083,6 @@ export default {
                         : [3, 6].includes(this.prescription.Status) ? 'error'
                             : [16].includes(this.prescription.Status) ? 'returned'
                                 : '';
-        },
-        tray() {
-            return this.$store.state.tray;
         },
         availableStatuses() {
             //this will be expanded by roles and other statuses

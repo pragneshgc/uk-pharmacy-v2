@@ -29,7 +29,7 @@
 
                         <label for="message-text">Message <small class="danger">(required)</small></label>
                         <!-- <textarea v-model="prescriberForm.message" name="message-text" cols="30" rows="30"> -->
-                        <vue-editor v-model="prescriberForm.message" />
+                        <Editor id="message" v-model="prescriberForm.message" />
 
                         <div v-if="errors.length > 0" class="infoBox error">
                             <p v-for="(value, key) in errors" :key="key">
@@ -57,16 +57,16 @@
 
 <script>
 import Modal from './Modal.vue';
-import { VueEditor } from "vue2-editor";
 import Error from '../mixins/errors'
 import Datepicker from './wrapper/Datepicker.vue'
+import Editor from './wrapper/Editor.vue';
 
 export default {
     props: ['orderID'],
     mixins: [Error],
     extends: Modal,
     components: {
-        VueEditor,
+        Editor,
         Datepicker
     },
     data: function () {

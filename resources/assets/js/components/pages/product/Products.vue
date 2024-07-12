@@ -201,9 +201,11 @@
                         </thead>
                         <tbody v-if="products.length > 0">
                             <tr v-for="(value) in visibleProducts" :key="value.ProductCodeID">
-                                <td v-for="(v, k) in value" :key="k" v-if="!hiddenColumns.includes(k)">
-                                    <span v-html="v"></span>
-                                </td>
+                                <template v-for="(v, k) in value" :key="k">
+                                    <td v-if="!hiddenColumns.includes(k)">
+                                        <span v-html="v"></span>
+                                    </td>
+                                </template>
                                 <td>
                                     <a title="View Details" @click="editProduct(value)"
                                         class="btn btn-primary table-icon"><i class="fa fa-info"></i></a>
@@ -225,9 +227,11 @@
                     <table id="deliveries-table" v-else-if="tab == 'delivery'" class="table table-hover">
                         <thead class="primary-color text-white">
                             <tr>
-                                <th v-for="(value, key) in countries[0]" :key="key" v-if="!hiddenColumns.includes(key)">
-                                    {{ key }}
-                                </th>
+                                <template v-for="(value, key) in countries[0]" :key="key">
+                                    <th v-if="!hiddenColumns.includes(key)">
+                                        {{ key }}
+                                    </th>
+                                </template>
                                 <th>
                                     Options
                                 </th>
@@ -236,9 +240,11 @@
                         <tbody>
                             <!-- <transition-group tag="tbody" name="slide-left"> -->
                             <tr v-for="(value) in countries" :key="value.ProductCodeID">
-                                <td v-for="(v, k) in value" :key="k" v-if="!hiddenColumns.includes(k)">
-                                    {{ v }}
-                                </td>
+                                <template v-for="(v, k) in value" :key="k">
+                                    <td v-if="!hiddenColumns.includes(k)">
+                                        {{ v }}
+                                    </td>
+                                </template>
                                 <td>
                                     <button title="View delivery pricing" @click="editCountry(value)"
                                         class="btn btn-primary table-icon"><i class="fa fa-info"></i></button>

@@ -59,20 +59,23 @@
                                     padding: 16px 8px;
                                     vertical-align: top;
                                 " />
-                            <th :class="[notOrderable.includes(key) ? '' : 'clickable', key == orderBy ? 'ordered' : '']"
-                                :title="notOrderable.includes(key) ? '' : 'Sort by ' + translate(key)"
-                                v-for="(value, key) in data.data[0]"
-                                v-if="typeof hiddenColumns != 'undefined' ? !hiddenColumns.includes(key) : true"
-                                v-on:click="setOrder(key)">
-                                {{ translate(key) }}
+                            <template v-for="(value, key) in data.data[0]">
+                                <th :class="[notOrderable.includes(key) ? '' : 'clickable', key == orderBy ? 'ordered' : '']"
+                                    :title="notOrderable.includes(key) ? '' : 'Sort by ' + translate(key)"
+                                    v-if="typeof hiddenColumns != 'undefined' ? !hiddenColumns.includes(key) : true"
+                                    v-on:click="setOrder(key)">
+                                    {{ translate(key) }}
 
-                                <span v-if="!notOrderable.includes(key)">
-                                    <i v-if="key == orderBy && orderDirection == 'DESC'" class="fa fa-caret-down"></i>
-                                    <i v-if="key == orderBy && orderDirection == 'ASC'" class="fa fa-caret-up"></i>
-                                    <i v-if="key != orderBy" class="fa fa-sort"></i>
-                                </span>
-                            </th>
-                            <th v-if="showtool" :style="!!$scopedSlots.tools ? 'width: 140px;' : 'width: 80px;'">
+                                    <span v-if="!notOrderable.includes(key)">
+                                        <i v-if="key == orderBy && orderDirection == 'DESC'"
+                                            class="fa fa-caret-down"></i>
+                                        <i v-if="key == orderBy && orderDirection == 'ASC'" class="fa fa-caret-up"></i>
+                                        <i v-if="key != orderBy" class="fa fa-sort"></i>
+                                    </span>
+                                </th>
+                            </template>
+
+                            <th v-if="showtool" :style="!!$slots.tools ? 'width: 140px;' : 'width: 80px;'">
                             </th>
                         </tr>
                     </thead>
@@ -90,15 +93,23 @@
                                     :checked="checked.includes(item[Object.keys(item)[0]]) || item.disabled == 1">
                                 <label :for="item[Object.keys(item)[0]]" @click="check(item)"></label>
                             </td>
-                            <td v-for="(value, key) in item"
-                                v-if="typeof hiddenColumns != 'undefined' ? !hiddenColumns.includes(key) : true">
-                                <span v-if="typeof value == 'string'" v-html="value"></span>
-                                <ul v-else-if="typeof value == 'object'">
-                                    <!-- <li v-for="obj in value">{{ obj }}</li> -->
-                                    <li v-for="obj in value" v-html="obj" />
-                                </ul>
-                                <span v-else v-html="value"></span>
-                            </td>
+                            <template v-for="(value, key) in item">
+                                <template
+                                    v-if="typeof hiddenColumns != 'undefined' ? !hiddenColumns.includes(key) : true">
+                                    <td>
+                                        <ul v-if="typeof value == 'object'">
+                                            <li v-for="obj in value">{{ obj }}</li>
+                                        </ul>
+                                        <span v-else v-html="value"></span>
+                                    </td>
+                                </template>
+                                <template>
+                                    <td>
+                                        <span v-html="value"></span>
+                                    </td>
+                                </template>
+                            </template>
+
                             <td v-if="showtool">
                                 <a class="btn btn-primary waves-effect table-icon"
                                     @click="redirect(item[redirectId], true)">
@@ -133,8 +144,27 @@ import Print from '../mixins/print'
 import PDF from '../mixins/pdf'
 import Error from '../mixins/errors'
 import CSV from '../mixins/csv'
+import { useDefaultStore } from '../stores/default.store'
+import { storeToRefs } from 'pinia'
+import { defineAsyncComponent } from 'vue'
 
 export default {
+    setup() {
+        const { checked } = storeToRefs(useDefaultStore());
+        const {
+            replaceVisible,
+            toggleChecked,
+            addChecked,
+            removeChecked
+        } = useDefaultStore();
+        return {
+            checked,
+            replaceVisible,
+            toggleChecked,
+            addChecked,
+            removeChecked,
+        }
+    },
     props: {
         dataUrl: String,
         columnClass: String,
@@ -159,7 +189,7 @@ export default {
         storeTableData: { Type: Boolean, default: false },
         showtool: { Type: Boolean, default: true }
     },
-    components: { 'PaginationComponent': () => import('./PaginationComponent.vue'), },
+    components: { 'PaginationComponent': defineAsyncComponent(() => import('./PaginationComponent.vue')), },
     mixins: [Print, PDF, CSV, Error],
     data: function () {
         return {
@@ -205,9 +235,6 @@ export default {
         },
         currentFilterParam: function () {
             return this.filters != '' ? '&f=' + this.filters : '';
-        },
-        checked() {
-            return this.$store.state.checked;
         }
     },
     watch: {
@@ -274,13 +301,10 @@ export default {
                         return item[Object.keys(item)[0]];
                     });
 
-                    this.$store.commit('replaceVisible', visible);
-
-                    // if(this.storeTableData){
-                    //     this.$store.commit('addTableData', this.data.data);
-                    // }
+                    this.replaceVisible(visible);
                 })
                 .catch((error) => {
+                    console.log('error', error);
                     this.reportError(error);
                 })
         },
@@ -314,19 +338,19 @@ export default {
         },
         check(item) {
             if (item.disabled != 1) {
-                this.$store.commit('toggleChecked', item[Object.keys(item)[0]]);
+                this.toggleChecked(item[Object.keys(item)[0]]);
             }
         },
         checkAll() {
             this.data.data.forEach(i => {
                 if (i.disabled != 1) {
-                    this.$store.commit('addChecked', i[Object.keys(i)[0]]);
+                    this.addChecked(i[Object.keys(i)[0]]);
                 }
             });
         },
         uncheckAll() {
             this.data.data.forEach(i => {
-                this.$store.commit('removeChecked', i[Object.keys(i)[0]]);
+                this.removeChecked(i[Object.keys(i)[0]]);
             });
         },
         translate(value) {

@@ -5,22 +5,24 @@
                 <h3>Prescribers</h3>
             </div>
             <div class="card-body">
-                <router-link tag="button" to="/prescribers/new" class="btn btnSize01 secondaryBtn mb-10" exact>
+                <button @click="$router.push('/prescribers/new')" class="btn btnSize01 secondaryBtn mb-10">
                     Add new prescriber
-                </router-link>
+                </button>
 
                 <TableComponentSearch data-url="/doctors/index" column-class="col-lg-12" table-title="Doctors"
-                    redirect-name="prescriber" redirect-id="ID" :hidden-columns="[]" :filters="filters" deleteUrl="/doctors"
-                    deleteId="ID" />
+                    redirect-name="prescriber" redirect-id="ID" :hidden-columns="[]" :filters="filters"
+                    deleteUrl="/doctors" deleteId="ID" />
             </div>
         </section>
     </div>
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue';
+
 export default {
     components: {
-        'TableComponentSearch': () => import('../../TableComponentSearch.vue'),
+        'TableComponentSearch': defineAsyncComponent(() => import('../../TableComponentSearch.vue')),
     },
     data: function () {
         return {

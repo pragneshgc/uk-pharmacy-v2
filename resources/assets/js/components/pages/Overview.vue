@@ -321,6 +321,7 @@ export default {
                     this.appActivity.forEach((activity) => {
                         if (activity.Page != 'exit') {
                             let routeDetails = this.getPageDetails(activity.Page);
+
                             activity.routeName = routeDetails.name;
                             activity.id = routeDetails.params.id;
                             activity.fullPath = routeDetails.fullPath;
@@ -355,7 +356,7 @@ export default {
             }
         },
         getPageDetails(page) {
-            let { route } = this.$router.resolve({
+            let route = this.$router.resolve({
                 path: page,
             });
 

@@ -337,7 +337,7 @@ export default {
     },
     methods: {
         loadOptions: _.debounce(function ({ action, searchQuery, callback }) {
-            if (action === ASYNC_SEARCH) {
+            if (action === 'ASYNC_SEARCH') {
                 this.getProductList(searchQuery, (results) => {
                     let products = [];
 

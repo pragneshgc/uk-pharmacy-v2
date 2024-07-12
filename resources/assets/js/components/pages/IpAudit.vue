@@ -20,6 +20,7 @@
 import orderStatuses from '../../mixins/constants/orderStatuses'
 import filtersData from '../../mixins/filtersData'
 import Download from '../../mixins/download';
+import { defineAsyncComponent } from 'vue';
 
 export default {
     mixins: [orderStatuses, filtersData, Download],
@@ -74,7 +75,7 @@ export default {
         }
     },
     components: {
-        'TableComponentSearch': () => import('../TableComponentSearch.vue'),
+        'TableComponentSearch': defineAsyncComponent(() => import('../TableComponentSearch.vue')),
     },
     mounted() {
         this.setupFilters();

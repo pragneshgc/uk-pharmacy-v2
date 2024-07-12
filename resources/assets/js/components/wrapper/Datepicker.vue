@@ -1,5 +1,5 @@
 <template>
-    <Datepicker v-bind="$attrs" v-on="$listeners">
+    <Datepicker v-bind="$attrs">
         <template v-for="(_, name) in $slots" #[name]="slotData">
             <slot :name="name" v-bind="slotData || {}" />
         </template>

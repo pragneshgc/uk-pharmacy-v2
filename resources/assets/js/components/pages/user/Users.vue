@@ -5,21 +5,23 @@
                 <h3>Users</h3>
             </div>
             <div class="card-body">
-                <router-link tag="button" to="/users/new" class="btn btnSize01 secondaryBtn mb-10" exact>
+                <button @click="$router.push('/users/new')" class="btn btnSize01 secondaryBtn mb-10">
                     Add new user
-                </router-link>
+                </button>
 
-                <TableComponentSearch data-url="/users" column-class="col-lg-12" table-title="Users" redirect-name="user"
-                    redirect-id="ID" :hidden-columns="['ID']" deleteUrl="/users" deleteId="ID" />
+                <TableComponentSearch data-url="/users" column-class="col-lg-12" table-title="Users"
+                    redirect-name="user" redirect-id="ID" :hidden-columns="['ID']" deleteUrl="/users" deleteId="ID" />
             </div>
         </section>
     </div>
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue';
+
 export default {
     components: {
-        'TableComponentSearch': () => import('../../TableComponentSearch.vue'),
+        'TableComponentSearch': defineAsyncComponent(() => import('../../TableComponentSearch.vue')),
     },
 }
 </script>

@@ -235,11 +235,22 @@
 </template>
 
 <script>
+import { storeToRefs } from 'pinia';
 import orderStatuses from '../../../mixins/constants/orderStatuses';
 import Error from '../../../mixins/errors';
 import Print from '../../../mixins/print';
+import { useDefaultStore } from '../../../stores/default.store';
 
 export default {
+    setup() {
+        const { tray } = storeToRefs(useDefaultStore());
+        const { addLog, clearLogs } = useDefaultStore();
+        return {
+            tray,
+            addLog,
+            clearLogs
+        }
+    },
     mixins: [orderStatuses, Error, Print],
     components: {
         'Notes': () => import('./NotesPopup.vue'),
@@ -270,7 +281,7 @@ export default {
     },
     computed: {
         trayIds() {
-            return this.$store.state.tray.map(order => order.PrescriptionID);
+            return this.tray.map(order => order.PrescriptionID);
         },
         filteredHistory() {
             if (this.expandHistory) {
@@ -325,7 +336,7 @@ export default {
             this.getOrders();
 
             if (oldValue.length == 0 && newValue.length > 0) {
-                this.$store.commit('clearLogs');
+                this.clearLogs();
             }
         },
         selected() {
@@ -498,7 +509,7 @@ export default {
                     this.dispenserPrint('label', false, () => {
                         this.selected.time = Date.now();
                         this.selected.action = 'Printed';
-                        this.$store.commit('addLog', this.selected);
+                        this.addLog(this.selected);
                         this.emitter.emit('tray.changeprescriptionstatus', { id: this.selected.PrescriptionID, status: 7 });
                         this.printing = false;
                     });
@@ -509,7 +520,7 @@ export default {
             this.dispenserPrint('delivery', id);
             this.dispenserPrint('label', id);
             let prescription = { PrescriptionID: id, action: 'Reprinted', time: Date.now() };
-            this.$store.commit('addLog', prescription);
+            this.addLog(prescription);
         },
         dispenserPrint(type, id = false, callback = false) {
             if (!id) {

@@ -1,5 +1,5 @@
 <template>
-    <Treeselect v-bind="$attrs" v-on="$listeners">
+    <Treeselect v-bind="$attrs">
         <template v-for="(_, name) in $slots" #[name]="slotData">
             <slot :name="name" v-bind="slotData || {}" />
         </template>

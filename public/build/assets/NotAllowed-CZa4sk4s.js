@@ -1,0 +1,2 @@
+import{_ as e,o as s,c,a as o}from"./app-82NRaNNR.js";const t={mounted(){console.log("Component mounted.")}},a=o("div",{class:"row wow fadeIn"},[o("div",{class:"col-md-12"},[o("div",{class:"card"},[o("div",{class:"card-body"}," You are not allowed to access this page! ")])])],-1),d=[a];function n(l,r,_,i,p,m){return s(),c("div",null,d)}const f=e(t,[["render",n]]);export{f as default};
+//# sourceMappingURL=NotAllowed-CZa4sk4s.js.map

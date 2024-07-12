@@ -143,45 +143,53 @@
                                 style="width: 40px;font-weight: 400;padding: 16px 8px;vertical-align: top;">
                                 <slot name="thfilter"></slot>
                             </th>
-                            <th :class="[notOrderable.includes(key) ? '' : 'clickable', key == orderBy ? 'ordered' : '']"
-                                v-for="(value, key) in data.data[0]"
-                                v-if="typeof hiddenColumns != 'undefined' ? !hiddenColumns.includes(key) : true"
-                                :title="notOrderable.includes(key) ? '' : 'Sort by ' + translate(key)"
-                                v-on:click="setOrder(key)">
-                                {{ translate(key) }}
-                                <span v-if="!notOrderable.includes(key)">
-                                    <i v-if="key == orderBy && orderDirection == 'DESC'" class="fa fa-caret-down"></i>
-                                    <i v-if="key == orderBy && orderDirection == 'ASC'" class="fa fa-caret-up"></i>
-                                    <i v-if="key != orderBy" class="fa fa-sort"></i>
-                                </span>
-                            </th>
+                            <template v-for="(value, key) in data.data[0]">
+                                <th :class="[notOrderable.includes(key) ? '' : 'clickable', key == orderBy ? 'ordered' : '']"
+                                    :title="notOrderable.includes(key) ? '' : 'Sort by ' + translate(key)"
+                                    v-if="typeof hiddenColumns != 'undefined' ? !hiddenColumns.includes(key) : true"
+                                    v-on:click="setOrder(key)">
+                                    {{ translate(key) }}
+
+                                    <span v-if="!notOrderable.includes(key)">
+                                        <i v-if="key == orderBy && orderDirection == 'DESC'"
+                                            class="fa fa-caret-down"></i>
+                                        <i v-if="key == orderBy && orderDirection == 'ASC'" class="fa fa-caret-up"></i>
+                                        <i v-if="key != orderBy" class="fa fa-sort"></i>
+                                    </span>
+                                </th>
+                            </template>
+
                             <th :style="[deleteId ? 'width: 75px;' : 'width: 50px;']"></th>
                         </tr>
                     </thead>
                     <!-- Table head -->
 
                     <!-- Table body -->
-                    <!--<transition-group tag="tbody" name="flip-list">-->
                     <tbody>
-                        <!--@dblclick="redirect(item[redirectId])"   -->
                         <tr class="clickable" @dblclick="openInTab(item[redirectId])" v-for="(item, index) in data.data"
                             :key="index" :class="[item['NotFound'] == true ? 'row-danger' : '']">
                             <td v-if="checkboxVisible">
-                                <!-- <label class="checkboxElement"> -->
                                 <input :name="item[Object.keys(item)[0]]" type="checkbox"
                                     :checked="checked.includes(item[Object.keys(item)[0]])">
                                 <label :for="item[Object.keys(item)[0]]" @click="check(item)"></label>
-                                <!-- <span class="checkmark"></span>  -->
-                                <!-- </label> -->
                             </td>
-                            <td v-for="(value, key) in item"
-                                v-if="typeof hiddenColumns != 'undefined' ? !hiddenColumns.includes(key) : true">
-                                <span v-if="typeof value == 'string'" v-html="value"></span>
-                                <ul v-else-if="typeof value == 'object'">
-                                    <li v-for="obj in value" v-html="obj"></li>
-                                </ul>
-                                <span v-else v-html="value"></span>
-                            </td>
+                            <template v-for="(value, key) in item">
+                                <template
+                                    v-if="typeof hiddenColumns != 'undefined' ? !hiddenColumns.includes(key) : true">
+                                    <td>
+                                        <ul v-if="typeof value == 'object'">
+                                            <li v-for="obj in value">{{ obj }}</li>
+                                        </ul>
+                                        <span v-else v-html="value"></span>
+                                    </td>
+                                </template>
+                                <template>
+                                    <td>
+                                        <span v-html="value"></span>
+                                    </td>
+                                </template>
+                            </template>
+
                             <td>
                                 <template v-if="showtool">
                                     <a class="btn btn-primary waves-effect table-icon" v-if="redirectName"
@@ -218,11 +226,22 @@
 </template>
 
 <script>
+import { storeToRefs } from 'pinia';
+import { useDefaultStore } from '../stores/default.store';
 import TableComponent from './TableComponent.vue';
 import Datepicker from './wrapper/Datepicker.vue';
 import Treeselect from './wrapper/Treeselect.vue';
 
 export default {
+    setup() {
+        const { checked } = storeToRefs(useDefaultStore());
+        const { replaceVisible, addChecked } = useDefaultStore();
+        return {
+            checked,
+            replaceVisible,
+            addChecked
+        }
+    },
     extends: TableComponent,
     components: {
         Datepicker, Treeselect
@@ -327,9 +346,10 @@ export default {
                         return item[Object.keys(item)[0]];
                     });
 
-                    this.$store.commit('replaceVisible', visible);
+                    this.replaceVisible(visible);
                 })
                 .catch((error) => {
+                    console.log('search', error);
                     this.reportError(error);
                 })
                 .finally(() => {

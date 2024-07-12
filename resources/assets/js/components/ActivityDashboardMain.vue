@@ -17,20 +17,25 @@
                 Fullscreen</button>
         </div>
         <div class="activity-dashboard-chart__body">
-            <canvas id="activity-dashboard-chart" style="width: 100%; max-height: 768px;"></canvas>
+            <Bar v-if="loaded" :data="data" :options="options" id="activity-dashboard-chart"
+                style="width: 100%; max-height: 768px;" />
         </div>
     </div>
 </template>
 
 <script>
-import { Chart } from 'chart.js';
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+import { Bar } from 'vue-chartjs';
 import Datepicker from './wrapper/Datepicker.vue';
 
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+
 export default {
-    components: { Datepicker },
+    components: { Datepicker, Bar },
     props: ['visibleFilters'],
     data() {
         return {
+            loaded: false,
             data: {},
             filters: {
                 date: '',
@@ -43,6 +48,13 @@ export default {
             date: {
                 start: 0,
                 end: 0,
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    },
+                },
             }
         }
     },
@@ -75,73 +87,28 @@ export default {
     },
     methods: {
         getChartData(initial = false) {
+            this.loaded = false;
             axios.get(`/stats/activity?type=${this.filters.type}&date=${this.filters.date}&interval=${this.filters.interval}`)
                 .then((response) => {
                     this.data = response.data.data;
                     this.user = false;
-
-                    if (initial) {
-                        this.initChart();
-                    } else {
-                        this.updateChart();
-                    }
+                    this.loaded = true;
                 })
                 .catch((error) => {
                     console.log(error);
                 })
         },
         getChartDataDetails(id) {
+            this.loaded = false;
             axios.get(`/stats/activity/${id}?date=${this.filters.date}&interval=${this.filters.interval}`)
                 .then((response) => {
                     this.data = response.data.data;
-                    this.updateChart();
+                    this.loaded = true;
                 })
                 .catch((error) => {
                     console.log(error);
                 })
         },
-        updateChart() {
-            this.chart.data = this.data;
-            this.chart.update();
-        },
-        initChart() {
-            var ctx = document.getElementById('activity-dashboard-chart');
-            this.chart = new Chart(ctx, {
-                type: 'bar',
-                data: this.data,
-                options: {
-                    onClick: (e, array) => {
-                        if (this.user) {
-                            return false;
-                        }
-
-                        let object = false;
-
-                        if (array.length > 0) {
-                            var bar = this.chart.getElementAtEvent(e)[0];
-                            var index = bar._index;
-                            var datasetIndex = bar._datasetIndex;
-
-                            object = this.chart.data.datasets[datasetIndex];
-                        } else {
-                            return false;
-                        }
-
-                        console.log(object);
-
-                        this.user = object.ids[index];
-                        this.getChartDataDetails(this.user);
-                    },
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    },
-                }
-            });
-        }
     },
 }
 </script>

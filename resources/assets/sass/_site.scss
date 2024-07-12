@@ -2045,28 +2045,28 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
     border-bottom-width: 1px!important;
 }
 
-.vue-treeselect{
+.vue3-treeselect{
     display: inline-block;
     max-width: 960px;
-    .vue-treeselect__control{
+    .vue3-treeselect__control{
         border-radius: 0;
         border: 1px solid #dcdcdc !important;
         border-bottom-width: 2px !important;
-        .vue-treeselect__input{
+        .vue3-treeselect__input{
             border: 0!important;
         }
     }
-    .vue-treeselect__menu-container{
-        .vue-treeselect__menu{
+    .vue3-treeselect__menu-container{
+        .vue3-treeselect__menu{
             border-radius: 0!important;
         }
     }
-    .vue-treeselect__multi-value-item-container{
-        .vue-treeselect__multi-value-item{
+    .vue3-treeselect__multi-value-item-container{
+        .vue3-treeselect__multi-value-item{
             background: #8fdade;
             color: #ffffff;
             transition: background .3s cubic-bezier(0.075, 0.82, 0.165, 1);
-            .vue-treeselect__icon{
+            .vue3-treeselect__icon{
                 color: #ffffff;
             }
 
@@ -2076,34 +2076,34 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
             }
         }
     }
-    &.vue-treeselect--has-value{
-        .vue-treeselect__control{
+    &.vue3-treeselect--has-value{
+        .vue3-treeselect__control{
             border: 1px solid #05a1a554 !important;
             border-bottom-width: 2px!important;
         }
     }
-    &.vue-treeselect--focused{
-        .vue-treeselect__control{
+    &.vue3-treeselect--focused{
+        .vue3-treeselect__control{
             border: 1px solid #239a9d !important;
             border-bottom-width: 2px !important;
         }
     }
     &.vue-treeselect-reports{
         max-width: 220px;
-        .vue-treeselect__control{
+        .vue3-treeselect__control{
             height: 35px;
-            .vue-treeselect__x-container{
+            .vue3-treeselect__x-container{
                 color: #333333;
             }
             svg{
                 color: #333333;
             }
         }
-        .vue-treeselect__placeholder{
+        .vue3-treeselect__placeholder{
             color:  #757575;
         }
     }
-    &.vue-treeselect-compact{
+    &.vue3-treeselect-compact{
         max-width: 205px;
         border: 1px solid gainsboro !important;
         cursor: pointer;
@@ -2111,50 +2111,50 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
         transition: all .3s ease-in-out;
         &:hover{
             border: 1px solid #ff8944 !important;
-            .vue-treeselect__control-arrow-container{
+            .vue3-treeselect__control-arrow-container{
                 svg{
                     color: #ff8944!important;
                 }
             }
         }
-        .vue-treeselect__control-arrow-container:hover{
+        .vue3-treeselect__control-arrow-container:hover{
             color: #ff8944!important;
         }
-        &.vue-treeselect--open{
+        &.vue3-treeselect--open{
             border: 1px solid #239a9d !important;
-            .vue-treeselect__control-arrow-container{
+            .vue3-treeselect__control-arrow-container{
                 svg{
                     color: #239a9d!important;
                 }
             }
         }
-        .vue-treeselect__control{
+        .vue3-treeselect__control{
             border: none!important;
             background: transparent;
             height: 24px;
-            .vue-treeselect__placeholder{
+            .vue3-treeselect__placeholder{
                 line-height: 24px!important;
             }
-            .vue-treeselect__single-value{
+            .vue3-treeselect__single-value{
                 color: white!important;
                 line-height: 24px!important;
                 border: none!important;
             }
-            .vue-treeselect__control-arrow{
+            .vue3-treeselect__control-arrow{
                 color: white;
             }
         }
-        .vue-treeselect__menu-placeholder{
+        .vue3-treeselect__menu-placeholder{
             height: 24px;
             line-height: 24px!important;
         }
-        // .vue-treeselect__control{
+        // .vue3-treeselect__control{
         //     height: 27px;
         // }
 
-        .vue-treeselect__menu-container{
+        .vue3-treeselect__menu-container{
             color: #333333;
-            .vue-treeselect__menu{
+            .vue3-treeselect__menu{
                 left: -1px;
                 top: 1px;
                 padding-top: 0;
@@ -2162,18 +2162,18 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
                 min-width: 205px;
                 height: auto;
                 max-height: 80vh!important;
-                .vue-treeselect__indent-level-0{
-                    .vue-treeselect__list{
+                .vue3-treeselect__indent-level-0{
+                    .vue3-treeselect__list{
                         border-top: 1px solid gainsboro;
                         border-bottom: 1px solid gainsboro;
                     }
                 }
 
-                .vue-treeselect__indent-level-1 .vue-treeselect__option{
+                .vue3-treeselect__indent-level-1 .vue3-treeselect__option{
                     padding-right: 5px!important;
                 }
 
-                .vue-treeselect__option{
+                .vue3-treeselect__option{
                     padding-right: 0;
                     display: block;
                     table-layout: unset;
@@ -2181,7 +2181,7 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
                     justify-content: space-between;
                     flex-direction: row;
                     align-items: center;
-                    .vue-treeselect__label-container{
+                    .vue3-treeselect__label-container{
                         display: block;
                     }
                 }
@@ -2190,14 +2190,14 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
 
     }
 
-    .vue-treeselect__multi-value-item-container{
+    .vue3-treeselect__multi-value-item-container{
         padding-right: 1px;
     }
 }
 
-.vue-treeselect__menu-container-body{
+.vue3-treeselect__menu-container-body{
     color: #333333;
-    .vue-treeselect__menu{
+    .vue3-treeselect__menu{
         left: -1px;
         top: 1px;
         padding-top: 0;
@@ -2205,18 +2205,18 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
         min-width: 205px;
         height: auto;
         max-height: 80vh!important;
-        .vue-treeselect__indent-level-0{
-            .vue-treeselect__list{
+        .vue3-treeselect__indent-level-0{
+            .vue3-treeselect__list{
                 border-top: 1px solid gainsboro;
                 border-bottom: 1px solid gainsboro;
             }
         }
 
-        .vue-treeselect__indent-level-1 .vue-treeselect__option{
+        .vue3-treeselect__indent-level-1 .vue3-treeselect__option{
             padding-right: 5px!important;
         }
 
-        .vue-treeselect__option{
+        .vue3-treeselect__option{
             padding-right: 0;
             display: block;
             table-layout: unset;
@@ -2224,7 +2224,7 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
             justify-content: space-between;
             flex-direction: row;
             align-items: center;
-            .vue-treeselect__label-container{
+            .vue3-treeselect__label-container{
                 display: block;
             }
         }
@@ -2488,6 +2488,11 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
     }
 }
 
+input.vue3-treeselect__input:not(:placeholder-shown){
+    border: 0 !important;
+    width: 0px !important;
+}
+
 .vuejs3-datepicker__value{
     border-radius: 0px !important;
     padding: 0 10px !important;
@@ -2500,4 +2505,13 @@ input:focus, select:focus, option:focus, option:active, select:focus-within, tex
     width: auto !important;
     height: auto !important;
     position: relative !important;
+}
+.vuejs3-datepicker__clear-button{
+    top:10px !important;
+    right: 6px !important;
+}
+
+.hideicon th span,
+.hideicon th i{
+    display: none !important;
 }

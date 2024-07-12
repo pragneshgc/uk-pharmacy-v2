@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue';
 import orderStatuses from '../../mixins/constants/orderStatuses'
 import filtersData from '../../mixins/filtersData'
 
@@ -158,7 +159,7 @@ export default {
         }
     },
     components: {
-        'TableComponentSearch': () => import('../TableComponentSearch.vue'),
+        'TableComponentSearch': defineAsyncComponent(() => import('../TableComponentSearch.vue')),
     },
     mounted() {
         this.setupFilters();

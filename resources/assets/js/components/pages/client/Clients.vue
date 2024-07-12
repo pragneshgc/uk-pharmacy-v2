@@ -5,9 +5,9 @@
                 <h3>Clients</h3>
             </div>
             <div class="card-body">
-                <router-link tag="button" to="/clients/new" class="btn btnSize01 secondaryBtn mb-10" exact>
+                <button @click="$router.push('/clients/new')" class="btn btnSize01 secondaryBtn mb-10">
                     Add new client
-                </router-link>
+                </button>
 
                 <TableComponentSearch data-url="/clients/index" column-class="col-lg-12" table-title="Clients"
                     redirect-name="client" redirect-id="ID" :filters="filters" deleteUrl="/clients" deleteId="ID"
@@ -18,9 +18,11 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue';
+
 export default {
     components: {
-        'TableComponentSearch': () => import('../../TableComponentSearch.vue'),
+        'TableComponentSearch': defineAsyncComponent(() => import('../../TableComponentSearch.vue')),
     },
     data: function () {
         return {
