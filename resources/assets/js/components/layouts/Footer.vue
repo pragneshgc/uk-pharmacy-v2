@@ -328,11 +328,13 @@ import { storeToRefs } from 'pinia';
 export default {
     setup() {
         const { tray } = storeToRefs(useDefaultStore());
-        const { refreshTray } = useDefaultStore();
+        const { refreshTray, clearTray, removeTray } = useDefaultStore();
 
         return {
             tray,
-            refreshTray
+            refreshTray,
+            clearTray,
+            removeTray
         }
     },
     components: {
@@ -723,7 +725,7 @@ export default {
 
             axios.delete(`/tray/clear${parameter}`)
                 .then((response) => {
-                    this.$store.commit('clearTray');
+                    this.clearTray();
                     this.postSuccess(response.data.message);
                     this.emitter.emit('table.refresh'); // this should only be called if there is a table present
                     this.emitter.emit('tray.clear'); // this event is used by the prescription pool
@@ -751,7 +753,7 @@ export default {
             if (id) {
                 axios.delete(`/tray/${id}`)
                     .then((response) => {
-                        this.$store.commit('removeTray', response.data.data);
+                        this.removeTray(response.data.data);
                         this.postSuccess(response.data.message);
                         this.emitter.emit('table.refresh'); // this should only be called if there is a table present
                         this.emitter.emit('tray.clear'); // this event is used by the prescription pool

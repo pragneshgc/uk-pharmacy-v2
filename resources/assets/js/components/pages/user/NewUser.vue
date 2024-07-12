@@ -65,15 +65,15 @@
                                 placeholder="Repeat Password">
                             <div v-if="errors.passwordRepeat" class="invalid-feedback d-block">{{
                                 errors.passwordRepeat[0]
-                            }}</div>
+                                }}</div>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <input autocomplete="off" v-model="data.captcha" type="text" name="captcha" id="passwordRepeat"
+                        <input autocomplete="off" v-model="data.captcha" type="text" name="captcha" id="captcha"
                             class="form-control tBoxSize02" placeholder="Enter Captcha">
                         <div v-if="errors.captcha" class="invalid-feedback d-block">{{
                             errors.captcha[0]
-                            }}</div>
+                        }}</div>
                     </div>
                     <div class="row mb-3">
                         <span v-html="captcha_image"></span>

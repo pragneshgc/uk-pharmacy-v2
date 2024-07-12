@@ -1,0 +1,2 @@
+import{_ as n,e as s,o as a,c,a as e,g as t,m as r,j as d}from"./app-CzB2aCin.js";const i={mounted(){console.log("Component mounted.")}},l={class:"content"},_={class:"title"};function p(m,u,f,h,g,x){const o=s("router-link");return a(),c("div",null,[e("div",l,[e("section",null,[e("h2",_,[t(" This page doesn't seem to contain anything. Get back to "),r(o,{to:"/",exact:""},{default:d(()=>[t("Home page")]),_:1}),t(" and try again. ")])])])])}const N=n(i,[["render",p]]);export{N as default};
+//# sourceMappingURL=NotFound-BtrMuRn3.js.map

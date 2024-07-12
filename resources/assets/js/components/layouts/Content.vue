@@ -8,7 +8,12 @@
             </div>
         </transition>
 
-        <router-view :class="[isDemo ? 'demo' : 'no-demo']"></router-view>
+        <!-- <router-view :class="[isDemo ? 'demo' : 'no-demo']"></router-view> -->
+        <router-view v-slot="{ Component }" :class="[isDemo ? 'demo' : 'no-demo']">
+            <transition name="slide-left" mode="out-in">
+                <component :is="Component" />
+            </transition>
+        </router-view>
         <Footer />
     </div>
 </template>

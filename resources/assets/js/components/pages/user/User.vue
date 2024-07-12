@@ -23,21 +23,6 @@
                             <div v-if="errors.surname" class="invalid-feedback d-block">{{ errors.surname[0] }}</div>
                         </div>
                         <div style="display: flex;flex-direction: column; width: 30%;">
-                            <!-- <label>Role</label>
-                            <select v-model="data.role" class="browser-default custom-select mb-10">
-                                <option value="4">Product Management</option>
-                                <option value="5">Shipping</option>
-                                <option value="10">PXP</option>
-                                <option value="19">Locum Dispenser</option>
-                                <option value="20">Dispenser</option>
-                                <option value="29">Locum Pharmacist</option>
-                                <option value="30">Pharmacist</option>
-                                <option value="35">Superintendent Pharmacist</option>
-                                <option value="40">Customer Service</option>
-                                <option value="50">Admin</option>
-                                <option value="60">Sysadmin</option>
-                            </select>
-                            <div v-if="errors.role" class="invalid-feedback d-block">{{ errors.role[0] }}</div> -->
 
                             <label v-if="userInfo.role >= 50">ESA User</label>
                             <select v-if="userInfo.role >= 50" v-model="data.esa_user_id"
@@ -50,7 +35,8 @@
                         </div>
 
                         <div style="display: flex;flex-direction: column; width: 30%;">
-                            <p>2FA is Currently <b v-if="passwordSecurityStatus">Enabled</b> <b v-else>Disabled</b> for this
+                            <p>2FA is Currently <b v-if="passwordSecurityStatus">Enabled</b> <b v-else>Disabled</b> for
+                                this
                                 account.</p>
                             <div v-if="passwordSecurityStatus">
                                 <template v-if="code.type == 'svg'">
@@ -110,15 +96,17 @@
                                 </option>
                             </select>
                         </div>
-                        <div v-if="errors.default_app" class="invalid-feedback d-block">{{ errors.default_app[0] }}</div>
+                        <div v-if="errors.default_app" class="invalid-feedback d-block">{{ errors.default_app[0] }}
+                        </div>
                     </div>
 
-                    <transition name="fade">
+                    <transition-group name="fade">
                         <!-- Password -->
                         <input autocomplete="off" v-if="passwordFieldVisible" v-model="password" type="password"
-                            name="new-password" id="password" class="form-control tBoxSize02 mb-3" placeholder="Password">
+                            name="new-password" id="password" class="form-control tBoxSize02 mb-3"
+                            placeholder="Password">
                         <div v-if="errors.password" class="invalid-feedback d-block">{{ errors.password[0] }}</div>
-                    </transition>
+                    </transition-group>
 
                     <transition name="fade">
                         <!-- Code -->
@@ -126,7 +114,8 @@
                         <div>
                             <div class="input-group mb-3" v-if="loginCodeVisible">
                                 <input style="margin: 0!important;" autocomplete="off" v-model="data.code" type="code"
-                                    name="code" id="code" class="form-control tBoxSize02 mb-10" placeholder="Login Code">
+                                    name="code" id="code" class="form-control tBoxSize02 mb-10"
+                                    placeholder="Login Code">
                                 <div class="input-group-append" style="display: inline;">
                                     <button @click="storeCode()"
                                         class="btn btnSize01 secondaryBtn m-0 z-depth-0 waves-effect" type="button"
@@ -138,21 +127,12 @@
                         </div>
                     </transition>
                     <br>
-                    <transition name="fade">
+                    <transition-group name="fade">
                         <!-- Email -->
                         <input v-if="emailFieldVisible" v-model="data.email" type="email" id="email"
                             class="form-control tBoxSize02 mb-10" placeholder="E-mail">
                         <div v-if="errors.email" class="invalid-feedback d-block">{{ errors.email[0] }}</div>
-                    </transition>
-
-                    <!-- <transition >
-                        <div v-if="data.two_factor_secret != null">
-                            two factor set
-                        </div>
-                        <div v-else>
-                            two factor not set
-                        </div>
-                    </transition> -->
+                    </transition-group>
 
                     <div>
                         <button @click="togglePasswordChange" class="btn btnSize01 secondaryBtn" type="button">Change
@@ -160,14 +140,18 @@
                         <!-- <button @click="toggle2FA" class="btn btnSize01 secondaryBtn" type="button">Enable 2FA</button> -->
                         <button @click="toggleEmailChange" class="btn btnSize01 secondaryBtn" type="button">Change
                             email</button>
-                        <button @click="toggleLoginCodeChange" class="btn btnSize01 secondaryBtn" type="button">Change login
+                        <button @click="toggleLoginCodeChange" class="btn btnSize01 secondaryBtn" type="button">Change
+                            login
                             code</button>
                         <button v-if="!passwordSecurityStatus" @click="enable2fa" class="btn btnSize01 secondaryBtn"
-                            type="button">Enable 2FA</button>
+                            type="button">Enable
+                            2FA</button>
                         <button v-if="passwordSecurityStatus" @click="disable2fa" class="btn btnSize01 secondaryBtn"
-                            type="button">Disable 2FA</button>
+                            type="button">Disable
+                            2FA</button>
                         <button v-if="userInfo.role == 60" @click="loginAs" class="btn btnSize01 secondaryBtn"
-                            type="button">Login as user</button>
+                            type="button">Login as
+                            user</button>
                         <!-- Send button -->
                         <button class="btn btnSize01 secondaryBtn" type="submit">Update</button>
                     </div>
@@ -197,10 +181,11 @@ export default {
             loading: false,
             errors: {},
             userInfo: userInfo,
+            roles: {}
         }
     },
     mounted() {
-        if (userInfo.id != this.$route.params.id && userInfo.role < 50) {
+        if (this.userInfo.id != this.$route.params.id && this.userInfo.role < 50) {
             this.$router.push('/notallowed');
         } else {
             this.getData();
@@ -223,6 +208,7 @@ export default {
     },
     methods: {
         getData: function () {
+            console.log('get data');
             this.loading = true;
 
             axios.get(this.dataUrl)

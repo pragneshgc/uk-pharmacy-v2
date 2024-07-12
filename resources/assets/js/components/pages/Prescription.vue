@@ -25,15 +25,27 @@
                             :disable-branch-nodes="true" placeholder="Loading..." :show-count="true"
                             :default-expand-level="1" :options="restrictedStatus" :scrollPositionOnCenter="true"
                             :append-to-body="false" v-model="prescriptionStatus">
-                            <div slot="value-label" slot-scope="{ node }">
-                                {{ node.raw.customLabel ? node.raw.customLabel : node.raw.label }}
-                            </div>
-                            <label slot="option-label"
-                                slot-scope="{ node, shouldShowCount, count, labelClassName, countClassName }"
-                                :class="labelClassName">
-                                {{ node.label }}
-                                <span v-if="shouldShowCount" :class="countClassName">({{ count }})</span>
-                            </label>
+                            <template #value-label="{ node }">
+                                <div>
+                                    {{ node.raw.customLabel ? node.raw.customLabel : node.raw.label }}
+                                </div>
+                            </template>
+
+                            <template #option-label="{
+                                node,
+                                shouldShowCount,
+                                count,
+                                labelClassName,
+                                countClassName
+                            }">
+                                <label :class="labelClassName">
+                                    {{ node.label }}
+                                    <span v-if="shouldShowCount" :class="countClassName">
+                                        ({{ count }})
+                                    </span>
+                                </label>
+                            </template>
+
                         </treeselect>
 
                         <transition name="fade">
@@ -148,7 +160,8 @@
                         </div>
                         <div class="card-body">
                             <p v-if="prescription.Message != ''" style="font-size: 19px;"><b
-                                    v-html="prescription.Message" /></p>
+                                    v-html="prescription.Message" />
+                            </p>
                             <p v-else>Unknown issue</p>
                             <hr class="mt-10 mb-10"
                                 v-if="(prescription.Notes != '' && prescription.Notes != null) && prescription.Message != ''">
@@ -171,13 +184,13 @@
                                     <span>Name: </span>
                                     <span style="text-transform: uppercase;" class="high-visibility">{{
                                         prescription.Name
-                                    }}</span>
+                                        }}</span>
                                 </li>
                                 <li>
                                     <span>Surname: </span>
                                     <span style="text-transform: uppercase;" class="high-visibility">{{
                                         prescription.Surname
-                                    }}</span>
+                                        }}</span>
                                 </li>
                                 <li class="gender"
                                     :class="[prescription.Sex == 'Male' ? 'blue' : prescription.Sex == 'Female' ? 'purple' : prescription.Sex == 'Transgender' ? 'orange' : 'grey']">
@@ -226,7 +239,7 @@
                                         </span>{{ timestampToDate(prescription.UpdatedDate) }}</li>
                                     <li v-if="isCommercial"><span>Commercial Invoice Value: </span>{{
                                         prescription.Repeats
-                                    }}</li>
+                                        }}</li>
                                     <li><span>Shipping: </span>Patient has Authorised 3rd Party Carrier</li>
                                     <li><span>Courier: </span>{{ prescription.Courier }}</li>
                                     <li v-if="prescription.TrackingCode != '' && prescription.TrackingCode != null">

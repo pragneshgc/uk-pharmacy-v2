@@ -91,13 +91,13 @@
                                     <span>Name: </span>
                                     <span style="text-transform: uppercase;" class="high-visibility">{{
                                         prescription.Name
-                                    }}</span>
+                                        }}</span>
                                 </li>
                                 <li>
                                     <span>Surname: </span>
                                     <span style="text-transform: uppercase;" class="high-visibility">{{
                                         prescription.Surname
-                                    }}</span>
+                                        }}</span>
                                 </li>
                                 <li class="gender"
                                     :class="[prescription.Sex == 'Male' ? 'blue' : prescription.Sex == 'Female' ? 'purple' : prescription.Sex == 'Transgender' ? 'orange' : 'grey']">
@@ -138,7 +138,7 @@
                                         </span>{{ timestampToDate(prescription.UpdatedDate) }}</li>
                                     <li v-if="isCommercial"><span>Commercial Invoice Value: </span>{{
                                         prescription.Repeats
-                                    }}
+                                        }}
                                         <a v-if="userInfo.role >= 50" href="javascript:;"
                                             class="smallTextBtn tertiaryBtn">Edit</a>
                                     </li>
@@ -225,8 +225,16 @@ import orderStatuses from '../../mixins/constants/orderStatuses';
 import doctorTypes from '../../mixins/constants/doctorTypes';
 import DiffTable from './DiffTable';
 import deliveryImgMap from '../../mixins/constants/deliveryImgMap';
+import { storeToRefs } from 'pinia';
+import { useDefaultStore } from '../stores/default.store';
 
 export default {
+    setup() {
+        const { tray } = storeToRefs(useDefaultStore());
+        return {
+            tray
+        }
+    },
     mixins: [Error, Clipboard, orderStatuses, doctorTypes, deliveryImgMap],
     // components: {
     //     EditOrderAddress
@@ -299,9 +307,6 @@ export default {
                     : [4, 5, 9, 10, 11, 12, 13, 14, 15].includes(this.prescription.Status) ? 'warning'
                         : [3, 6].includes(this.prescription.Status) ? 'error'
                             : '';
-        },
-        tray() {
-            return this.$store.state.tray;
         },
         hasFridge() {
             let fridge = 0;

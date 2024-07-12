@@ -206,8 +206,18 @@
 </template>
 
 <script>
+import { storeToRefs } from 'pinia';
 import Error from '../../../mixins/errors';
+import { useDefaultStore } from '../../../stores/default.store';
 export default {
+    setup() {
+        const { checked, tray, visible } = storeToRefs(useDefaultStore());
+        const { replaceChecked } = useDefaultStore();
+        return {
+            checked, tray, visible,
+            replaceChecked
+        }
+    },
     mixins: [Error],
     data: function () {
         return {
@@ -238,14 +248,8 @@ export default {
         this.emitter.off('changefilter');
     },
     computed: {
-        checked() {
-            return this.$store.state.checked;
-        },
         trayLength() {
-            return this.$store.state.tray.length;
-        },
-        visible() {
-            return this.$store.state.visible;
+            return this.tray.length;
         },
         match() {
             if (this.checked.length == 0) {
@@ -265,9 +269,6 @@ export default {
                 });
             }
         },
-        trayLength() {
-            return this.$store.state.tray.length;
-        }
     },
     methods: {
         redirectCallback() {
@@ -334,7 +335,7 @@ export default {
             axios.post('/tray', { PrescriptionID: this.checked })
                 .then((response) => {
                     this.postSuccess(response.data.message);
-                    this.$store.commit('replaceChecked', []);
+                    this.replaceChecked([]);
                     this.emitter.emit('tray.refresh');
                     this.emitter.emit('table.refresh');
                 })
@@ -395,7 +396,7 @@ export default {
         checkAll(limit = false) {
             axios.get(`/orders/ids?f=${this.orderFilter}&intray=false&limit=${limit}`)
                 .then((response) => {
-                    this.$store.commit('replaceChecked', response.data.data);
+                    this.replaceChecked(response.data.data);
                 })
                 .catch((error) => {
                     this.postError(error.response.data.message);
@@ -404,7 +405,7 @@ export default {
         checkByProperty(type, property) {
             axios.get(`/orders/ids?f=${this.orderFilter}&intray=false&type=${type}&property=${property}`)
                 .then((response) => {
-                    this.$store.commit('replaceChecked', response.data.data);
+                    this.replaceChecked(response.data.data);
                 })
                 .catch((error) => {
                     this.postError(error.response.data.message);
@@ -421,7 +422,7 @@ export default {
         },
         clearChecked() {
             this.checkboxStatus = false;
-            this.$store.commit('replaceChecked', []);
+            this.replaceChecked([]);
         },
     }
 }

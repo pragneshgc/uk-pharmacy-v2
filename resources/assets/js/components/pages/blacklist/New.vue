@@ -46,8 +46,18 @@
 <script>
 import Reports from '../../pages/Reports.vue';
 import Error from '../../../mixins/errors'
+import { storeToRefs } from 'pinia';
+import { useDefaultStore } from '../../../stores/default.store';
 
 export default {
+    setup() {
+        const { checked, visible } = storeToRefs(useDefaultStore());
+        const { replaceChecked } = useDefaultStore();
+        return {
+            checked,
+            visible,
+        }
+    },
     extends: Reports,
     data: function () {
         return {
@@ -56,12 +66,6 @@ export default {
     },
     mixins: [Error],
     computed: {
-        checked() {
-            return this.$store.state.checked;
-        },
-        visible() {
-            return this.$store.state.visible;
-        },
         //check if the current checked boxes match the total check boxes
         match() {
             if (this.checked.length == 0) {
@@ -85,7 +89,7 @@ export default {
         },
     },
     destroyed() {
-        this.$store.commit('replaceChecked', []);
+        this.replaceChecked([]);
     },
     methods: {
         checkAllVisible() {
@@ -101,14 +105,14 @@ export default {
             axios.post(`/blacklist`, { ids: this.checked })
                 .then((response) => {
                     this.postSuccess('Added blacklist entry');
-                    this.$store.commit('replaceChecked', []);
+                    this.replaceChecked([]);
                 })
                 .catch((error) => {
                     this.postError(error.response.data.message);
                 })
         },
         clearChecked() {
-            this.$store.commit('replaceChecked', []);
+            this.replaceChecked([]);
         },
     }
 }

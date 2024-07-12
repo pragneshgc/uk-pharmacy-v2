@@ -23,52 +23,14 @@ export const useDefaultStore = defineStore('default', {
         }
     },
     getters: {
-        isDemo: (state) => {
-            return state.appInfo.mode == 'local' || state.appInfo.mode == 'staging' || state.appInfo.mode == 'demo'
-        },
-
-        changeStyle: (state, style) => {
-            state.style = style;
-        },
-
-
-        addTableData: (state, data) => {
-            state.tableData = data;
-        },
-        addTray: (state, order) => {
-            state.tray.push(order);
-        },
-        removeTray: (state, id) => {
-            let removeIndex = state.tray
-                .map(function (item) {
-                    return item.TrayID;
-                })
-                .indexOf(parseInt(id));
-
-            ~removeIndex && state.tray.splice(removeIndex, 1);
-        },
-        removeTrayPrescription: (state, id) => {
-            let removeIndex = state.tray
-                .map(function (item) {
-                    return item.PrescriptionID;
-                })
-                .indexOf(parseInt(id));
-
-            ~removeIndex && state.tray.splice(removeIndex, 1);
-        },
-
-        orderFilter: (state) => {
-
-            return state.filter || useRoute().query.orderFilter ||
-                localStorage.getItem('dashboard.orderFilter')
-                ? localStorage.getItem('dashboard.orderFilter')
-                : state.userInfo.role == 20 || state.userInfo.role == 19
-                    ? 'approved'
-                    : 'new'
-        }
-
     },
     actions: {
+        isDemo() {
+            return this.appInfo.mode == 'local' || this.appInfo.mode == 'staging' || this.appInfo.mode == 'demo'
+        },
+        changeStyle(style) {
+            this.style = style;
+        },
         addChecked(id) {
             if (this.checked.indexOf(id) == -1) {
                 this.checked.push(id);
@@ -120,5 +82,39 @@ export const useDefaultStore = defineStore('default', {
                 this.checked.push(id);
             }
         },
+
+        addTableData(data) {
+            this.tableData = data;
+        },
+        addTray(order) {
+            this.tray.push(order);
+        },
+        removeTray(id) {
+            let removeIndex = this.tray
+                .map(function (item) {
+                    return item.TrayID;
+                })
+                .indexOf(parseInt(id));
+
+            ~removeIndex && this.tray.splice(removeIndex, 1);
+        },
+        removeTrayPrescription(id) {
+            let removeIndex = this.tray
+                .map(function (item) {
+                    return item.PrescriptionID;
+                })
+                .indexOf(parseInt(id));
+
+            ~removeIndex && this.tray.splice(removeIndex, 1);
+        },
+        orderFilter() {
+
+            return this.filter || useRoute().query.orderFilter ||
+                localStorage.getItem('dashboard.orderFilter')
+                ? localStorage.getItem('dashboard.orderFilter')
+                : this.userInfo.role == 20 || this.userInfo.role == 19
+                    ? 'approved'
+                    : 'new'
+        }
     },
 });

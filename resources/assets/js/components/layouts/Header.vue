@@ -56,10 +56,20 @@
 </template>
 
 <script>
+import { storeToRefs } from 'pinia';
 import Error from '../../mixins/errors'
 import DOMPurify from 'dompurify';
+import { useDefaultStore } from '../../stores/default.store';
 
 export default {
+    setup() {
+        const { style } = storeToRefs(useDefaultStore());
+        const { changeStyle } = useDefaultStore();
+        return {
+            style,
+            changeStyle
+        }
+    },
     mixins: [Error],
     data: function () {
         return {
@@ -89,14 +99,12 @@ export default {
     },
     methods: {
         switchStyle() {
-            let style = 'default-style';
-
-            if (this.$store.state.style == 'default-style') {
-                style = 'redesign-style';
+            if (this.style == 'default-style') {
+                this.style = 'redesign-style';
             }
 
-            this.$store.commit('changeStyle', style);
-            localStorage.setItem('interfacestyle', style);
+            this.changeStyle(this.style);
+            localStorage.setItem('interfacestyle', this.style);
         },
         search() {
             if (this.orderID == '' && this.refNo != '') {
